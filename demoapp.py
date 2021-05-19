@@ -39,7 +39,7 @@ with st.form('Form1'):
 	lista.append(st.selectbox('Selecione o turno', turnos ))
 	lista.append(st.selectbox('Selecione o departamento', departamentos))
 	lista.append(st.selectbox('Selecione a linha', linhas))
-	lista.append(st.selectbox('Selecione o equipamento', equipamentos))]
+	lista.append(st.selectbox('Selecione o equipamento', equipamentos))
 	lista.append(st.selectbox('Selecione o gatilho', gatilhos))
 
 
