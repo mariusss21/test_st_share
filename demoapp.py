@@ -89,7 +89,7 @@ if submitted1:
 	new_d = {str(key): str(value) for key, value in keys_values}
 	
 
-	doc_ref = db.collection("5porques").document(new_d['data'] +  new_d['responsável indicação'])
+	doc_ref = db.collection("5porques").document(new_d['data'] +  new_d['responsável indentificação'])
 	doc_ref.add(new_d)
 	
 	# And then uploading some data to that reference
