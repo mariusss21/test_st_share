@@ -85,7 +85,8 @@ if submitted1:
 	df2 = pd.DataFrame(lista).T
 	df2.columns = colunas
 	st.write(df2.head())
-	doc_ref.add(df2.to_dict(orient='records'))
+	dados = df2.to_dict(orient='records')
+	doc_ref.add(dados)
 	#st.write(df2.pivot(columns=colunas))
 	
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
