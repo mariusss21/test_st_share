@@ -39,7 +39,7 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 st.image('Ambev.jpeg')
 
 # Titulo da aplicação
-st.title('AmBev 5 porquês')
+st.title('Formulário 5 porques')
 
 with st.form('Form1'):
 	lista.append(st.date_input('Data da ocorrência'))
