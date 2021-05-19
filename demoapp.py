@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import json
+import time
 
 # Import firebase
 from google.cloud import firestore
@@ -13,6 +14,7 @@ key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds, project="streamlit")
 
+ts = time.time()
 
 
 # Link do arquivo com os dados
@@ -88,7 +90,7 @@ if submitted1:
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	df.to_csv(DATA_URL, index=False)
 	# This time, we're creating a NEW post reference for Apple
-	doc_ref = db.collection("posts").document("5porques")
+	doc_ref = db.collection("5porques").document(ts)
 
 	# And then uploading some data to that reference
 	doc_ref.set({
