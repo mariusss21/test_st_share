@@ -59,7 +59,7 @@ st.image('Ambev.jpeg')
 st.title('Formulário 5 porques')
 
 with st.form('Form1'):
-	dic['data'] = st.date_input('Data da ocorrência').str
+	dic['data'] = st.date_input('Data da ocorrência')
 	dic['turno'] = st.selectbox('Selecione o turno', turnos )
 	dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 	dic['linha'] = st.selectbox('Selecione a linha', linhas)
