@@ -90,7 +90,7 @@ if submitted1:
 	
 
 	doc_ref = db.collection("5porques").document(new_d['data'] +  new_d['responsável identificação'])
-	doc_ref.add(new_d)
+	doc_ref.set(new_d)
 	
 	# And then uploading some data to that reference
 	#doc_ref.set({
