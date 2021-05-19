@@ -31,8 +31,6 @@ def load_data():
 df = load_data()
 colunas = df.columns
 
-#st.write(df.head())
-
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
 st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
@@ -89,7 +87,7 @@ if submitted1:
 	new_d = {str(key): str(value) for key, value in keys_values}
 	
 
-	doc_ref = db.collection("5porques").document(new_d['data'] +  new_d['responsável identificação'])
+	doc_ref = db.collection("5porques").document(new_d['data'] + '_' + new_d['responsável identificação'])
 	doc_ref.set(new_d)
 	
 	# And then uploading some data to that reference
