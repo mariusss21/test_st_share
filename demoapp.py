@@ -106,3 +106,8 @@ if submitted1:
 st.write(df.head())
 
 
+# referencias 
+# https://blog.streamlit.io/secrets-in-sharing-apps/
+# https://blog.streamlit.io/streamlit-firestore/
+# https://blog.streamlit.io/streamlit-firestore-continued/
+
