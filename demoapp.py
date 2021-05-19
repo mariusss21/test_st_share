@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-DATA_URL = "data.csv"
+DATA_URL = "https://drive.google.com/file/d/1pz0onHrxh5pJF9_coSCYcMGQE5Z6gVJR/view?usp=sharing"
 
 @st.cache
 def load_data():
