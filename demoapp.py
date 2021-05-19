@@ -6,7 +6,7 @@ import time
 
 # Import firebase
 from google.cloud import firestore
-import google.auth
+from google.oauth2 import service_account
 
 #from oauth2client import service_account
 
