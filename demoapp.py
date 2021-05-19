@@ -28,10 +28,12 @@ submitted1=False
 
 # Constantes
 equipamentos = ['Uncoiler', 'Cupper']
-gatilhos = ['10 minutos', 'Segurança', '1 hora']
+gatilhos = [ 'Segurança', '10 minutos', '1 hora']
 linhas = ['L571', 'L572', 'L581', 'Utilidades']
 turnos = ['Turno A', 'Turno B', 'Turno C']
 departamentos = ['Engenharia', 'Automação', 'Manutenção']
+falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', 'Medição', 'Outra']
+deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
 
 with st.form('Form1'):
@@ -41,9 +43,22 @@ with st.form('Form1'):
 	lista.append(st.selectbox('Selecione a linha', linhas))
 	lista.append(st.selectbox('Selecione o equipamento', equipamentos))
 	lista.append(st.selectbox('Selecione o gatilho', gatilhos))
-
-
-	lista.append(st.slider(label='Select intensity', min_value=0, max_value=100))
+	lista.append(st.text_input('Descreva a anomalia', ""))
+	lista.append(st.text_input('Ordem de manutenção', ""))
+	lista.append(st.text_input('Descreva a correção', ""))
+	lista.append(st.text_input('Por que?', ""))
+	lista.append(st.text_input('Por que?', ""))
+	lista.append(st.text_input('Por que?', ""))
+	lista.append(st.text_input('Por que?', ""))
+	lista.append(st.text_input('Por que?', ""))
+	lista.append(st.multiselect('Selecione o tipo da falha', falhas))
+	lista.append(st.multiselect('Selecione o tipo da deterioização (falha)', falhas))
+	lista.append(st.multiselect('Selecione o tipo da correção', falhas))
+	lista.append(st.multiselect('Selecione o tipo da deterioização (correção)', falhas))
+	lista.append(st.text_input('Ações tomadas', ""))
+	lista.append(st.text_input('Notas de manutenção', ""))
+	lista.append(st.text_input('Responsável pela identificação da anomalia', ""))
+	lista.append(st.text_input('Responsável pela correção da anomalia', ""))
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
 if submitted1:
