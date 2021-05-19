@@ -95,7 +95,7 @@ if submitted1:
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	#df.to_csv(DATA_URL, index=False)
 	# This time, we're creating a NEW post reference for Apple
-	doc_ref = db.collection("5porques").document(ts.str.split('.')[0])
+	doc_ref = db.collection("5porques").document(str(round(ts)))
 
 	# And then uploading some data to that reference
 	doc_ref.set({
