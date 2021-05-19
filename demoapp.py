@@ -2,36 +2,46 @@
 import streamlit as st
 import pandas as pd
 
+# Link do arquivo com os dados
 DATA_URL = "data.csv"
 
+#Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 #@st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
 	return data
 
+# Carrega dataframe e extrai suas colunas
 df = load_data()
 colunas = df.columns
 
 #st.write(df.head())
 
+# Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
 st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
 st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 
+# Lista vazia para input dos dados do formulário
 lista = []
 submitted1=False
 
+# Constantes
+equipamentos = ['Uncoiler', 'Cupper']
+gatilhos = ['10 minutos', 'Segurança', '1 hora']
+linhas = ['L571', 'L572', 'L581', 'Utilidades']
+turnos = ['Turno A', 'Turno B', 'Turno C']
+departamentos = ['Engenharia', 'Automação', 'Manutenção']
+
+
 with st.form('Form1'):
 	lista.append(st.date_input('Data da ocorrência'))
-	lista.append(st.selectbox('Selecione o turno', ['Turno A', 'Turno B', 'Turno C']))
-	lista.append(st.selectbox('Selecione o departamento', ['Engenharia', 'Automação']))
-	lista.append(st.selectbox('Selecione a linha', ['L571', 'L572', 'L581', 'Utilidades']))
-	if lista[3] == 'L571':
-    		lista.append(st.selectbox('Selecione o equipamento', ['1', '2', '3', '4']))
-	elif lista[3] == 'L572':
-    		lista.append(st.selectbox('Selecione o equipamento', ['5', '6', '7', '8']))
-	else:
-    		lista.append(st.selectbox('Selecione o equipamento', ['5', '6']))
+	lista.append(st.selectbox('Selecione o turno', turnos ))
+	lista.append(st.selectbox('Selecione o departamento', departamentos))
+	lista.append(st.selectbox('Selecione a linha', linhas))
+	lista.append(st.selectbox('Selecione o equipamento', equipamentos))]
+	lista.append(st.selectbox('Selecione o gatilho', gatilhos))
+
 
 	lista.append(st.slider(label='Select intensity', min_value=0, max_value=100))
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
