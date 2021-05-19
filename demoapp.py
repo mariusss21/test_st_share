@@ -84,15 +84,15 @@ with st.form('Form1'):
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
 if submitted1:
-	df2 = pd.DataFrame(lista).T
-	df2.columns = colunas
-	st.write(df2.head())
-	df2.astype('category')
-	dados = df2.to_dict()
+	#df2 = pd.DataFrame(lista).T
+	#df2.columns = colunas
+	#st.write(df2.head())
+	#df2.astype('category')
+	#dados = df2.to_dict()
 	doc_ref.add(dic)
 	#st.write(df2.pivot(columns=colunas))
 	
-	df = pd.concat([df, df2], join='inner', ignore_index=True)
+	#df = pd.concat([df, df2], join='inner', ignore_index=True)
 	#df.to_csv(DATA_URL, index=False)
 	# This time, we're creating a NEW post reference for Apple
 	#doc_ref = db.collection("5porques").document("teste")
