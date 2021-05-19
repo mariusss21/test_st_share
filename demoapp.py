@@ -13,7 +13,7 @@ from google.cloud import firestore
 key_dict = json.loads(st.secrets["textkey"])
 #creds = service_account.Credentials.from_service_account_info(key_dict)
 
-creds = ServiceAccountCredentials.from_json_keyfile_dict(key_dict)
+creds = ServiceAccount.Credentials.from_json_keyfile_dict(key_dict)
 db = firestore.Client(credentials=creds, project="streamlit")
 
 ts = time.time()
