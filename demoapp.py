@@ -85,6 +85,7 @@ if submitted1:
 	df2 = pd.DataFrame(lista).T
 	df2.columns = colunas
 	st.write(df2.head())
+	df2.replace(np.nan, '').astype(str)
 	dados = df2.to_dict()
 	doc_ref.add(dados)
 	#st.write(df2.pivot(columns=colunas))
