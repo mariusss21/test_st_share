@@ -110,32 +110,6 @@ st.write(df.head())
 # https://blog.streamlit.io/streamlit-firestore/
 # https://blog.streamlit.io/streamlit-firestore-continued/
 
-'''
-	lista.append(st.date_input('Data da ocorrência'))
-	lista.append(st.selectbox('Selecione o turno', turnos ))
-	lista.append(st.selectbox('Selecione o departamento', departamentos))
-	lista.append(st.selectbox('Selecione a linha', linhas))
-	lista.append(st.selectbox('Selecione o equipamento', equipamentos))
-	lista.append(st.selectbox('Selecione o gatilho', gatilhos))
-	lista.append(st.text_input('Descreva a anomalia', ""))
-	lista.append(st.text_input('Ordem de manutenção', ""))
-	lista.append(st.text_input('Descreva a correção', ""))
-	lista.append(st.text_input('1) Por que?', ""))
-	lista.append(st.text_input('2) Por que?', ""))
-	lista.append(st.text_input('3) Por que?', ""))
-	lista.append(st.text_input('4) Por que?', ""))
-	lista.append(st.text_input('5) Por que?', ""))
-	lista.append(st.multiselect('Selecione o tipo da falha', falhas))
-	lista.append(st.multiselect('Selecione o tipo da deterioização (falha)', deterioização))
-	lista.append(st.multiselect('Selecione o tipo da correção', falhas))
-	lista.append(st.multiselect('Selecione o tipo da deterioização (correção)', deterioização))
-	lista.append(st.text_input('Ações tomadas', ""))
-	lista.append(st.text_input('Notas de manutenção', ""))
-	lista.append(st.text_input('Responsável pela identificação da anomalia', ""))
-	lista.append(st.text_input('Responsável pela correção da anomalia', ""))
-	submitted1 = st.form_submit_button('Enviar 5 Porquês')
-	'''
-
 	#df2 = pd.DataFrame(lista).T
 	#df2.columns = colunas
 	#st.write(df2.head())
