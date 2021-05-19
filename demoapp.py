@@ -89,7 +89,9 @@ if submitted1:
 	#st.write(df2.head())
 	#df2.astype('category')
 	#dados = df2.to_dict()
-	doc_ref.add(dic)
+	keys_values = dic.items()
+	new_d = {str(key): str(value) for key, value in keys_values}
+	doc_ref.add(new_d)
 	#st.write(df2.pivot(columns=colunas))
 	
 	#df = pd.concat([df, df2], join='inner', ignore_index=True)
