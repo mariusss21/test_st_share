@@ -35,6 +35,9 @@ departamentos = ['Engenharia', 'Automação', 'Manutenção']
 falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', 'Medição', 'Outra']
 deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
+# Imagem
+st.image('Ambev.jpeg')
+
 # Titulo da aplicação
 st.title('AmBev 5 porquês')
 
