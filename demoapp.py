@@ -36,7 +36,7 @@ falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', '
 deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
 # Titulo da aplicação
-st.markdown('AmBev 5 porquês')
+st.title('AmBev 5 porquês')
 
 with st.form('Form1'):
 	lista.append(st.date_input('Data da ocorrência'))
@@ -49,10 +49,10 @@ with st.form('Form1'):
 	lista.append(st.text_input('Ordem de manutenção', ""))
 	lista.append(st.text_input('Descreva a correção', ""))
 	lista.append(st.text_input('Por que?', ""))
-	lista.append(st.text_input('Por que?', ""))
-	lista.append(st.text_input('Por que?', ""))
-	lista.append(st.text_input('Por que?', ""))
-	lista.append(st.text_input('Por que?', ""))
+	#lista.append(st.text_input('Por que?', ""))
+	#lista.append(st.text_input('Por que?', ""))
+	#lista.append(st.text_input('Por que?', ""))
+	#lista.append(st.text_input('Por que?', ""))
 	lista.append(st.multiselect('Selecione o tipo da falha', falhas))
 	lista.append(st.multiselect('Selecione o tipo da deterioização (falha)', falhas))
 	lista.append(st.multiselect('Selecione o tipo da correção', falhas))
