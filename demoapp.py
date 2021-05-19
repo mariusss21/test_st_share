@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-DATA_URL = "https://www.dropbox.com/s/r19o7jiyyqpuj4k/data.csv?dl=0"
+DATA_URL = "data.csv"
 
 @st.cache
 def load_data():
@@ -13,7 +13,7 @@ df = load_data()
 
 st.sidebar.title("Escolha a ação desejada")
 if st.sidebar.checkbox("Inserir ocorrência 5 Porquês"):
-	df = df.append(list(range(0,33)), ignore_index=True)
+	df = df.append(list(range(0,32)), ignore_index=True, axis=0)
 	st.write(df.head())
 	df.to_csv(DATA_URL)
 
