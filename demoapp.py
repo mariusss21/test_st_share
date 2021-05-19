@@ -97,7 +97,7 @@ if submitted1:
 	#})
 	# Now let's make a reference to ALL of the posts
 	posts_ref = db.collection("5porques_2")
-	st.write(type(post_ref))
+	st.write(type(posts_ref))
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
 		st.write("The id is: ", doc.id)
