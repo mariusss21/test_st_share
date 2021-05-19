@@ -97,13 +97,15 @@ if submitted1:
 	#})
 	# Now let's make a reference to ALL of the posts
 	posts_ref = db.collection("5porques_2")
+	st.write(type(post_ref))
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
 		st.write("The id is: ", doc.id)
 		st.write("The contents are: ", doc.to_dict())
+		df = df.append(doc.to_dict(), ignore_index=True)
+		st.write(type(doc))
 
 st.write(df.head())
-
 
 # referencias 
 # https://blog.streamlit.io/secrets-in-sharing-apps/
