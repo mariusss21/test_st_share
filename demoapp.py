@@ -8,19 +8,14 @@ import time
 from google.cloud import firestore
 from google.oauth2 import service_account
 
-#from oauth2client import service_account
-
-#cred = credentials.Certificate("path/to/serviceAccountKey.json")
-#firebase_admin.initialize_app(cred)
-
+#Configurando acesso ao firebase
 key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
-
-#creds = ServiceAccountCredentials.from_json_keyfile_dict(key_dict)
 db = firestore.Client(credentials=creds, project="streamlit-cb45e")
+doc_ref = db.collection(u'5porques')
 
+#timestamp
 ts = time.time()
-
 
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
@@ -90,18 +85,19 @@ if submitted1:
 	df2 = pd.DataFrame(lista).T
 	df2.columns = colunas
 	st.write(df2.head())
+	doc_ref.add(df2.to_dict(orient='records')
 	#st.write(df2.pivot(columns=colunas))
 	
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	#df.to_csv(DATA_URL, index=False)
 	# This time, we're creating a NEW post reference for Apple
-	doc_ref = db.collection("5porques").document("teste")
+	#doc_ref = db.collection("5porques").document("teste")
 
 	# And then uploading some data to that reference
-	doc_ref.set({
-	"title": "Apple",
-	"url": "www.apple.com"
-	})
+	#doc_ref.set({
+	#"title": "Apple",
+	#"url": "www.apple.com"
+	#})
 
 st.write(df.head())
 
