@@ -84,21 +84,14 @@ with st.form('Form1'):
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
 if submitted1:
-	#df2 = pd.DataFrame(lista).T
-	#df2.columns = colunas
-	#st.write(df2.head())
-	#df2.astype('category')
-	#dados = df2.to_dict()
+
 	keys_values = dic.items()
 	new_d = {str(key): str(value) for key, value in keys_values}
-	doc_ref.add(new_d)
-	#st.write(df2.pivot(columns=colunas))
 	
-	#df = pd.concat([df, df2], join='inner', ignore_index=True)
-	#df.to_csv(DATA_URL, index=False)
-	# This time, we're creating a NEW post reference for Apple
-	#doc_ref = db.collection("5porques").document("teste")
 
+	doc_ref = db.collection("5porques").document(new_d['data'] +  new_d['responsável indicação'])
+	doc_ref.add(new_d)
+	
 	# And then uploading some data to that reference
 	#doc_ref.set({
 	#"title": "Apple",
@@ -145,3 +138,13 @@ st.write(df.head())
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
 	'''
 
+	#df2 = pd.DataFrame(lista).T
+	#df2.columns = colunas
+	#st.write(df2.head())
+	#df2.astype('category')
+	#dados = df2.to_dict()
+		#st.write(df2.pivot(columns=colunas))
+	
+	#df = pd.concat([df, df2], join='inner', ignore_index=True)
+	#df.to_csv(DATA_URL, index=False)
+	# This time, we're creating a NEW post reference for Apple
