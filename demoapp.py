@@ -6,6 +6,8 @@ import time
 
 # Import firebase
 from google.cloud import firestore
+import google.auth
+
 #from oauth2client import service_account
 
 #cred = credentials.Certificate("path/to/serviceAccountKey.json")
