@@ -12,10 +12,11 @@ def load_data():
 df = load_data()
 colunas = df.columns
 
-st.write(df.head())
+#st.write(df.head())
 
 st.sidebar.title("Escolha a ação desejada")
-#if st.sidebar.checkbox("Inserir ocorrência 5 Porquês"):
+st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
+st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 
 lista = []
 submitted1=False
@@ -41,5 +42,5 @@ if submitted1:
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	df.to_csv(DATA_URL, index=False)
 
-st.write(df.head())
+#st.write(df.head())
 
