@@ -96,7 +96,7 @@ if submitted1:
 	#"url": "www.apple.com"
 	#})
 	# Now let's make a reference to ALL of the posts
-	posts_ref = db.collection("5porques")
+	posts_ref = db.collection("5porques_2")
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
 		st.write("The id is: ", doc.id)
