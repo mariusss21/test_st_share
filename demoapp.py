@@ -69,9 +69,12 @@ with st.form('Form1'):
 if submitted1:
 	df2 = pd.DataFrame(lista).T
 	df2.columns = colunas
+	
+	st.write(pd.pivot_table(df2))
+	
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	df.to_csv(DATA_URL, index=False)
 
-#st.write(df.head())
-#
+st.write(df.head())
+
 
