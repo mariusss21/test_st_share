@@ -1,6 +1,7 @@
 # importar bibliotecas
 import streamlit as st
 import pandas as pd
+from google.cloud import firestore
 
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
