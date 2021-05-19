@@ -1,7 +1,21 @@
 # importar bibliotecas
 import streamlit as st
 import pandas as pd
+import json
+
+# Import firebase
 from google.cloud import firestore
+import firebase_admin
+from firebase_admin import credentials
+
+#cred = credentials.Certificate("path/to/serviceAccountKey.json")
+#firebase_admin.initialize_app(cred)
+
+key_dict = json.loads(st.secrets["textkey"])
+creds = service_account.Credentials.from_service_account_info(key_dict)
+db = firestore.Client(credentials=creds, project="streamlit")
+
+
 
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
@@ -75,6 +89,14 @@ if submitted1:
 	
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
 	df.to_csv(DATA_URL, index=False)
+	# This time, we're creating a NEW post reference for Apple
+	doc_ref = db.collection("posts").document("5porques")
+
+	# And then uploading some data to that reference
+	doc_ref.set({
+	"title": "Apple",
+	"url": "www.apple.com"
+	})
 
 st.write(df.head())
 
