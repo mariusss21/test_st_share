@@ -6,7 +6,7 @@ import time
 
 # Import firebase
 from google.cloud import firestore
-from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client import service_account
 
 #cred = credentials.Certificate("path/to/serviceAccountKey.json")
 #firebase_admin.initialize_app(cred)
