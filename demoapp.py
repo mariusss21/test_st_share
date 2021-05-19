@@ -35,6 +35,8 @@ departamentos = ['Engenharia', 'Automação', 'Manutenção']
 falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', 'Medição', 'Outra']
 deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
+# Titulo da aplicação
+st.markdown('AmBev 5 porquês')
 
 with st.form('Form1'):
 	lista.append(st.date_input('Data da ocorrência'))
