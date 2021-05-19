@@ -93,7 +93,7 @@ if submitted1:
 	#st.write(df2.pivot(columns=colunas))
 	
 	df = pd.concat([df, df2], join='inner', ignore_index=True)
-	df.to_csv(DATA_URL, index=False)
+	#df.to_csv(DATA_URL, index=False)
 	# This time, we're creating a NEW post reference for Apple
 	doc_ref = db.collection("5porques").document(ts.str.split('.')[0])
 
