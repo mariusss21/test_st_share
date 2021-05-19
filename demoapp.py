@@ -1,26 +1,20 @@
-## Demo Streamlit app on EC2
-
-
+# importar bibliotecas
 import streamlit as st
-import plotly as py
-import plotly.io as pio
-from plotly import graph_objects as go
+import pandas as pd
+
+DATA_URL = "https://www.dropbox.com/s/r19o7jiyyqpuj4k/data.csv?dl=0"
+
+@st.cache
+def load_data():
+	data = pd.read_csv(DATA_URL)
+	return data
+
+df = load_data()
+
+st.sidebar.title("Escolha a ação desejada")
+if st.sidebar.checkbox("Inserir ocorrência 5 Porquês"):
+	df = df.append(list(range(0,33)), ignore_index=True)
+	st.write(df.head())
+	df.to_csv(DATA_URL)
 
 
-
-
-labels =  ["People who like streamlit", "People who don't know about streamlit"]
-values = [80, 20]
-
-
-# pull is given as a fraction of the pie radius
-fig = go.Figure(data=[go.Pie(labels=labels, values=values,textinfo='label+percent',
-                             insidetextorientation='radial', pull=[0, 0, 0.2, 0] #,hole = 0.2
-                            )])
-
-
-fig.update_layout(
-    title_text="Demo streamlit app")
-
-
-st.plotly_chart(fig, sharing='streamlit')
