@@ -13,7 +13,7 @@ df = load_data()
 
 st.sidebar.title("Escolha a ação desejada")
 if st.sidebar.checkbox("Inserir ocorrência 5 Porquês"):
-	df = df.append(list(range(0,32)), ignore_index=True, axis=0)
+	df = df.append(list(range(0,32)), ignore_index=True)
 	st.write(df.head())
 	df.to_csv(DATA_URL)
 
