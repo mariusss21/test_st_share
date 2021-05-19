@@ -40,6 +40,7 @@ st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 
 # Lista vazia para input dos dados do formulário
 lista = []
+dic = {} #dicionario
 submitted1=False
 
 # Constantes
@@ -58,6 +59,59 @@ st.image('Ambev.jpeg')
 st.title('Formulário 5 porques')
 
 with st.form('Form1'):
+	dic['data'] = st.date_input('Data da ocorrência')
+	dic['turno'] = st.selectbox('Selecione o turno', turnos )
+	dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
+	dic['linha'] = st.selectbox('Selecione a linha', linhas)
+	dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
+	dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
+	dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
+	dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
+	dic['correção'] = st.text_input('Descreva a correção', "")
+	dic['pq1'] = st.text_input('1) Por que?', "")
+	dic['pq2'] = st.text_input('2) Por que?', "")
+	dic['pq3'] = st.text_input('3) Por que?', "")
+	dic['pq4'] = st.text_input('4) Por que?', "")
+	dic['pq5'] = st.text_input('5) Por que?', "")
+	dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
+	dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
+	dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
+	dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
+	dic['ações'] = st.text_input('Ações tomadas', "")
+	dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
+	dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
+	dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
+	submitted1 = st.form_submit_button('Enviar 5 Porquês')
+
+if submitted1:
+	df2 = pd.DataFrame(lista).T
+	df2.columns = colunas
+	st.write(df2.head())
+	df2.astype('category')
+	dados = df2.to_dict()
+	doc_ref.add(dic)
+	#st.write(df2.pivot(columns=colunas))
+	
+	df = pd.concat([df, df2], join='inner', ignore_index=True)
+	#df.to_csv(DATA_URL, index=False)
+	# This time, we're creating a NEW post reference for Apple
+	#doc_ref = db.collection("5porques").document("teste")
+
+	# And then uploading some data to that reference
+	#doc_ref.set({
+	#"title": "Apple",
+	#"url": "www.apple.com"
+	#})
+
+st.write(df.head())
+
+
+# referencias 
+# https://blog.streamlit.io/secrets-in-sharing-apps/
+# https://blog.streamlit.io/streamlit-firestore/
+# https://blog.streamlit.io/streamlit-firestore-continued/
+
+'''
 	lista.append(st.date_input('Data da ocorrência'))
 	lista.append(st.selectbox('Selecione o turno', turnos ))
 	lista.append(st.selectbox('Selecione o departamento', departamentos))
@@ -81,32 +135,5 @@ with st.form('Form1'):
 	lista.append(st.text_input('Responsável pela identificação da anomalia', ""))
 	lista.append(st.text_input('Responsável pela correção da anomalia', ""))
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
-
-if submitted1:
-	df2 = pd.DataFrame(lista).T
-	df2.columns = colunas
-	st.write(df2.head())
-	df2.astype('category')
-	dados = df2.to_dict()
-	doc_ref.add(dados)
-	#st.write(df2.pivot(columns=colunas))
-	
-	df = pd.concat([df, df2], join='inner', ignore_index=True)
-	#df.to_csv(DATA_URL, index=False)
-	# This time, we're creating a NEW post reference for Apple
-	#doc_ref = db.collection("5porques").document("teste")
-
-	# And then uploading some data to that reference
-	#doc_ref.set({
-	#"title": "Apple",
-	#"url": "www.apple.com"
-	#})
-
-st.write(df.head())
-
-
-# referencias 
-# https://blog.streamlit.io/secrets-in-sharing-apps/
-# https://blog.streamlit.io/streamlit-firestore/
-# https://blog.streamlit.io/streamlit-firestore-continued/
+	'''
 
