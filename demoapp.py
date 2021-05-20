@@ -113,12 +113,12 @@ if analisar:
 	#col2.header("Fim")
 	fim_filtro = col2.date_input("Fim")
 	
-	#filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
-	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
+	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
+	st.write(filtrado)
 	detalhar_analise = st.checkbox("Detalhar ocorrências")
 	
 	if detalhar_analise:
-		for index, row in dados.iterrows():
+		for index, row in filtrado.iterrows():
 			st.write('Ocorrência ' + str(index))
 			st.table(row)		
 
