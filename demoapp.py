@@ -1,7 +1,7 @@
 # importar bibliotecas
 import streamlit as st
 from streamlit import caching
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import json
@@ -116,7 +116,8 @@ if analisar:
 if estatistica:
 
 	#grafico1 = dados['turno'].groupby('turno').count()
-	grafico1 = dados['turno'].hist()
-	st.write(grafico1)
-	st.bar_chart(grafico1)
-	
+	fig = plt.figure()
+	#grafico1 = dados['turno'].hist()
+	ax = fig.add_plot(1,1,1)
+	ax.hist(dados['turno'])
+	st.write(fig)
