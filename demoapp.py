@@ -60,10 +60,11 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
 # Imagem
 st.image('Ambev.jpeg')
+st.subheader('Aplicação 5 porques')
+st.write('Inclusão e análise de ocorrêcias 5 porques')
 
 if inserir:
-	# Titulo da aplicação
-	st.title('Formulário 5 porques')
+	st.subheader('Formulário para incluir ocorrência')
 
 	with st.form('Form1'):
 		dic['data'] = st.date_input('Data da ocorrência')
