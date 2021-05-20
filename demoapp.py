@@ -118,13 +118,12 @@ if analisar:
 	detalhar_analise = st.checkbox("Detalhar ocorrências")
 	indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
-	if detalhar_analise:
-		for index, row in filtrado.iterrows():
-			
-			lista_rows_filtrado[indice] = st.checkbox('Ocorrência ' + str(index))
-			if lista_rows_filtrado[indice]:
-				st.table(row)	
-			indice = indice + 1
+	
+	for index, row in filtrado.iterrows():
+		lista_rows_filtrado[indice] = st.checkbox('Ocorrência ' + str(index))
+		if lista_rows_filtrado[indice]:
+			st.table(row)	
+		indice = indice + 1
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
