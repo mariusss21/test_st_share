@@ -115,7 +115,7 @@ if analisar:
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
-	detalhar_analise = st.checkbox("Detalhar ocorrências")
+
 	indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
 	
