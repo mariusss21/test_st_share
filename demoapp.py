@@ -31,11 +31,10 @@ st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 rec = st.sidebar.button('Recarregar base de dados')
 if rec:
 	caching.clear_cache()
-	recarregar = 1
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 @st.cache
-def load_data(recarregar):
+def load_data():
 	data = pd.read_csv(DATA_URL)
 	#colunas = data.columns
 	posts_ref = db.collection("5porques_2")	
@@ -47,9 +46,7 @@ def load_data(recarregar):
 	return data
 
 # Carrega dataframe e extrai suas colunas
-dados = load_data(recarregar)
-
-
+dados = load_data()
 
 # Lista vazia para input dos dados do formulário
 lista = []
