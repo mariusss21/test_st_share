@@ -22,6 +22,7 @@ DATA_URL = "data.csv"
 st.sidebar.title("Escolha a ação desejada")
 inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
+estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
 #recarregar base de dados
 rec = st.sidebar.button('Recarregar base de dados')
@@ -109,6 +110,8 @@ if analisar:
 
 	#col2.header("Fim")
 	fim_filtro = col2.date_input("Fim")
-
 	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
 
+if estatistica:
+	
+	dados['turno'].plot.hist()
