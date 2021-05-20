@@ -61,7 +61,7 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 # Imagem
 st.image('Ambev.jpeg')
 st.subheader('Aplicação 5 porques')
-st.write('Inclusão e análise de ocorrêcias 5 porques')
+st.write('Selecione no menu lateral a opção desejada')
 
 if inserir:
 	st.subheader('Formulário para incluir ocorrência')
