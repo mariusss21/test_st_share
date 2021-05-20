@@ -39,7 +39,7 @@ def load_data(recarregar):
 	return data
 
 # Carrega dataframe e extrai suas colunas
-dados = load_data()
+dados = load_data(recarregar)
 
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
