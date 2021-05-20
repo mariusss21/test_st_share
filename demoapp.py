@@ -115,5 +115,6 @@ if analisar:
 
 if estatistica:
 
-	grafico1 = dados['turno'].groupby('turno').count()
+	#grafico1 = dados['turno'].groupby('turno').count()
+	grafico1 = np.histogram(data['turno']) #[0]
 	st.bar_chart(grafico1)
