@@ -28,7 +28,7 @@ def load_data():
 		data = data.append(doc.to_dict(), ignore_index=True)
 	#st.write(df.head())
 	data['data'] = pd.to_datetime(data['data']).dt.date	
-	return df
+	return data
 
 # Carrega dataframe e extrai suas colunas
 dados = load_data()
