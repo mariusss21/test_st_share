@@ -24,8 +24,8 @@ def load_data():
 	return data
 
 # Carrega dataframe e extrai suas colunas
-df = load_data()
-colunas = df.columns
+df_col = load_data()
+colunas = df_col.columns
 
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
@@ -127,7 +127,7 @@ if leitura:
 	for doc in posts_ref.stream():
 		#st.write("The id is: ", doc.id)
 		#st.write("The contents are: ", doc.to_dict())
-		df = df.append(doc.to_dict(), ignore_index=True)
+		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
 		#st.write(type(doc))
 	st.write(df.head())
 	df['data'] = pd.to_datetime(df['data']).dt.date
