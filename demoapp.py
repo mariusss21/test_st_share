@@ -121,7 +121,7 @@ if analisar:
 	
 	for index, row in filtrado.iterrows():
 		lista_rows_filtrado[indice] = st.checkbox('Ocorrência ' + str(index))
-		if detalhar todas:
+		if detalhar_todas:
 			st.table(row)
 		else:
 			if lista_rows_filtrado[indice]:
