@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import json
 
+
+
 # Import firebase
 from google.cloud import firestore
 from google.oauth2 import service_account
@@ -17,9 +19,15 @@ doc_ref = db.collection(u'5porques')
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
 
+# variável para recarregar os dados
+recarregar = 0
+
+#recarregar base de dados
+recarregar = st.sidebar.button('Recarregar base de dados')
+
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 @st.cache
-def load_data():
+def load_data(recarregar):
 	data = pd.read_csv(DATA_URL)
 	#colunas = data.columns
 	posts_ref = db.collection("5porques_2")	
