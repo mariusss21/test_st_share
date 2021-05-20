@@ -130,7 +130,7 @@ if leitura:
 		df = df.append(doc.to_dict(), ignore_index=True)
 		#st.write(type(doc))
 	st.write(df.head())
-	df['data'] = ['data'].dt.date
+	df['data'] = df['data'].dt.date
 		
 st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 	 
