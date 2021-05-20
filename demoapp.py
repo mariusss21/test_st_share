@@ -58,26 +58,6 @@ st.image('Ambev.jpeg')
 # Titulo da aplicação
 st.title('Formulário 5 porques')
 
-# Etapa de login
-#login = False
-
-#if not logado:
-#	with st.sidebar.form('senha'):
-#		senha = st.text_input('Digite a senha para acesso', "")
-#		login = st.form_submit_button('Login')
-#	if login:
-#		if senha == st.secrets['senha_con']:
-#			st.write('Login efetuado com sucesso')
-#			logado = True
-#		else:
-#			st.write('Senha incorreta')
-#			logado = False
-
-#if logado:
-#	logoff = st.button('Logoff')
-#	if logoff:
-#		logado = False
-
 with st.form('Form1'):
 	dic['data'] = st.date_input('Data da ocorrência')
 	dic['turno'] = st.selectbox('Selecione o turno', turnos )
@@ -111,22 +91,6 @@ if submitted1:
 	doc_ref = db.collection("5porques_2").document(new_d['data'] + '_' + new_d['responsável identificação'])
 	doc_ref.set(new_d)
 		
-leitura = st.button('Ler dados da Nuvem')
-
-#if leitura:
-	# Informa a coleção para leitura
-#	posts_ref = db.collection("5porques_2")
-	
-	# For a reference to a collection, we use .stream() instead of .get()
-#	for doc in posts_ref.stream():
-		#st.write("The id is: ", doc.id)
-		#st.write("The contents are: ", doc.to_dict())
-#		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
-		#st.write(type(doc))
-#	st.write(df.head())
-#	df['data'] = pd.to_datetime(df['data']).dt.date
-#	load_data(df)
-		
 st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 	 
 col1, col2 = st.beta_columns(2)
@@ -136,27 +100,6 @@ inicio_filtro = col1.date_input("Início")
 
 #col2.header("Fim")
 fim_filtro = col2.date_input("Fim")
-	 
-filtrar = st.button('Filtrar ocorrências')
-
-if filtrar:
-	st.write(inicio_filtro)
-	st.write(fim_filtro)
 	
 st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
 st.write(dados)
-# referencias 
-# https://blog.streamlit.io/secrets-in-sharing-apps/
-# https://blog.streamlit.io/streamlit-firestore/
-# https://blog.streamlit.io/streamlit-firestore-continued/
-
-	#df2 = pd.DataFrame(lista).T
-	#df2.columns = colunas
-	#st.write(df2.head())
-	#df2.astype('category')
-	#dados = df2.to_dict()
-		#st.write(df2.pivot(columns=colunas))
-	
-	#df = pd.concat([df, df2], join='inner', ignore_index=True)
-	#df.to_csv(DATA_URL, index=False)
-	# This time, we're creating a NEW post reference for Apple
