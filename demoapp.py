@@ -29,6 +29,7 @@ st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 #recarregar base de dados
 rec = st.sidebar.button('Recarregar base de dados')
 if rec:
+	caching.clear_cache()
 	recarregar = 1
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
