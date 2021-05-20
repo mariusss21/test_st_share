@@ -55,16 +55,22 @@ st.title('Formulário 5 porques')
 # Etapa de login
 login = False
 
-with st.sidebar.form('senha'):
-	senha = st.text_input('Digite a senha para acesso', "")
-	login = st.form_submit_button('Login')
-if login:
-	if senha == st.secret['senha_con']:
-		st.write('Login efetuado com sucesso')
-		logado = True
-	else:
-		st.write('Senha incorreta')
-		logado = false
+if not logado:
+	with st.sidebar.form('senha'):
+		senha = st.text_input('Digite a senha para acesso', "")
+		login = st.form_submit_button('Login')
+	if login:
+		if senha == st.secrets['senha_con']:
+			st.write('Login efetuado com sucesso')
+			logado = True
+		else:
+			st.write('Senha incorreta')
+			logado = False
+
+if logado:
+	logoff = st.button('Logoff')
+	if logoff:
+		logado = False
 	
 	
 
