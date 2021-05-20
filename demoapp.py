@@ -137,10 +137,10 @@ st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 col1, col2 = st.beta_columns(2)
 
 col1.header("Início")
-inicio_filtro = col1.st.date_input()
+inicio_filtro = col1.date_input()
 
 col2.header("Fim")
-fim_filtro = col2.st.date_input()
+fim_filtro = col2.date_input()
 	 
 filtrar = st.button('Filtrar ocorrências')
 
