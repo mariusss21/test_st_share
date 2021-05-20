@@ -114,7 +114,7 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
-	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado' )
+	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
 	detalhar_analise = st.checkbox("Detalhar ocorrências")
 	
 	if detalhar_analise:
