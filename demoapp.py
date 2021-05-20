@@ -40,7 +40,8 @@ def load_data():
 	for doc in posts_ref.stream():
 		data = data.append(doc.to_dict(), ignore_index=True)
 	#st.write(df.head())
-	data['data'] = pd.to_datetime(data['data']).dt.date	
+	data['data'] = pd.to_datetime(data['data']).dt.date
+	data = data.sort_values(by=['data'])
 	return data
 
 # Carrega dataframe e extrai suas colunas
@@ -99,12 +100,11 @@ if inserir:
 
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
-		doc_ref = db.collection("5porques_2").document(new_d['data'] + '_' + new_d['responsável identificação'])
+		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 
 if analisar:
 	st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
-
 	col1, col2 = st.beta_columns(2)
 
 	#col1.header("Início")
@@ -112,7 +112,14 @@ if analisar:
 
 	#col2.header("Fim")
 	fim_filtro = col2.date_input("Fim")
-	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
+	
+	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
+	st.write(filtrado['data', 'turno', 'linha', 'equipamento', 'responsável identificação'])
+	detalher_analise = st.checkbox("Detalhar ocorrências")
+	
+	if detalhar_analise:
+		for index, row in dados.iterrows():
+			st.write(row)		
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
