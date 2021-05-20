@@ -119,7 +119,8 @@ if analisar:
 	
 	if detalhar_analise:
 		for index, row in dados.iterrows():
-			st.write(row)		
+			st.write('Ocorrência ' + index)
+			st.table(row)		
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
