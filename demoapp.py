@@ -21,13 +21,13 @@ DATA_URL = "data.csv"
 @st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
-	colunas = data.columns
+	#colunas = data.columns
 	posts_ref = db.collection("5porques_2")	
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
-		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
+		data = data.append(doc.to_dict(), ignore_index=True)
 	#st.write(df.head())
-	df['data'] = pd.to_datetime(df['data']).dt.date	
+	data['data'] = pd.to_datetime(data['data']).dt.date	
 	return df
 
 # Carrega dataframe e extrai suas colunas
