@@ -87,7 +87,6 @@ st.bokeh_chart(div)
 
 if password != st.secrets['senha_con']:
 	st.error("the password you entered is incorrect")
-	return
 	
 	
 
