@@ -115,14 +115,17 @@ if analisar:
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
-
+	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
 	
 	for index, row in filtrado.iterrows():
 		lista_rows_filtrado[indice] = st.checkbox('Ocorrência ' + str(index))
-		if lista_rows_filtrado[indice]:
-			st.table(row)	
+		if detalhar todas:
+			st.table(row)
+		else:
+			if lista_rows_filtrado[indice]:
+				st.table(row)	
 		indice = indice + 1
 
 if estatistica:
