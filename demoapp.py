@@ -114,5 +114,5 @@ if analisar:
 	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
 
 if estatistica:
-	
-	dados['turno'].plot.hist()
+	grafico1 = dados.groupby('turno').value_counts()
+	grafico.plot.hist()
