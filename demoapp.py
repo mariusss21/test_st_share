@@ -41,6 +41,7 @@ def load_data(recarregar):
 	return data
 
 # Carrega dataframe e extrai suas colunas
+@st.cache
 dados = load_data(recarregar)
 
 # Definição da sidebar
