@@ -23,7 +23,9 @@ DATA_URL = "data.csv"
 recarregar = 0
 
 #recarregar base de dados
-recarregar = st.sidebar.button('Recarregar base de dados')
+rec = st.sidebar.button('Recarregar base de dados')
+if rec:
+	recarregar = 5
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 @st.cache
