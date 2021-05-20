@@ -53,24 +53,41 @@ st.image('Ambev.jpeg')
 st.title('Formulário 5 porques')
 
 # Etapa de login
-login = False
+#login = False
 
-if not logado:
-	with st.sidebar.form('senha'):
-		senha = st.text_input('Digite a senha para acesso', "")
-		login = st.form_submit_button('Login')
-	if login:
-		if senha == st.secrets['senha_con']:
-			st.write('Login efetuado com sucesso')
-			logado = True
-		else:
-			st.write('Senha incorreta')
-			logado = False
+#if not logado:
+#	with st.sidebar.form('senha'):
+#		senha = st.text_input('Digite a senha para acesso', "")
+#		login = st.form_submit_button('Login')
+#	if login:
+#		if senha == st.secrets['senha_con']:
+#			st.write('Login efetuado com sucesso')
+#			logado = True
+#		else:
+#			st.write('Senha incorreta')
+#			logado = False
 
-if logado:
-	logoff = st.button('Logoff')
-	if logoff:
-		logado = False
+#if logado:
+#	logoff = st.button('Logoff')
+#	if logoff:
+#		logado = False
+
+password = st.sidebar.text_input("Password:", value="")
+
+# select our text input field and make it into a password input
+js = "el = document.querySelectorAll('.sidebar-content input')[0]; el.type = 'password';"
+
+# passing js code to the onerror handler of an img tag with no src
+# triggers an error and allows automatically running our code
+html = f'<img src onerror="{js}">'
+
+# in contrast to st.write, this seems to allow passing javascript
+div = Div(text=html)
+st.bokeh_chart(div)
+
+if password != st.secrets['senha_con']:
+	st.error("the password you entered is incorrect")
+	return
 	
 	
 
