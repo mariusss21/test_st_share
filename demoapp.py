@@ -31,7 +31,7 @@ def load_data():
 	return df
 
 # Carrega dataframe e extrai suas colunas
-df = load_data()
+dados = load_data()
 
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
@@ -143,8 +143,8 @@ if filtrar:
 	st.write(inicio_filtro)
 	st.write(fim_filtro)
 	
-st.write(df[(df['data'] >= inicio_filtro) & (df['data'] <= fim_filtro)])
-st.write(df)
+st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
+st.write(dados)
 # referencias 
 # https://blog.streamlit.io/secrets-in-sharing-apps/
 # https://blog.streamlit.io/streamlit-firestore/
