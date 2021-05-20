@@ -115,7 +115,7 @@ if analisar:
 	
 	#filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
 	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
-	detalher_analise = st.checkbox("Detalhar ocorrências")
+	detalhar_analise = st.checkbox("Detalhar ocorrências")
 	
 	if detalhar_analise:
 		for index, row in dados.iterrows():
