@@ -128,9 +128,9 @@ if leitura:
 		#st.write("The id is: ", doc.id)
 		#st.write("The contents are: ", doc.to_dict())
 		df = df.append(doc.to_dict(), ignore_index=True)
-		st.write(type(doc))
-		st.write(df.head())
-	df['data'] = pd.to_datetime(df['data'])
+		#st.write(type(doc))
+	st.write(df.head())
+	df['data'] = ['data'].dt.date
 		
 st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 	 
