@@ -45,6 +45,7 @@ def load_data():
 
 # Carrega dataframe e extrai suas colunas
 dados = load_data()
+colunas = dados.columns
 
 # Lista vazia para input dos dados do formulário
 lista = []
@@ -114,10 +115,11 @@ if analisar:
 	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
 
 if estatistica:
-
+	st.subheader("Estatísticas das ocorrências")
 	#grafico1 = dados['turno'].groupby('turno').count()
 	fig = plt.figure()
 	#grafico1 = dados['turno'].hist()
+	variavel =  st.selectbox('Selecione o item para análise', colunas)
 	ax = fig.add_subplot(1,1,1)
-	ax.hist(dados['turno'])
+	ax.hist(dados[variavel])
 	st.write(fig)
