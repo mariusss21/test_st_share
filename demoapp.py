@@ -121,6 +121,6 @@ if estatistica:
 	#grafico1 = dados['turno'].hist()
 	variavel =  st.selectbox('Selecione o item para análise', colunas)
 	ax = fig.add_subplot(1,1,1)
-	ax.xticks(rotation=45)
+	fig.xticks(rotation=45)
 	ax.hist(dados[variavel])
 	st.write(fig)
