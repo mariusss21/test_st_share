@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import json
-import time
 
 # Import firebase
 from google.cloud import firestore
@@ -14,9 +13,6 @@ key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds, project="streamlit-cb45e")
 doc_ref = db.collection(u'5porques')
-
-#timestamp
-ts = time.time()
 
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
@@ -55,6 +51,22 @@ st.image('Ambev.jpeg')
 
 # Titulo da aplicação
 st.title('Formulário 5 porques')
+
+# Etapa de login
+login = False
+
+with st.sidebar.form('senha'):
+	senha = st.text_input('Digite a senha para acesso', "")
+	login = st.form_submit_button('Login')
+if login:
+	if senha == st.secret['senha_con']:
+		st.write('Login efetuado com sucesso')
+		logado = True
+	else:
+		st.write('Senha incorreta')
+		logado = false
+	
+	
 
 with st.form('Form1'):
 	dic['data'] = st.date_input('Data da ocorrência')
