@@ -18,14 +18,10 @@ doc_ref = db.collection(u'5porques')
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
 
-# variável para recarregar os dados
-recarregar = 0
-
-
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
-st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
-st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
+inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
+analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 
 #recarregar base de dados
 rec = st.sidebar.button('Recarregar base de dados')
@@ -65,51 +61,53 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 # Imagem
 st.image('Ambev.jpeg')
 
-# Titulo da aplicação
-st.title('Formulário 5 porques')
+if inserir:
+	# Titulo da aplicação
+	st.title('Formulário 5 porques')
 
-with st.form('Form1'):
-	dic['data'] = st.date_input('Data da ocorrência')
-	dic['turno'] = st.selectbox('Selecione o turno', turnos )
-	dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
-	dic['linha'] = st.selectbox('Selecione a linha', linhas)
-	dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
-	dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
-	dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
-	dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
-	dic['correção'] = st.text_input('Descreva a correção', "")
-	dic['pq1'] = st.text_input('1) Por que?', "")
-	dic['pq2'] = st.text_input('2) Por que?', "")
-	dic['pq3'] = st.text_input('3) Por que?', "")
-	dic['pq4'] = st.text_input('4) Por que?', "")
-	dic['pq5'] = st.text_input('5) Por que?', "")
-	dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
-	dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
-	dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
-	dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
-	dic['ações'] = st.text_input('Ações tomadas', "")
-	dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
-	dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
-	dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
-	dic['verificado'] = 'não'
-	submitted1 = st.form_submit_button('Enviar 5 Porquês')
+	with st.form('Form1'):
+		dic['data'] = st.date_input('Data da ocorrência')
+		dic['turno'] = st.selectbox('Selecione o turno', turnos )
+		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
+		dic['linha'] = st.selectbox('Selecione a linha', linhas)
+		dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
+		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
+		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
+		dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
+		dic['correção'] = st.text_input('Descreva a correção', "")
+		dic['pq1'] = st.text_input('1) Por que?', "")
+		dic['pq2'] = st.text_input('2) Por que?', "")
+		dic['pq3'] = st.text_input('3) Por que?', "")
+		dic['pq4'] = st.text_input('4) Por que?', "")
+		dic['pq5'] = st.text_input('5) Por que?', "")
+		dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
+		dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
+		dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
+		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
+		dic['ações'] = st.text_input('Ações tomadas', "")
+		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
+		dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
+		dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
+		dic['verificado'] = 'não'
+		submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
-if submitted1:
+	if submitted1:
 
-	keys_values = dic.items()
-	new_d = {str(key): str(value) for key, value in keys_values}
-	doc_ref = db.collection("5porques_2").document(new_d['data'] + '_' + new_d['responsável identificação'])
-	doc_ref.set(new_d)
-		
-st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
-	 
-col1, col2 = st.beta_columns(2)
+		keys_values = dic.items()
+		new_d = {str(key): str(value) for key, value in keys_values}
+		doc_ref = db.collection("5porques_2").document(new_d['data'] + '_' + new_d['responsável identificação'])
+		doc_ref.set(new_d)
 
-#col1.header("Início")
-inicio_filtro = col1.date_input("Início")
+if analisar:
+	st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 
-#col2.header("Fim")
-fim_filtro = col2.date_input("Fim")
-	
-st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
-st.write(dados)
+	col1, col2 = st.beta_columns(2)
+
+	#col1.header("Início")
+	inicio_filtro = col1.date_input("Início")
+
+	#col2.header("Fim")
+	fim_filtro = col2.date_input("Fim")
+
+	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)])
+
