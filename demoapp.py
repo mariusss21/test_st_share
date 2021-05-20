@@ -149,6 +149,7 @@ if filtrar:
 	st.write(fim_filtro)
 	
 st.write(df[(df['data'] >= inicio_filtro) & (df['data'] <= fim_filtro)])
+st.write(df)
 # referencias 
 # https://blog.streamlit.io/secrets-in-sharing-apps/
 # https://blog.streamlit.io/streamlit-firestore/
