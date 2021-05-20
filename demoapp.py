@@ -21,11 +21,17 @@ DATA_URL = "data.csv"
 @st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
-	return data
+	colunas = data.columns
+	posts_ref = db.collection("5porques_2")	
+	# For a reference to a collection, we use .stream() instead of .get()
+	for doc in posts_ref.stream():
+		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
+	#st.write(df.head())
+	df['data'] = pd.to_datetime(df['data']).dt.date	
+	return df
 
 # Carrega dataframe e extrai suas colunas
-df_col = load_data()
-colunas = df_col.columns
+df = load_data()
 
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
@@ -102,35 +108,24 @@ if submitted1:
 
 	keys_values = dic.items()
 	new_d = {str(key): str(value) for key, value in keys_values}
-	
-
 	doc_ref = db.collection("5porques_2").document(new_d['data'] + '_' + new_d['responsável identificação'])
 	doc_ref.set(new_d)
-	
-	# And then uploading some data to that reference
-	#doc_ref.set({
-	#"title": "Apple",
-	#"url": "www.apple.com"
-	#})
-	# Now let's make a reference to ALL of the posts
-
-
-
 		
 leitura = st.button('Ler dados da Nuvem')
 
-if leitura:
+#if leitura:
 	# Informa a coleção para leitura
-	posts_ref = db.collection("5porques_2")
+#	posts_ref = db.collection("5porques_2")
 	
 	# For a reference to a collection, we use .stream() instead of .get()
-	for doc in posts_ref.stream():
+#	for doc in posts_ref.stream():
 		#st.write("The id is: ", doc.id)
 		#st.write("The contents are: ", doc.to_dict())
-		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
+#		df = df.append(doc.to_dict(), ignore_index=True, columns=colunas)
 		#st.write(type(doc))
-	st.write(df.head())
-	df['data'] = pd.to_datetime(df['data']).dt.date
+#	st.write(df.head())
+#	df['data'] = pd.to_datetime(df['data']).dt.date
+#	load_data(df)
 		
 st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 	 
