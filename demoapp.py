@@ -4,8 +4,6 @@ import pandas as pd
 import numpy as np
 import json
 
-
-
 # Import firebase
 from google.cloud import firestore
 from google.oauth2 import service_account
@@ -22,10 +20,16 @@ DATA_URL = "data.csv"
 # variável para recarregar os dados
 recarregar = 0
 
+
+# Definição da sidebar
+st.sidebar.title("Escolha a ação desejada")
+st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
+st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
+
 #recarregar base de dados
 rec = st.sidebar.button('Recarregar base de dados')
 if rec:
-	recarregar = 5
+	recarregar = 1
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 @st.cache
@@ -41,13 +45,9 @@ def load_data(recarregar):
 	return data
 
 # Carrega dataframe e extrai suas colunas
-@st.cache
 dados = load_data(recarregar)
 
-# Definição da sidebar
-st.sidebar.title("Escolha a ação desejada")
-st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
-st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
+
 
 # Lista vazia para input dos dados do formulário
 lista = []
