@@ -18,7 +18,7 @@ doc_ref = db.collection(u'5porques')
 DATA_URL = "data.csv"
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
-#@st.cache
+@st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
 	return data
@@ -72,24 +72,6 @@ st.title('Formulário 5 porques')
 #	if logoff:
 #		logado = False
 
-password = st.sidebar.text_input("Password:", value="")
-
-# select our text input field and make it into a password input
-js = "el = document.querySelectorAll('.sidebar-content input')[0]; el.type = 'password';"
-
-# passing js code to the onerror handler of an img tag with no src
-# triggers an error and allows automatically running our code
-html = f'<img src onerror="{js}">'
-
-# in contrast to st.write, this seems to allow passing javascript
-div = Div(text=html)
-st.bokeh_chart(div)
-
-if password != st.secrets['senha_con']:
-	st.error("the password you entered is incorrect")
-	
-	
-
 with st.form('Form1'):
 	dic['data'] = st.date_input('Data da ocorrência')
 	dic['turno'] = st.selectbox('Selecione o turno', turnos )
@@ -113,6 +95,7 @@ with st.form('Form1'):
 	dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
 	dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
 	dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
+	dic['verificado'] = 'não'
 	submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
 if submitted1:
@@ -130,17 +113,40 @@ if submitted1:
 	#"url": "www.apple.com"
 	#})
 	# Now let's make a reference to ALL of the posts
+
+
+
+		
+leitura = st.button('Ler dados da Nuvem')
+
+if leitura:
+	# Informa a coleção para leitura
 	posts_ref = db.collection("5porques_2")
-	st.write(type(posts_ref))
+	
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
-		st.write("The id is: ", doc.id)
-		st.write("The contents are: ", doc.to_dict())
+		#st.write("The id is: ", doc.id)
+		#st.write("The contents are: ", doc.to_dict())
 		df = df.append(doc.to_dict(), ignore_index=True)
 		st.write(type(doc))
+		st.write(df.head())
+		df['data'] = pd.to_datetime(df['data'])
+		
+st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
+	 
+col1, col2 = st.beta_columns(2)
 
-st.write(df.head())
+col1.header("Início")
+inicio_filtro = col1.st.date_input()
 
+col2.header("Fim")
+fim_filtro = col2.st.date_input()
+	 
+filtrar = st.button('Filtrar ocorrências')
+
+if filtrar:
+	st.write(inicio_filtro)
+	st.write(fim_filtro)
 # referencias 
 # https://blog.streamlit.io/secrets-in-sharing-apps/
 # https://blog.streamlit.io/streamlit-firestore/
