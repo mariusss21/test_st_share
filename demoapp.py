@@ -1,6 +1,7 @@
 # importar bibliotecas
 import streamlit as st
 from streamlit import caching
+import matplotlib as plt
 import pandas as pd
 import numpy as np
 import json
