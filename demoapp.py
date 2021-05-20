@@ -115,5 +115,5 @@ if analisar:
 
 if estatistica:
 
-	grafico1 = dados.groupby('turno').count()
-	st.bar_chart(grafico1['turno'])
+	grafico1 = dados['turno'].groupby('turno').count()
+	st.bar_chart(grafico1)
