@@ -66,15 +66,17 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['verificado'] = 'sim'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			row['verificado'] = 'sim'
+			
 			caching.clear_cache()
+			row['verificado'] = 'sim'
 
 		if abrir_ocorrencia:
 			att_verificado = {}
 			att_verificado['verificado'] = 'não'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			row['verificado'] = 'não'
+			
 			caching.clear_cache()
+			row['verificado'] = 'não'
 	
 
 
