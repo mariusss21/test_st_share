@@ -127,6 +127,7 @@ if analisar:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
 				st.table(row.drop(columns=[0,1]))
+				abrir_ocorrencia = False
 				if row['verificado'] == 'não':
 					validar = st.button('Validar ocorrência')
 				else:
