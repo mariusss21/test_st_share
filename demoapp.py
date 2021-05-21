@@ -64,10 +64,11 @@ def func_validar(index, row, indice):
 		#	abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
 
 		if validar:
+			caching.clear_cache()
 			att_verificado = {}
 			att_verificado['verificado'] = 'sim'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			caching.clear_cache()
+			
 			
 		#if abrir_ocorrencia:	
 		#	att_verificado = {}
@@ -148,7 +149,7 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
-	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
+	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	if not detalhar_todas:
