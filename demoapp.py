@@ -49,7 +49,7 @@ def load_data():
 	#st.write(df.head())
 	data['data'] = pd.to_datetime(data['data']).dt.date
 	data = data.sort_values(by=['data'])
-	data.reset_index(inplace = True)
+	#data.reset_index(inplace = True)
 	st.write(data.head(20))
 	return data
 
@@ -152,7 +152,7 @@ if analisar:
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	if not detalhar_todas:
-		indice = st.multiselect('Selecione a ocorrência', filtrado['index'])
+		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 
 	for index, row in filtrado.iterrows():
 		if detalhar_todas:
