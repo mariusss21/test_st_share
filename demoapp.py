@@ -161,7 +161,7 @@ if analisar:
 		else:
 			if index in indice:
 			       st.subheader('Ocorrência ' + str(index))
-			       func_validar(index, row, indice)
+			       func_validar(index, row, index)
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
