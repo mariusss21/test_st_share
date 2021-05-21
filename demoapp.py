@@ -60,8 +60,8 @@ def func_validar(index, row, indice):
 		st.table(row)
 		if row['verificado'] == 'não':
 			validar = st.button('Validar ocorrência ' + str(index))
-		else:
-			abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
+		#else:
+		#	abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
 
 		if validar:
 			att_verificado = {}
