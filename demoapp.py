@@ -1,16 +1,20 @@
-# importar bibliotecas
+######################################################################################################
+                                 # importar bibliotecas
+######################################################################################################
+
 import streamlit as st
 from streamlit import caching
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import json
-
-# Import firebase
 from google.cloud import firestore
 from google.oauth2 import service_account
 
-#Configurando acesso ao firebase
+######################################################################################################
+				#Configurando acesso ao firebase
+######################################################################################################
+
 key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds, project="streamlit-cb45e")
@@ -19,22 +23,24 @@ doc_ref = db.collection(u'5porques')
 # Link do arquivo com os dados
 DATA_URL = "data.csv"
 
-# Definição da sidebar
+######################################################################################################
+				     #Definição da sidebar
+######################################################################################################
+
+
 st.sidebar.title("Escolha a ação desejada")
 inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês", value=True)
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
-#recarregar base de dados
-#rec = st.sidebar.button('Recarregar base de dados')
-#if rec:
-#	caching.clear_cache()
+######################################################################################################
+                                           #Funções
+######################################################################################################
 
-#Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
+#função para carregar os dados do firebase (utiliza cache para agilizar a aplicação)
 @st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
-	#colunas = data.columns
 	posts_ref = db.collection("5porques_2")	
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
@@ -46,14 +52,39 @@ def load_data():
 	data.reset_index(inplace = True)
 	return data
 
+def func_validar(index, row, indice):
+	if index in indice:
+		st.subheader('Ocorrência ' + str(index))
+		abrir_ocorrencia = False
+
+		if row['verificado'] == 'não':
+			validar = st.button('Validar ocorrência' + str(index))
+		else:
+			abrir_ocorrencia = st.button('Abrir ocorrência' + str(index))
+
+		if validar:
+			att_verificado = {}
+			att_verificado['verificado'] = 'sim'
+			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			row['verificado'] = 'sim'
+			caching.clear_cache()
+
+		if abrir_ocorrencia:
+			att_verificado = {}
+			att_verificado['verificado'] = 'não'
+			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			row['verificado'] = 'não'
+			caching.clear_cache()
+	
+
+
+######################################################################################################
+                                           #Main
+######################################################################################################
+
 # Carrega dataframe e extrai suas colunas
 dados = load_data()
 colunas = dados.columns
-
-# Lista vazia para input dos dados do formulário
-lista = []
-dic = {} #dicionario
-submitted1=False
 
 # Constantes
 equipamentos = ['Uncoiler', 'Cupper']
@@ -68,6 +99,10 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 st.image('Ambev.jpeg')
 st.subheader('Aplicação 5 porques')
 st.write('Selecione no menu lateral a opção desejada')
+
+# Lista vazia para input dos dados do formulário
+dic = {} #dicionario
+submitted1=False
 
 if inserir:
 	st.subheader('Formulário para incluir ocorrência')
@@ -118,36 +153,20 @@ if analisar:
 	if not detalhar_todas:
 		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	
+	abrir_ocorrencia = []
+	validar = []
+	
 	for index, row in filtrado.iterrows():
-		
+		abrir_ocorrencia.append('False')
+		validar.append('False)
 		if detalhar_todas:
 			st.subheader('Ocorrência ' + str(index))
 			st.table(row)
 		else:
 			if index in indice:
-				st.subheader('Ocorrência ' + str(index))
-				st.table(row.drop(columns=[0,1]))
-				abrir_ocorrencia = False
-				if row['verificado'] == 'não':
-					validar = st.button('Validar ocorrência + str(index)')
-				else:
-					abrir_ocorrencia = st.button('Abrir ocorrência + str(index)')
-					
-				if validar:
-					att_verificado = {}
-					att_verificado['verificado'] = 'sim'
-					db.collection("5porques_2").document(row['document']).update(att_verificado)
-					row['verificado'] = 'sim'
-					caching.clear_cache()
-					
-				if abrir_ocorrencia:
-					att_verificado = {}
-					att_verificado['verificado'] = 'não'
-					db.collection("5porques_2").document(row['document']).update(att_verificado)
-					row['verificado'] = 'não'
-					caching.clear_cache()
-					
-				
+			       st.subheader('Ocorrência ' + str(index))
+			       func_validar(index, row, indice)
+			        
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
