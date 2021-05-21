@@ -129,7 +129,7 @@ if analisar:
 		else:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
-				st.table(row)	
+				st.table(row.drop([0,1], axis=1))	
 			#indice = indice + 1
 
 if estatistica:
