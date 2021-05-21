@@ -118,6 +118,7 @@ if analisar:
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
+	st.multiselect('Selecione a ocorrência', filtrado.index)
 	
 	for index, row in filtrado.iterrows():
 		
