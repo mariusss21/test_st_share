@@ -21,7 +21,7 @@ DATA_URL = "data.csv"
 
 # Definição da sidebar
 st.sidebar.title("Escolha a ação desejada")
-inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
+inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês", value=True)
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
@@ -118,8 +118,9 @@ if analisar:
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	#indice = 0
-	lista_rows_filtrado = [0] * filtrado.shape[0]
-	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
+	#lista_rows_filtrado = [0] * filtrado.shape[0]
+	if not detalhar_todas:
+		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	
 	for index, row in filtrado.iterrows():
 		
