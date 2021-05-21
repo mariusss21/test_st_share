@@ -128,7 +128,13 @@ if analisar:
 				st.subheader('Ocorrência ' + str(index))
 				st.table(row.drop(columns=[0,1]))
 				validar = st.button('Validar ocorrência')
-				#if validar:
+				if validar:
+					att_verificado = {}
+					att_verificado[str(row['document']) + '.' + 'verificado'] = 'sim'
+					db.collection("5porques_2").document(row['document']).update(att_verificado)
+				
+
+})
 					
 
 if estatistica:
