@@ -130,7 +130,7 @@ if analisar:
 				validar = st.button('Validar ocorrência')
 				if validar:
 					att_verificado = {}
-					att_verificado[str(row['document']) + '.' + 'verificado'] = 'sim'
+					att_verificado['verificado'] = 'sim'
 					db.collection("5porques_2").document(row['document']).update(att_verificado)
 				
 
