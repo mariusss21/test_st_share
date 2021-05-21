@@ -60,7 +60,7 @@ def func_validar(index, row, indice):
 		#abrir_ocorrencia = False
 		validar = False
 		st.table(row)
-		if row['verificado'] == 'não':
+		if row['verificado'] != 'sim':
 			validar = st.button('Validar ocorrência ' + str(index))
 		#else:
 		#	abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
