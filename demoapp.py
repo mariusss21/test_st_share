@@ -50,6 +50,7 @@ def load_data():
 	data['data'] = pd.to_datetime(data['data']).dt.date
 	data = data.sort_values(by=['data'])
 	data.reset_index(inplace = True)
+	df.write(data.head(20))
 	return data
 
 def func_validar(index, row, indice):
