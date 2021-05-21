@@ -134,9 +134,6 @@ if analisar:
 					db.collection("5porques_2").document(row['document']).update(att_verificado)
 				
 
-})
-					
-
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
 	fig = plt.figure()
