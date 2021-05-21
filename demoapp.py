@@ -57,6 +57,7 @@ def func_validar(index, row, indice):
 	if index in indice:
 		#st.subheader('Ocorrência ' + str(index))
 		abrir_ocorrencia = False
+		validar = False
 		st.table(row)
 		if row['verificado'] == 'não':
 			validar = st.button('Validar ocorrência ' + str(index))
