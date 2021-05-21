@@ -118,7 +118,7 @@ if analisar:
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	#indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
-	st.multiselect('Selecione a ocorrência', filtrado.index)
+	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	
 	for index, row in filtrado.iterrows():
 		
@@ -126,7 +126,7 @@ if analisar:
 			st.subheader('Ocorrência ' + str(index))
 			st.table(row)
 		else:
-			if index in filtrado.index:
+			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
 				st.table(row)	
 			#indice = indice + 1
