@@ -70,6 +70,7 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['verificado'] = 'sim'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			caching.clear_cache()
 			
 			
 		#if abrir_ocorrencia:	
