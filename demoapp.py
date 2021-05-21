@@ -63,20 +63,18 @@ def func_validar(index, row, indice):
 			abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
 
 		if validar:
+			caching.clear_cache()
 			att_verificado = {}
 			att_verificado['verificado'] = 'sim'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
 			
-			caching.clear_cache()
-			row['verificado'] = 'sim'
-
 		if abrir_ocorrencia:
+			caching.clear_cache()
 			att_verificado = {}
 			att_verificado['verificado'] = 'não'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
 			
-			caching.clear_cache()
-			row['verificado'] = 'não'
+			
 	
 
 
