@@ -126,8 +126,8 @@ if analisar:
 			st.subheader('Ocorrência ' + str(index))
 			st.table(row)
 		else:
-			if indice in filtrado.index:
-				st.subheader('Ocorrência ' + str(indice))
+			if index in filtrado.index:
+				st.subheader('Ocorrência ' + str(index))
 				st.table(row)	
 			#indice = indice + 1
 
