@@ -49,7 +49,7 @@ def load_data():
 	#st.write(df.head())
 	data['data'] = pd.to_datetime(data['data']).dt.date
 	data = data.sort_values(by=['data'])
-	#data.reset_index(inplace = True)
+	data.reset_index(inplace = True)
 	st.write(data.head(20))
 	return data
 
