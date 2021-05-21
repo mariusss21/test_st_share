@@ -152,7 +152,7 @@ if analisar:
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	if not detalhar_todas:
-		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
+		indice = st.multiselect('Selecione a ocorrência', filtrado['index'])
 
 	for index, row in filtrado.iterrows():
 		if detalhar_todas:
@@ -161,7 +161,7 @@ if analisar:
 		else:
 			if index in indice:
 			       st.subheader('Ocorrência ' + str(index))
-			       func_validar(index, row, index)
+			       func_validar(index, row, indice)
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
