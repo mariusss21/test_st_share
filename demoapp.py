@@ -44,8 +44,10 @@ def load_data():
 	posts_ref = db.collection("5porques_2")	
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
-		data = data.append(doc.to_dict(), ignore_index=True)
-		data['document'] = doc.id
+		dicionario = doc.to_dict()
+		dicionario['document'] = doc.id
+		data = data.append(dicionario, ignore_index=True)
+		#data['document'] = doc.id
 	#st.write(df.head())
 	data['data'] = pd.to_datetime(data['data']).dt.date
 	data = data.sort_values(by=['data'])
