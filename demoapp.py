@@ -55,7 +55,7 @@ def load_data():
 def func_validar(index, row, indice):
 	if index in indice:
 		#st.subheader('Ocorrência ' + str(index))
-		abrir_ocorrencia = False
+		#abrir_ocorrencia = False
 		validar = False
 		st.table(row)
 		if row['verificado'] == 'não':
@@ -64,18 +64,16 @@ def func_validar(index, row, indice):
 			abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
 
 		if validar:
-			
 			att_verificado = {}
 			att_verificado['verificado'] = 'sim'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
 			caching.clear_cache()
 			
-		if abrir_ocorrencia:
-			
-			att_verificado = {}
-			att_verificado['verificado'] = 'não'
-			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			caching.clear_cache()
+		#if abrir_ocorrencia:	
+		#	att_verificado = {}
+		#	att_verificado['verificado'] = 'não'
+		#	db.collection("5porques_2").document(row['document']).update(att_verificado)
+		#	caching.clear_cache()
 			
 			
 	
