@@ -152,13 +152,8 @@ if analisar:
 	
 	if not detalhar_todas:
 		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
-	
-	abrir_ocorrencia = []
-	validar = []
-	
+
 	for index, row in filtrado.iterrows():
-		abrir_ocorrencia.append('False')
-		validar.append('False)
 		if detalhar_todas:
 			st.subheader('Ocorrência ' + str(index))
 			st.table(row)
@@ -167,7 +162,6 @@ if analisar:
 			       st.subheader('Ocorrência ' + str(index))
 			       func_validar(index, row, indice)
 			        
-
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
 	fig = plt.figure()
