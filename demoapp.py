@@ -127,11 +127,23 @@ if analisar:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
 				st.table(row.drop(columns=[0,1]))
-				validar = st.button('Validar ocorrência')
+				if row['validado'] == 'não':
+					validar = st.button('Validar ocorrência')
+				else:
+					abrir_ocorrencia = st.button('Abrir ocorrência')
+					
 				if validar:
 					att_verificado = {}
 					att_verificado['verificado'] = 'sim'
 					db.collection("5porques_2").document(row['document']).update(att_verificado)
+					caching.clear_cache()
+					
+				if abrir_ocorrencia:
+					att_verificado = {}
+					att_verificado['verificado'] = 'não'
+					db.collection("5porques_2").document(row['document']).update(att_verificado)
+					caching.clear_cache()
+					
 				
 
 if estatistica:
