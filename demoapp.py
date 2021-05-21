@@ -39,6 +39,7 @@ def load_data():
 	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
 		data = data.append(doc.to_dict(), ignore_index=True)
+		data['document'] = doc.id
 	#st.write(df.head())
 	data['data'] = pd.to_datetime(data['data']).dt.date
 	data = data.sort_values(by=['data'])
@@ -107,18 +108,13 @@ if inserir:
 if analisar:
 	st.subheader('Selecione a data de início e fim para filtrar as cocorrências')
 	col1, col2 = st.beta_columns(2)
-
-	#col1.header("Início")
 	inicio_filtro = col1.date_input("Início")
-
-	#col2.header("Fim")
 	fim_filtro = col2.date_input("Fim")
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
-	#indice = 0
-	#lista_rows_filtrado = [0] * filtrado.shape[0]
+	
 	if not detalhar_todas:
 		indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	
@@ -130,14 +126,14 @@ if analisar:
 		else:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
-				st.table(row.drop(columns=[0,1]))	
-			#indice = indice + 1
+				st.table(row.drop(columns=[0,1]))
+				validar = st.button('Validar ocorrência')
+				#if validar:
+					
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
-	#grafico1 = dados['turno'].groupby('turno').count()
 	fig = plt.figure()
-	#grafico1 = dados['turno'].hist()
 	variavel =  st.selectbox('Selecione o item para análise', colunas)
 	ax = fig.add_subplot(1,1,1)
 	plt.xticks(rotation=45)
