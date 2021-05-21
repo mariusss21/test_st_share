@@ -26,9 +26,9 @@ analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
 #recarregar base de dados
-rec = st.sidebar.button('Recarregar base de dados')
-if rec:
-	caching.clear_cache()
+#rec = st.sidebar.button('Recarregar base de dados')
+#if rec:
+#	caching.clear_cache()
 
 #Leitura dos dados, cache temporariamente desabilitado por conta da nserção de novos valores
 @st.cache
@@ -97,7 +97,7 @@ if inserir:
 		submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
 	if submitted1:
-
+		caching.clear_cache()
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
 		doc_ref = db.collection("5porques_2").document()
