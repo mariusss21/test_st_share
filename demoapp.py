@@ -116,7 +116,7 @@ if analisar:
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
-	indice = 0
+	#indice = 0
 	lista_rows_filtrado = [0] * filtrado.shape[0]
 	st.multiselect('Selecione a ocorrência', filtrado.index)
 	
@@ -126,10 +126,10 @@ if analisar:
 			st.subheader('Ocorrência ' + str(index))
 			st.table(row)
 		else:
-			lista_rows_filtrado[indice] = st.checkbox('Ocorrência ' + str(index))
-			if lista_rows_filtrado[indice]:
+			if indice in filtrado.index:
+				st.subheader('Ocorrência ' + str(indice))
 				st.table(row)	
-			indice = indice + 1
+			#indice = indice + 1
 
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
