@@ -90,8 +90,8 @@ def send_email():
 	sent_from = gmail_user
 	from_ = 'Ambev 5 Porques'
 	to = 'marius.lisboa@gmail.com'
-	subject = "Nova ocorrência gerada"
-	body = "Olá, foi gerada uma nova ocorrência, acesse a plataforma para avaliá-la. Atenciosamente, Ambev 5 Porques"
+	subject = "Nova ocorrencia gerada"
+	body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avalia-la. Atenciosamente, Ambev 5 Porques"
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (sent_from, to, subject, body)
 
