@@ -89,7 +89,7 @@ def send_email():
 
 	sent_from = gmail_user
 	to = 'marius.lisboa@gmail.com'
-	subject = 'OMG Super Important Message'
+	subject = "Teste 1"
 	body = "Hey, what's up?\n\n- You"
 
 	email_text = """\
