@@ -95,7 +95,7 @@ def send_email():
 	email_text = """\
 	From: %s
 	To: %s
-	Subject: %s
+	subject: %s
 
 	%s
 	""" % (sent_from, to, subject, body)
