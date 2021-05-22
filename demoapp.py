@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import json
+import smtplib
+
 from google.cloud import firestore
 from google.oauth2 import service_account
 
