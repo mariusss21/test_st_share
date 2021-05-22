@@ -81,6 +81,35 @@ def func_validar(index, row, indice):
 		#	db.collection("5porques_2").document(row['document']).update(att_verificado)
 		#	caching.clear_cache()
 			
+
+# email
+def send_email():
+	gmail_user = st.secrets["email"]
+	gmail_password = st.secrets["senha"]
+
+	sent_from = gmail_user
+	to = 'marius.lisboa@gmail.com'
+	subject = 'OMG Super Important Message'
+	body = 'Hey, what's up?\n\n- You'
+
+	email_text = """\
+	From: %s
+	To: %s
+	Subject: %s
+
+	%s
+	""" % (sent_from, ", ".join(to), subject, body)
+
+	try:
+		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+		server.ehlo()
+		server.login(gmail_user, gmail_password)
+		server.sendmail(sent_from, to, email_text)
+		server.close()
+
+		st.write('Email sent!')
+	except:
+		st.write('Whoops, something went wrong...')
 			
 	
 
@@ -106,6 +135,10 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 st.image('Ambev.jpeg')
 st.subheader('Aplicação 5 porques')
 st.write('Selecione no menu lateral a opção desejada')
+
+teste_email = st.button('Teste email')
+if teste_email:
+	send_email()
 
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
