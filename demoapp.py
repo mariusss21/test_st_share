@@ -93,7 +93,7 @@ def send_email():
 	subject = "Nova ocorrencia gerada"
 	body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avalia-la. Atenciosamente, Ambev 5 Porques"
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
-	""" % (sent_from, to, subject, body)
+	""" % (from_, to, subject, body)
 
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
