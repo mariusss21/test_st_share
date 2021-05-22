@@ -93,10 +93,10 @@ def send_email():
 	body = "Hey, what's up?\n\n- You"
 
 	email_text = """\
-	Subject: %s
+	Subject: Olá
 
 	%s
-	""" % (subject, body)
+	""" % (body)
 
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
