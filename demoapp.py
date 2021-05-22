@@ -92,12 +92,14 @@ def send_email():
 	subject = "Teste 1"
 	body = "Hey, what's up?\n\n- You"
 
-	email_text = """\
-	From: Ambev 5 Porques
-	Subject: %s	
+	#email_text = """\
+	#From: Ambev 5 Porques
+	#Subject: %s	
 
-	%s
-	""" % (subject, body)
+	#%s
+	#""" % (subject, body)
+	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
+	""" % (sent_from, ", ".join(to), subject, body)
 
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
