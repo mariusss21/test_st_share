@@ -94,11 +94,10 @@ def send_email():
 
 	email_text = """\
 	From: %s
-	To: %s
 	subject: %s
 
 	%s
-	""" % (sent_from, to, subject, body)
+	""" % (sent_from, subject, body)
 
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
