@@ -133,7 +133,8 @@ st.write('Selecione no menu lateral a opção desejada')
 
 teste_email = st.button('Teste email')
 if teste_email:
-	send_email()
+	pass
+	#send_email()
 
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
