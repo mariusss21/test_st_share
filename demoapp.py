@@ -88,12 +88,12 @@ def send_email():
 	gmail_password = st.secrets["senha"]
 
 	sent_from = gmail_user
-	from = 'Ambev 5 Porques'
+	from_ = 'Ambev 5 Porques'
 	to = 'marius.lisboa@gmail.com'
 	subject = "Nova ocorrência gerada"
 	body = "Olá, foi gerada uma nova ocorrência, acesse a plataforma para avaliá-la. \nAtenciosamente, Ambev 5 Porques"
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
-	""" % (from, to, subject, body)
+	""" % (from_, to, subject, body)
 
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
