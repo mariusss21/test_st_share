@@ -139,7 +139,7 @@ def func_validar(index, row, indice):
 				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 				dic['linha'] = st.selectbox('Selecione a linha', linhas)
 				dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
-				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
+				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia', value=doc['descrição anomalia'])
 				dic['ordem manutenção'] = st.text_input('Ordem de manutenção', value=doc['ordem manutenção'])
 				dic['correção'] = st.text_input('Descreva a correção', value=doc['correção'])
@@ -236,11 +236,6 @@ st.image('Ambev.jpeg')
 st.subheader('Aplicação 5 porques')
 st.write('Selecione no menu lateral a opção desejada')
 
-teste_email = st.button('Teste email')
-if teste_email:
-	pass
-	#
-
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
 #submitted1=False
@@ -286,8 +281,6 @@ if analisar:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
 				func_validar(index, row, indice)
-				
-				
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
