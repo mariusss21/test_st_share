@@ -236,7 +236,7 @@ if analisar:
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
 	#filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] == gestor) & (dados['responsável identificação'] == responsavel) ]
-	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento'])
+	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	if not detalhar_todas:
