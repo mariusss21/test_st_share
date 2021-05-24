@@ -139,7 +139,7 @@ def func_validar(index, row, indice):
 				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 				dic['linha'] = st.selectbox('Selecione a linha', linhas)
 				dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
-				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos.index(doc['gatilho']))
+				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia', value=doc['descrição anomalia'])
 				dic['ordem manutenção'] = st.text_input('Ordem de manutenção', value=doc['ordem manutenção'])
 				dic['correção'] = st.text_input('Descreva a correção', value=doc['correção'])
