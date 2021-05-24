@@ -149,10 +149,11 @@ def editar_registro(documento):
 	data = pd.read_csv(DATA_URL)
 	posts_ref = db.collection("5porques_2")	
 	data = data.append(doc, ignore_index=True)
+	data['data'] = pd.to_datetime(data['data']).dt.date
 	
 	pd.to_datetime(data['data']).dt.date
 	with st.form('Form1'):
-		dic['data'] = st.date_input('Data da ocorrência', value=pd.to_datetime(data['data']).dt.date)
+		dic['data'] = st.date_input('Data da ocorrência', value=data['data'])
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
 		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 		dic['linha'] = st.selectbox('Selecione a linha', linhas)
