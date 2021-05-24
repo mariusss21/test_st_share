@@ -219,14 +219,23 @@ if analisar:
 	col1, col2 = st.beta_columns(2)
 	inicio_filtro = col1.date_input("Início")
 	fim_filtro = col2.date_input("Fim")
+	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
+	
 	
 	#st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
 	st.text('Selecione o responsável pelo preenchimento do formulário')
-	responsavel = st.selectbox("Selecione o responsável", list(dados['responsável identificação'].drop_duplicates()))
-	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['responsável identificação'] == responsavel)][['data', 'turno', 'gestor', 'responsável identificação', 'status','linha', 'equipamento']])
+	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))
+	
+	if responsavel is not None:
+		filtrado = filtrado[filtrado['responsável identificação'] == reponsavel]
+	#st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['responsável identificação'] == responsavel)][['data', 'turno', 'gestor', 'responsável identificação', 'status','linha', 'equipamento']])
 			
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	gestor = st.selectbox("Selecione o responsável", list(dados['gestor'].drop_duplicates()))
+	if gestor is not None:
+		filtrado = filtrado[filtrado['gestor'] == gestor]
+	
+	
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] == gestor) & (dados['responsável identificação'] == responsavel) ]
 
