@@ -106,7 +106,7 @@ def load_usuarios():
 def func_validar(index, row, indice):
 
 	if index in indice:
-		editar = bt3.checkbox('Editar')
+		editar = st.checkbox('Editar')
 		
 		if not editar:
 			st.table(row)
