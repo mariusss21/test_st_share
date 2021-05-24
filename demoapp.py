@@ -228,6 +228,9 @@ if analisar:
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	gestor = st.selectbox("Selecione o responsável", list(filtrado['gestor'].drop_duplicates()))
+	
+	st.write(gestor)
+	st.write(type(gestor))
 	if gestor is not None or gestor is not Null:
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
