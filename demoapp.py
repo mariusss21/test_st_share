@@ -80,7 +80,8 @@ def func_validar(index, row, indice):
 			
 		if editar:
 			retorno = editar_registro(str(row['document']))	
-			db.collection("5porques_2").document(str(row['document'])).update(retorno)
+			if retorno is not None:
+				db.collection("5porques_2").document(str(row['document'])).update(retorno)
 
 # email
 def send_email():
