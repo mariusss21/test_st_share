@@ -55,6 +55,15 @@ def load_data():
 	data.reset_index(inplace = True)
 	return data
 
+@st.cache
+def load_usuarios():
+	posts_ref = db.collection("Usuarios")	
+	for doc in posts_ref.stream():
+		dicionario = doc.to_dict()
+		dicionario['document'] = doc.id
+		data = data.append(dicionario, ignore_index=True)
+	return data
+
 def func_validar(index, row, indice):
 
 	if index in indice:
@@ -229,7 +238,13 @@ def editar_registro(documento):
 
 # Carrega dataframe e extrai suas colunas
 dados = load_data()
+usuarios_fb = load_usuarios()
+gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
+nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
+
+st.write(gestores)
+st.write(nao_gestores)
 
 # Constantes
 equipamentos = ['Uncoiler', 'Cupper']
