@@ -80,6 +80,7 @@ def func_validar(index, row, indice):
 			
 		if editar:
 			retorno = editar_registro(str(row['document']))	
+			db.collection("5porques_2").document(documento).set(retorno)
 
 # email
 def send_email():
@@ -179,7 +180,8 @@ def editar_registro(documento):
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
-		db.collection("5porques_2").document(documento).delete()
+		return new_d
+		#db.collection("5porques_2").document(documento).delete()
 		#db.collection("5porques_2").document(documento).set(new_d)
 		#caching.clear_cache()
 
