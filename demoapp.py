@@ -141,7 +141,7 @@ def formulario():
 		
 		
 def editar_registro(documento):
-	doc_ref = db.collection("posts").document(documento)
+	doc_ref = db.collection("5porques_2").document(documento)
 	doc_fb = doc_ref.get()
 	doc = doc_fb.to_dict()
 	st.write(doc)
