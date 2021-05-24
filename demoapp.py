@@ -251,7 +251,7 @@ if analisar:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
 				retorno2 = func_validar(index, row, indice)
-				st.write(retorno)
+				st.write(retorno2)
 				
 			        
 if estatistica:
