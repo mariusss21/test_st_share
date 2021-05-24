@@ -244,8 +244,8 @@ gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
 nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
 
-st.write(gestores)
-st.write(nao_gestores)
+st.write(list(gestores))
+st.write(list(nao_gestores))
 
 # Constantes
 equipamentos = ['Uncoiler', 'Cupper']
