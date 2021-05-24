@@ -57,29 +57,29 @@ def load_data():
 
 def func_validar(index, row, indice):
 	if index in indice:
-		#st.subheader('Ocorrência ' + str(index))
-		#abrir_ocorrencia = False
-		validar = False
 		st.table(row)
-		if row['verificado'] != 'sim':
-			validar = st.button('Validar ocorrência ' + str(index))
-		#else:
-		#	abrir_ocorrencia = st.button('Abrir ocorrência ' + str(index))
-
-		if validar:
+		
+		bt1, bt2, bt3 = st.beta_columns(3)
+		aprovar = bt1.button('Aprovar')
+		reprovar = bt2.button('Reprovar')
+		editar = bt1.button('Editar')
+		
+		if aprovar:
 			caching.clear_cache()
 			att_verificado = {}
-			att_verificado['status'] = 'aprovado'
+			att_verificado['status'] = 'Aprovado'
+			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			caching.clear_cache()
+		
+		if reprovar:
+			caching.clear_cache()
+			att_verificado = {}
+			att_verificado['status'] = 'Reprovado'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
 			caching.clear_cache()
 			
-			
-		#if abrir_ocorrencia:	
-		#	att_verificado = {}
-		#	att_verificado['verificado'] = 'não'
-		#	db.collection("5porques_2").document(row['document']).update(att_verificado)
-		#	caching.clear_cache()
-			
+		if editar:
+			pass			
 
 # email
 def send_email():
@@ -104,78 +104,78 @@ def send_email():
 		st.write('Whoops, something went wrong...')
 		
 #função formulário 
-def formulario(inserir_editar, documento):
-	
-	if inserir_editar:
-		with st.form('Form1'):
-			dic['data'] = st.date_input('Data da ocorrência')
-			dic['turno'] = st.selectbox('Selecione o turno', turnos )
-			dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
-			dic['linha'] = st.selectbox('Selecione a linha', linhas)
-			dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
-			dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
-			dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
-			dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
-			dic['correção'] = st.text_input('Descreva a correção', "")
-			dic['pq1'] = st.text_input('1) Por que?', "")
-			dic['pq2'] = st.text_input('2) Por que?', "")
-			dic['pq3'] = st.text_input('3) Por que?', "")
-			dic['pq4'] = st.text_input('4) Por que?', "")
-			dic['pq5'] = st.text_input('5) Por que?', "")
-			dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
-			dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
-			dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
-			dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
-			dic['ações'] = st.text_input('Ações tomadas', "")
-			dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
-			dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
-			dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
-			dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', "")
-			dic['status'] = 'Pendente'
-			submitted1 = st.form_submit_button('Enviar 5 Porquês')
+def formulario():
+	with st.form('Form1'):
+		dic['data'] = st.date_input('Data da ocorrência')
+		dic['turno'] = st.selectbox('Selecione o turno', turnos )
+		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
+		dic['linha'] = st.selectbox('Selecione a linha', linhas)
+		dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
+		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
+		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
+		dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
+		dic['correção'] = st.text_input('Descreva a correção', "")
+		dic['pq1'] = st.text_input('1) Por que?', "")
+		dic['pq2'] = st.text_input('2) Por que?', "")
+		dic['pq3'] = st.text_input('3) Por que?', "")
+		dic['pq4'] = st.text_input('4) Por que?', "")
+		dic['pq5'] = st.text_input('5) Por que?', "")
+		dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
+		dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
+		dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
+		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
+		dic['ações'] = st.text_input('Ações tomadas', "")
+		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
+		dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "")
+		dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
+		dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', "")
+		dic['status'] = 'Pendente'
+		submitted1 = st.form_submit_button('Enviar 5 Porquês')
 
-		if submitted1:
-			caching.clear_cache()
-			keys_values = dic.items()
-			new_d = {str(key): str(value) for key, value in keys_values}
-			doc_ref = db.collection("5porques_2").document()
-			doc_ref.set(new_d)
+	if submitted1:
+		caching.clear_cache()
+		keys_values = dic.items()
+		new_d = {str(key): str(value) for key, value in keys_values}
+		doc_ref = db.collection("5porques_2").document()
+		doc_ref.set(new_d)
 		
-	else:
-		doc = db.collection("posts").document(documento).get()	    		    				   
-		with st.form('Form1'):
-			dic['data'] = st.date_input('Data da ocorrência', value=doc['data'])
-			dic['turno'] = st.selectbox('Selecione o turno', turnos )
-			dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
-			dic['linha'] = st.selectbox('Selecione a linha', linhas)
-			dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
-			dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
-			dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "", value=doc['descrição anomalia'])
-			dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "", value=doc['ordem manutenção'])
-			dic['correção'] = st.text_input('Descreva a correção', "", value=doc['correção'])
-			dic['pq1'] = st.text_input('1) Por que?', "", value=doc['pq1'])
-			dic['pq2'] = st.text_input('2) Por que?', "", value=doc['pq2'])
-			dic['pq3'] = st.text_input('3) Por que?', "", value=doc['pq3'])
-			dic['pq4'] = st.text_input('4) Por que?', "", value=doc['pq4'])
-			dic['pq5'] = st.text_input('5) Por que?', "", value=doc['pq5'])
-			dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
-			dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
-			dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
-			dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
-			dic['ações'] = st.text_input('Ações tomadas', "", value=doc['ações'])
-			dic['notas de manutenção'] = st.text_input('Notas de manutenção', "", value=doc['notas de manutenção'])
-			dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "", value=doc['responsável identificação'])
-			dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "", value=doc['responsável reparo'])
-			dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', "")
-			dic['status'] = 'Retificado'
-			submitted1 = st.form_submit_button('Enviar 5 Porquês')
+		
+def editar_registro(documento)
 
-		if submitted1:
-			caching.clear_cache()
-			keys_values = dic.items()
-			new_d = {str(key): str(value) for key, value in keys_values}
-			doc_ref = db.collection("5porques_2").document(documento)
-			doc_ref.set(new_d)
+	doc = db.collection("posts").document(documento).get()	    		    				   
+	with st.form('Form1'):
+		dic['data'] = st.date_input('Data da ocorrência', value=doc['data'])
+		dic['turno'] = st.selectbox('Selecione o turno', turnos )
+		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
+		dic['linha'] = st.selectbox('Selecione a linha', linhas)
+		dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
+		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
+		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "", value=doc['descrição anomalia'])
+		dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "", value=doc['ordem manutenção'])
+		dic['correção'] = st.text_input('Descreva a correção', "", value=doc['correção'])
+		dic['pq1'] = st.text_input('1) Por que?', "", value=doc['pq1'])
+		dic['pq2'] = st.text_input('2) Por que?', "", value=doc['pq2'])
+		dic['pq3'] = st.text_input('3) Por que?', "", value=doc['pq3'])
+		dic['pq4'] = st.text_input('4) Por que?', "", value=doc['pq4'])
+		dic['pq5'] = st.text_input('5) Por que?', "", value=doc['pq5'])
+		dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
+		dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
+		dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
+		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
+		dic['ações'] = st.text_input('Ações tomadas', "", value=doc['ações'])
+		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "", value=doc['notas de manutenção'])
+		dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', "", value=doc['responsável identificação'])
+		dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "", value=doc['responsável reparo'])
+		dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', "")
+		dic['status'] = 'Retificado'
+		submitted1 = st.form_submit_button('Enviar 5 Porquês')
+
+	if submitted1:
+		caching.clear_cache()
+		keys_values = dic.items()
+		new_d = {str(key): str(value) for key, value in keys_values}
+		doc_ref = db.collection("5porques_2").document(documento)
+		doc_ref.set(new_d)
 
 
 ######################################################################################################
@@ -211,7 +211,7 @@ submitted1=False
 
 if inserir:
 	st.subheader('Formulário para incluir ocorrência')
-	formulario(True, '')
+	formulario()
 
 if analisar:
 	st.subheader('Configure as opções de filtro')
