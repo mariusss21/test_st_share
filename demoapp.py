@@ -79,7 +79,7 @@ def func_validar(index, row, indice):
 			caching.clear_cache()
 			
 		if editar:
-			editar_registro(row['document'])			
+			editar_registro(str(row['document']))			
 
 # email
 def send_email():
