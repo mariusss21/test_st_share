@@ -222,7 +222,7 @@ if analisar:
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 	
 	
-	#st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
+	
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))
 	
@@ -233,12 +233,10 @@ if analisar:
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	gestor = st.selectbox("Selecione o responsável", list(dados['gestor'].drop_duplicates()))
 	if gestor is not None:
-		filtrado = filtrado[filtrado['gestor'] == gestor]
+		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	
-	
-	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] == gestor) & (dados['responsável identificação'] == responsavel) ]
-
+	#filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] == gestor) & (dados['responsável identificação'] == responsavel) ]
+	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento'])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	if not detalhar_todas:
