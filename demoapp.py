@@ -191,7 +191,7 @@ def formulario():
 				new_d[key] = 'Não informado'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
-		send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
+		send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']))
 
 ######################################################################################################
                                            #Main
