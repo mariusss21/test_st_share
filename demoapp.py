@@ -173,6 +173,9 @@ def editar_registro(documento):
 		dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', value=doc['gestor'])
 		dic['status'] = 'Retificado'
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
+		keys_values2 = dic.items()
+		new_d2 = {str(key): str(value) for key, value in keys_values}
+		st.write(new_d2)
 
 	if submitted_edit:
 		keys_values = dic.items()
