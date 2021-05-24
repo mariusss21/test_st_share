@@ -56,9 +56,9 @@ def load_data():
 	return data
 
 def func_validar(index, row, indice):
+	retorno = ''
 	if index in indice:
 		st.table(row)
-		retorno = ''
 		bt1, bt2, bt3 = st.beta_columns(3)
 		aprovar = bt1.button('Aprovar')
 		reprovar = bt2.button('Reprovar')
@@ -80,7 +80,7 @@ def func_validar(index, row, indice):
 			
 		if editar:
 			retorno = editar_registro(str(row['document']))	
-		st.write(retorno)
+	st.write(retorno)
 
 # email
 def send_email():
