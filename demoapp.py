@@ -221,18 +221,18 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 		
-	st.text('Selecione o responsável pelo preenchimento do formulário')
+	#st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
 	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	st.text('Selecione o Gestor')
-	gestor = st.selectbox("Selecione o responsável", list(filtrado['gestor'].drop_duplicates()))
+	#st.text('Selecione o Gestor')
+	gestor = st.selectbox("Selecione o status", list(filtrado['gestor'].drop_duplicates()))
 	if gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	st.text('Selecione o status da ocorrência')
-	status = st.selectbox("Selecione o responsável", list(filtrado['status'].drop_duplicates()))
+	#st.text('Selecione o status da ocorrência')
+	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()))
 	if status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == status]	
 	
