@@ -134,7 +134,7 @@ def func_validar(index, row, indice):
 			doc = db.collection("5porques_2").document(documento).get().to_dict()
 			
 			with st.form('Form_edit'):
-				dic['data'] = st.date_input('Data da ocorrência' + ' ' + + str(index))
+				dic['data'] = st.date_input('Data da ocorrência' + ' ' + str(index))
 				dic['turno'] = st.selectbox('Selecione o turno', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos, departamentos.index(doc['departamento']))
 				dic['linha'] = st.selectbox('Selecione a linha', linhas, linhas.index(doc['linha']))
