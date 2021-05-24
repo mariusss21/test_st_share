@@ -79,6 +79,7 @@ def func_validar(index, row, indice):
 			caching.clear_cache()
 			
 		if editar:
+			documento = str(row['document'])
 			#retorno = editar_registro(str(row['document']))	
 			doc = db.collection("5porques_2").document(documento).get().to_dict()
 			with st.form('Form_edit'):
@@ -114,7 +115,7 @@ def func_validar(index, row, indice):
 				for key, value in new_d.items():
 					if (value == '') or value == '[]':
 						new_d[key] = 'Não informado'
-				db.collection("5porques_2").document(str(row['document'])).update(new_d)
+				db.collection("5porques_2").document(documento).update(new_d)
 
 # email
 def send_email():
