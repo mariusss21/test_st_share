@@ -154,8 +154,8 @@ def func_validar(index, row, indice):
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas', value=doc['ações'])
 				dic['notas de manutenção'] = st.text_input('Notas de manutenção', value=doc['notas de manutenção'])
-				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores, nao_gestores.index(doc['responsável identificação]))
-				dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', nao_gestores, nao_gestores.index(doc['responsável reparo]))
+				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores, nao_gestores.index(doc['responsável identificação']))
+				dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia', nao_gestores, nao_gestores.index(doc['responsável reparo']))
 				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores, gestores.index(doc['gestor']))
 				dic['status'] = 'Retificado'
 				submitted_edit = st.form_submit_button('Editar 5 Porquês')
