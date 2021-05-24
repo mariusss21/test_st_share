@@ -111,8 +111,8 @@ def func_validar(index, row, indice):
 		if not editar:
 			st.table(row)
 			bt1, bt2 = st.beta_columns(2)
-			aprovar = bt1.button('Aprovar')
-			reprovar = bt2.button('Reprovar')
+			aprovar = bt1.button('Aprovar ocorrência ' + str(index))
+			reprovar = bt2.button('Reprovar ocorrência ' + str(index))
 
 			if aprovar:
 				caching.clear_cache()
