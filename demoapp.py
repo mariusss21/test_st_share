@@ -135,10 +135,10 @@ def func_validar(index, row, indice):
 			
 			with st.form('Form_edit'):
 				dic['data'] = st.date_input('Data da ocorrência')
-				dic['turno'] = st.selectbox('Selecione o turno', turnos )
-				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
-				dic['linha'] = st.selectbox('Selecione a linha', linhas)
-				dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
+				dic['turno'] = st.selectbox('Selecione o turno', turnos, turnos.index(doc['turno']) )
+				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos, departamentos.index(doc['departamento']))
+				dic['linha'] = st.selectbox('Selecione a linha', linhas, linhas.index(doc['linha']))
+				dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos, equipamentos.index(doc['equipamento']))
 				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia', value=doc['descrição anomalia'])
 				dic['ordem manutenção'] = st.text_input('Ordem de manutenção', value=doc['ordem manutenção'])
@@ -154,9 +154,9 @@ def func_validar(index, row, indice):
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas', value=doc['ações'])
 				dic['notas de manutenção'] = st.text_input('Notas de manutenção', value=doc['notas de manutenção'])
-				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores)
-				dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', value=doc['responsável reparo'])
-				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores)
+				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores, nao_gestores.index(doc['responsável identificação]))
+				dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', nao_gestores, nao_gestores.index(doc['responsável reparo]))
+				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores, gestores.index(doc['gestor']))
 				dic['status'] = 'Retificado'
 				submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
