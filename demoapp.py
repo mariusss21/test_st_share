@@ -223,17 +223,18 @@ if analisar:
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
-	if responsavel is not None or responsavel  != 'nan':
+	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	st.text('Selecione o responsável pelo preenchimento do formulário')
+	st.text('Selecione o Gestor')
 	gestor = st.selectbox("Selecione o responsável", list(filtrado['gestor'].drop_duplicates()))
-	
-	st.write(gestor)
-	st.write(type(gestor))
-	st.write(str(gestor))
 	if gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
+	
+	st.text('Selecione o status da ocorrência')
+	status = st.selectbox("Selecione o responsável", list(filtrado['status'].drop_duplicates()))
+	if status is not None and (str(status) != 'nan'):
+		filtrado = filtrado[filtrado['gestor'] == status]	
 	
 	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
