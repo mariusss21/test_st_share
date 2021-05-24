@@ -147,7 +147,7 @@ def editar_registro(documento):
 	st.write(doc)
 	st.write(type(doc))
 	with st.form('Form1'):
-		dic['data'] = st.date_input('Data da ocorrência', value=doc['data'].value)
+		dic['data'] = st.date_input('Data da ocorrência', value=doc['data'])
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
 		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 		dic['linha'] = st.selectbox('Selecione a linha', linhas)
