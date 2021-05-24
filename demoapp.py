@@ -116,7 +116,7 @@ def func_validar(index, row, indice):
 				for key, value in new_d.items():
 					if (value == '') or value == '[]':
 						new_d[key] = 'Não informado'
-				db.collection("5porques_2").document(documento).set(new_d)
+				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 
 # email
 def send_email():
