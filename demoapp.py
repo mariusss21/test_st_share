@@ -180,8 +180,8 @@ def editar_registro(documento):
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
 		db.collection("5porques_2").document(documento).delete()
-		db.collection("5porques_2").document(documento).set(new_d)
-		caching.clear_cache()
+		#db.collection("5porques_2").document(documento).set(new_d)
+		#caching.clear_cache()
 
 
 ######################################################################################################
