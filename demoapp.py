@@ -117,7 +117,7 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['status'] = 'Aprovado'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			send_email(str(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email']), 2)
+			send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 2)
 			caching.clear_cache()
 		
 		if reprovar:
@@ -125,7 +125,7 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['status'] = 'Reprovado'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			send_email(str(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email']), 3)
+			send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 3)
 			caching.clear_cache()
 			
 		if editar:
@@ -168,7 +168,7 @@ def func_validar(index, row, indice):
 						new_d[key] = 'Não informado'
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
-				send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']), 1)
+				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1)
 				
 		
 #função formulário 
