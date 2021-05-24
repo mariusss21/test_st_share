@@ -62,7 +62,7 @@ def func_validar(index, row, indice):
 		bt1, bt2, bt3 = st.beta_columns(3)
 		aprovar = bt1.button('Aprovar')
 		reprovar = bt2.button('Reprovar')
-		editar = bt1.button('Editar')
+		editar = bt3.button('Editar')
 		
 		if aprovar:
 			caching.clear_cache()
