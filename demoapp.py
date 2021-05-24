@@ -231,7 +231,7 @@ if analisar:
 	
 	st.write(gestor)
 	st.write(type(gestor))
-	if gestor is not None or str(gestor) != 'nan'
+	if gestor is not None or (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
 	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
