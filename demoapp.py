@@ -131,7 +131,8 @@ def func_validar(index, row, indice):
 				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
-			doc = db.collection("5porques_2").document(documento).get().to_dict()
+			#doc = db.collection("5porques_2").document(documento).get().to_dict()
+			doc = row.to_dict()
 			
 			with st.form('Form_edit' + str(index)):
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
