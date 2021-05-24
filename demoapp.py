@@ -174,7 +174,7 @@ def editar_registro(documento):
 		caching.clear_cache()		
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
-		db.collection("5porques_2").document(documento).update(new_d)
+		db.collection("5porques_2").document(documento).set(new_d, merge=True)
 
 
 
