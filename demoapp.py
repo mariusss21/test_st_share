@@ -128,7 +128,7 @@ def func_validar(index, row, indice):
 						new_d[key] = 'Não informado'
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
-				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['responsável identificação']]['Email'])
+				send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
 				
 
 # email
