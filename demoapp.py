@@ -313,10 +313,10 @@ if analisar:
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
-	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
+	#detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
 	#if not detalhar_todas:
-	#	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
+	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 
 	for index, row in filtrado.iterrows():
 		if detalhar_todas:
