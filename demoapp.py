@@ -89,8 +89,8 @@ def load_data():
 		data = data.append(dicionario, ignore_index=True)
 
 	data['data'] = pd.to_datetime(data['data']).dt.date
-	data = data.sort_values(by=['data'])
-	data.reset_index(inplace = True)
+	#data = data.sort_values(by=['data'])
+	#data.reset_index(inplace = True)
 	return data
 
 @st.cache
