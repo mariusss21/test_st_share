@@ -80,7 +80,7 @@ def func_validar(index, row, indice):
 			
 		if editar:
 			retorno = editar_registro(str(row['document']))	
-	st.write(retorno)
+	return retorno
 
 # email
 def send_email():
@@ -249,8 +249,10 @@ if analisar:
 			st.table(row)
 		else:
 			if index in indice:
-			       st.subheader('Ocorrência ' + str(index))
-			       func_validar(index, row, indice)
+				st.subheader('Ocorrência ' + str(index))
+				retorno2 = func_validar(index, row, indice)
+				st.write(retorno)
+				
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
