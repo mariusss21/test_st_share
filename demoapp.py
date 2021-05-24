@@ -114,9 +114,9 @@ def func_validar(index, row, indice):
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas', value=doc['ações'])
 				dic['notas de manutenção'] = st.text_input('Notas de manutenção', value=doc['notas de manutenção'])
-				dic['responsável identificação'] = st.text_input('Responsável pela identificação da anomalia', value=doc['responsável identificação'])
+				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores)
 				dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', value=doc['responsável reparo'])
-				dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', value=doc['gestor'])
+				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores)
 				dic['status'] = 'Retificado'
 				submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
@@ -176,7 +176,7 @@ def formulario():
 		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
 		dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores)
 		dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
-		dic['gestor'] = st.select_box('Gestor responsável pela avaliação da ocorrência', gestores)
+		dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores)
 		dic['status'] = 'Pendente'
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
 
