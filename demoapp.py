@@ -133,6 +133,9 @@ def formulario():
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
 
 	if submitted_ins:
+		for key, value in dic:
+			if value == '' or value is null:
+				value = 'Não preenchido'
 		caching.clear_cache()
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
@@ -171,7 +174,11 @@ def editar_registro(documento):
 		dic['status'] = 'Retificado'
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
-	if submitted_edit:		
+	if submitted_edit:
+		for key, value in dic:
+			if value == '' or value is null:
+				value = 'Não preenchido'
+				
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
