@@ -138,7 +138,7 @@ def formulario():
 		new_d = {str(key): str(value) for key, value in keys_values}
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
-				new_d[key] = 'Informado'
+				new_d[key] = 'Não informado'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 		
