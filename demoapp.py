@@ -231,6 +231,7 @@ if analisar:
 	
 	st.write(gestor)
 	st.write(type(gestor))
+	st.write(str(gestor))
 	if gestor is not None or (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
