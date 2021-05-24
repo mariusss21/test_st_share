@@ -56,7 +56,7 @@ def load_data():
 	return data
 
 def func_validar(index, row, indice):
-	retorno = ''
+
 	if index in indice:
 		st.table(row)
 		bt1, bt2, bt3 = st.beta_columns(3)
@@ -80,7 +80,6 @@ def func_validar(index, row, indice):
 			
 		if editar:
 			retorno = editar_registro(str(row['document']))	
-	return retorno
 
 # email
 def send_email():
@@ -177,7 +176,7 @@ def editar_registro(documento):
 		new_d = {str(key): str(value) for key, value in keys_values}
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
 		caching.clear_cache()
-		return(new_d)
+
 
 ######################################################################################################
                                            #Main
@@ -250,8 +249,8 @@ if analisar:
 		else:
 			if index in indice:
 				st.subheader('Ocorrência ' + str(index))
-				retorno2 = func_validar(index, row, indice)
-				st.write(retorno2)
+				func_validar(index, row, indice)
+				
 				
 			        
 if estatistica:
