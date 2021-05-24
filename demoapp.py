@@ -219,9 +219,6 @@ gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
 nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
 
-st.write(gestores)
-st.write(nao_gestores)
-
 # Constantes
 equipamentos = ['Uncoiler', 'Cupper']
 gatilhos = [ 'Segurança', '10 minutos', '1 hora']
@@ -243,7 +240,7 @@ if teste_email:
 
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
-submitted1=False
+#submitted1=False
 
 if inserir:
 	st.subheader('Formulário para incluir ocorrência')
