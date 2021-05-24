@@ -227,7 +227,7 @@ if analisar:
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))
 	
 	if responsavel is not None:
-		filtrado = filtrado[filtrado['responsável identificação'] == reponsavel]
+		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 	#st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['responsável identificação'] == responsavel)][['data', 'turno', 'gestor', 'responsável identificação', 'status','linha', 'equipamento']])
 			
 	st.text('Selecione o responsável pelo preenchimento do formulário')
