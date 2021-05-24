@@ -319,13 +319,13 @@ if analisar:
 	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 
 	for index, row in filtrado.iterrows():
-		if detalhar_todas:
+		#if detalhar_todas:
+		#	st.subheader('Ocorrência ' + str(index))
+		#	st.table(row)
+		#else:
+		if index in indice:
 			st.subheader('Ocorrência ' + str(index))
-			st.table(row)
-		else:
-			if index in indice:
-				st.subheader('Ocorrência ' + str(index))
-				func_validar(index, row, indice)
+			func_validar(index, row, indice)
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
