@@ -171,11 +171,11 @@ def editar_registro(documento):
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
 	if submitted_edit:
-		
+		caching.clear_cache()		
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
 		db.collection("5porques_2").document(documento).update(new_d)
-		caching.clear_cache()
+
 
 
 ######################################################################################################
