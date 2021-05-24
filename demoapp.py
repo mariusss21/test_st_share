@@ -79,7 +79,7 @@ def func_validar(index, row, indice):
 			caching.clear_cache()
 			
 		if editar:
-			pass			
+			editar_registro(row['document'])			
 
 # email
 def send_email():
@@ -140,7 +140,7 @@ def formulario():
 		doc_ref.set(new_d)
 		
 		
-def editar_registro(documento)
+def editar_registro(documento):
 
 	doc = db.collection("posts").document(documento).get()	    		    				   
 	with st.form('Form1'):
