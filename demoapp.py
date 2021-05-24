@@ -174,7 +174,7 @@ def editar_registro(documento):
 		dic['status'] = 'Retificado'
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 		keys_values2 = dic.items()
-		new_d2 = {str(key): str(value) for key, value in keys_values}
+		new_d2 = {str(key): str(value) for key, value in keys_values2}
 		st.write(new_d2)
 
 	if submitted_edit:
