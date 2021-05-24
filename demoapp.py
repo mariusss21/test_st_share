@@ -142,18 +142,10 @@ def formulario():
 		
 def editar_registro(documento):
 	doc = db.collection("5porques_2").document(documento).get().to_dict()
-	#doc_fb = doc_ref.get()
-	#doc = doc_fb.to_dict()
-	st.write(doc)
-	st.write(type(doc))
-	data = pd.read_csv(DATA_URL)
-	posts_ref = db.collection("5porques_2")	
-	data = data.append(doc, ignore_index=True)
-	data['data'] = pd.to_datetime(data['data']).dt.date
 	
 	pd.to_datetime(data['data']).dt.date
 	with st.form('Form1'):
-		dic['data'] = st.date_input('Data da ocorrência', value=data['data'])
+		dic['data'] = st.date_input('Data da ocorrência')
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
 		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
 		dic['linha'] = st.selectbox('Selecione a linha', linhas)
