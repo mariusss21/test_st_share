@@ -177,8 +177,8 @@ def editar_registro(documento):
 	if submitted_edit:
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
-		for value in new_d.values():
-			if value == '' or value is None:
+		for key, value in new_d.items():
+			if (value == '') or value is Null:
 				value = 'Não preenchido'
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
 		caching.clear_cache()
