@@ -82,6 +82,7 @@ def func_validar(index, row, indice):
 			documento = str(row['document'])
 			#retorno = editar_registro(str(row['document']))	
 			doc = db.collection("5porques_2").document(documento).get().to_dict()
+			
 			with st.form('Form_edit'):
 				dic['data'] = st.date_input('Data da ocorrência')
 				dic['turno'] = st.selectbox('Selecione o turno', turnos )
@@ -115,7 +116,7 @@ def func_validar(index, row, indice):
 				for key, value in new_d.items():
 					if (value == '') or value == '[]':
 						new_d[key] = 'Não informado'
-				db.collection("5porques_2").document(documento).update(new_d)
+				db.collection("5porques_2").document(documento).set(new_d)
 
 # email
 def send_email():
