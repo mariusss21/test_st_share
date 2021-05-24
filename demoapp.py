@@ -58,7 +58,7 @@ def load_data():
 def func_validar(index, row, indice):
 	if index in indice:
 		st.table(row)
-		
+		retorno = ''
 		bt1, bt2, bt3 = st.beta_columns(3)
 		aprovar = bt1.button('Aprovar')
 		reprovar = bt2.button('Reprovar')
@@ -79,7 +79,8 @@ def func_validar(index, row, indice):
 			caching.clear_cache()
 			
 		if editar:
-			editar_registro(str(row['document']))			
+			retorno = editar_registro(str(row['document']))	
+		st.write(retorno)
 
 # email
 def send_email():
@@ -142,6 +143,7 @@ def formulario():
 		
 def editar_registro(documento):
 	doc = db.collection("5porques_2").document(documento).get().to_dict()
+	st.write(doc)
 
 	with st.form('Form_edit'):
 		dic['data'] = st.date_input('Data da ocorrência')
@@ -170,14 +172,12 @@ def editar_registro(documento):
 		dic['status'] = 'Retificado'
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
-	if submitted_edit:
-		caching.clear_cache()		
+	if submitted_edit:		
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
-		st.write(new_d)
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
-
-
+		caching.clear_cache()
+		return(new_d)
 
 ######################################################################################################
                                            #Main
