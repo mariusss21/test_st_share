@@ -129,7 +129,7 @@ def func_validar(index, row, indice):
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
 				send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
-			st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
+				#st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
 
 # email
 def send_email(to):
@@ -191,6 +191,7 @@ def formulario():
 				new_d[key] = 'Não informado'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
+		send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
 
 ######################################################################################################
                                            #Main
