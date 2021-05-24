@@ -133,7 +133,7 @@ def formulario():
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
 
 	if submitted_ins:
-		for key, value in dic:
+		for value in dic.values():
 			if value == '' or value is null:
 				value = 'Não preenchido'
 		caching.clear_cache()
@@ -175,7 +175,8 @@ def editar_registro(documento):
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
 	if submitted_edit:
-		for key, value in dic:
+		
+		for value in dic.values():
 			if value == '' or value is null:
 				value = 'Não preenchido'
 				
