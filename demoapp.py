@@ -138,7 +138,7 @@ def formulario():
 		new_d = {str(key): str(value) for key, value in keys_values}
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
-				new_d[key] = '-'
+				new_d[key] = 'Informado'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 		
@@ -179,7 +179,7 @@ def editar_registro(documento):
 		new_d = {str(key): str(value) for key, value in keys_values}
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
-				new_d[key] = '-'
+				new_d[key] = 'Não informado'
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
 		caching.clear_cache()
 
