@@ -222,7 +222,7 @@ if analisar:
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 		
 	#st.text('Selecione o responsável pelo preenchimento do formulário')
-	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
+	responsavel = st.multiselect("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
 	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
