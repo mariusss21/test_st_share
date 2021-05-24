@@ -142,7 +142,9 @@ def formulario():
 		
 def editar_registro(documento):
 
-	doc = db.collection("posts").document(documento).get()	    		    				   
+	doc = db.collection("posts").document(documento).get()	 
+	st.write(doc)
+	st.write(type(doc))
 	with st.form('Form1'):
 		dic['data'] = st.date_input('Data da ocorrência', value=doc['data'].value)
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
