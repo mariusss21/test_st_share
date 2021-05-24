@@ -192,7 +192,7 @@ def formulario():
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'])
-	st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']))
+		st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']))
 
 ######################################################################################################
                                            #Main
