@@ -133,7 +133,7 @@ def func_validar(index, row, indice):
 			documento = str(row['document'])	
 			doc = db.collection("5porques_2").document(documento).get().to_dict()
 			
-			with st.form('Form_edit'):
+			with st.form('Form_edit' + str(index)):
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
@@ -158,7 +158,7 @@ def func_validar(index, row, indice):
 				dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia' + ' (' + str(index) + '):', nao_gestores, nao_gestores.index(doc['responsável reparo']))
 				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência' + ' (' + str(index) + '):', gestores, gestores.index(doc['gestor']))
 				dic['status'] = 'Retificado'
-				submitted_edit = st.form_submit_button('Editar 5 Porquês')
+				submitted_edit = st.form_submit_button('Editar 5 Porquês' + ' (' + str(index) + '):')
 
 			if submitted_edit:
 				keys_values = dic.items()
