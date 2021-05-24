@@ -221,10 +221,10 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	
 	st.text('Selecione o responsável pelo preenchimento do formulário')
-	responsavel = st.selectbox("Selecione o responsável", list(dados['responsável identificação']))
+	responsavel = st.selectbox("Selecione o responsável", list(dados['responsável identificação'].drop_duplicates()))
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
-	gestor = st.selectbox("Selecione o responsável", list(dados['gestor']))
+	gestor = st.selectbox("Selecione o responsável", list(dados['gestor'].drop_duplicates()))
 	
 	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] == gestor) & (dados['responsável identificação'] == responsavel) ]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
