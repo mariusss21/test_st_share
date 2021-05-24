@@ -195,7 +195,7 @@ def formulario():
 		dic['ações'] = st.text_input('Ações tomadas', "")
 		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
 		dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores)
-		dic['responsável reparo'] = st.text_input('Responsável pela correção da anomalia', "")
+		dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia', nao_gestores)
 		dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores)
 		dic['status'] = 'Pendente'
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
