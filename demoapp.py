@@ -134,7 +134,7 @@ def formulario():
 
 	if submitted_ins:
 		for value in dic.values():
-			if value == '' or value is null:
+			if value == '' or value is None:
 				value = 'Não preenchido'
 		caching.clear_cache()
 		keys_values = dic.items()
@@ -177,7 +177,7 @@ def editar_registro(documento):
 	if submitted_edit:
 		
 		for value in dic.values():
-			if value == '' or value is null:
+			if value == '' or value is None:
 				value = 'Não preenchido'
 				
 		keys_values = dic.items()
