@@ -141,6 +141,7 @@ def send_email(to, atividade):
 	from_ = 'Ambev 5 Porques'
 	subject = ""
 	body = ''
+	atividade = int(atividade)
 	
 	if atividade == 0:
 		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar. \nAtenciosamente, \nAmbev 5 Porques"
@@ -151,7 +152,7 @@ def send_email(to, atividade):
 	elif atividade == 2:
 		body = "Ola, o gestor aprovou a ocorrencia. \nAtenciosamente, \nAmbev 5 Porques"
 		subject = "Ocorrencia aprovada"	
-	else: 
+	elif atividade == 3:
 		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar. \nAtenciosamente, \nAmbev 5 Porques"
 		subject = "Ocorrencia reprovada"		
 	
