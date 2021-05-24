@@ -145,7 +145,6 @@ def formulario():
 		
 def editar_registro(documento):
 	doc = db.collection("5porques_2").document(documento).get().to_dict()
-	st.write(doc)
 
 	with st.form('Form_edit'):
 		dic['data'] = st.date_input('Data da ocorrência')
@@ -173,17 +172,14 @@ def editar_registro(documento):
 		dic['gestor'] = st.text_input('Gestor responsável pela avaliação da ocorrência', value=doc['gestor'])
 		dic['status'] = 'Retificado'
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
-		keys_values2 = dic.items()
-		new_d2 = {str(key): str(value) for key, value in keys_values2}
-		st.write(new_d2)
-
+		
 	if submitted_edit:
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
-		db.collection("5porques_2").document(documento).set(new_d, {merge: true})
+		db.collection("5porques_2").document(documento).set(new_d, {merge: True})
 		caching.clear_cache()
 
 
