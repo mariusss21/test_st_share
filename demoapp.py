@@ -79,6 +79,7 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['status'] = 'Aprovado'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			send_email(str(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email']), 2)
 			caching.clear_cache()
 		
 		if reprovar:
@@ -86,6 +87,7 @@ def func_validar(index, row, indice):
 			att_verificado = {}
 			att_verificado['status'] = 'Reprovado'
 			db.collection("5porques_2").document(row['document']).update(att_verificado)
+			send_email(str(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email']), 3)
 			caching.clear_cache()
 			
 		if editar:
@@ -128,18 +130,31 @@ def func_validar(index, row, indice):
 						new_d[key] = 'Não informado'
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
-				send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
-				#st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['Gestor']]['Email']))
+				send_email(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']), 1)
+				
 
 # email
-def send_email(to):
+def send_email(to, atividade):
 	gmail_user = st.secrets["email"]
 	gmail_password = st.secrets["senha"]
 	sent_from = gmail_user
 	from_ = 'Ambev 5 Porques'
-	#to = 'marius.lisboa@gmail.com'
-	subject = "Nova ocorrencia gerada"
-	body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avalia-la. \nAtenciosamente, \nAmbev 5 Porques"
+	subject = ""
+	body = ''
+	
+	if atividade == 0:
+		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar. \nAtenciosamente, \nAmbev 5 Porques"
+		subject = "Nova ocorrencia gerada"
+	elif atividade == 1:
+		body = "Ola, o responsavel retificou a ocorrencia, acesse a plataforma para reavaliar. \nAtenciosamente, \nAmbev 5 Porques"
+		subject = "Ocorrencia retificada"
+	elif atividade == 2:
+		body = "Ola, o gestor aprovou a ocorrencia. \nAtenciosamente, \nAmbev 5 Porques"
+		subject = "Ocorrencia aprovada"	
+	else: 
+		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar. \nAtenciosamente, \nAmbev 5 Porques"
+		subject = "Ocorrencia reprovada"		
+	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (from_, to, subject, body)
 
@@ -191,9 +206,8 @@ def formulario():
 				new_d[key] = 'Não informado'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
-		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'])
-		st.write(str(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email']))
-
+		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0)
+		
 ######################################################################################################
                                            #Main
 ######################################################################################################
