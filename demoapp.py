@@ -223,12 +223,12 @@ if analisar:
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
-	if responsavel is not None:
+	if responsavel is not None or responsavel  != 'nan':
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	gestor = st.selectbox("Selecione o responsável", list(filtrado['gestor'].drop_duplicates()))
-	if gestor is not None:
+	if gestor is not None or gestor != 'nan':
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
 	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
