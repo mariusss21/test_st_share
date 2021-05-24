@@ -180,7 +180,7 @@ def editar_registro(documento):
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
-		db.collection("5porques_2").document(documento).set(new_d, merge=False)
+		db.collection("5porques_2").document(documento).update(new_d, merge=False)
 		caching.clear_cache()
 
 
