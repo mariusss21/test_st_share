@@ -57,6 +57,7 @@ def load_data():
 
 @st.cache
 def load_usuarios():
+	data = pd.DataFrame(columns=['Nome', 'Email', 'Gestor', 'Codigo'])
 	posts_ref = db.collection("Usuarios")	
 	for doc in posts_ref.stream():
 		dicionario = doc.to_dict()
