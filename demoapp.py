@@ -222,8 +222,9 @@ if analisar:
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 		
 	#st.text('Selecione o responsável pelo preenchimento do formulário')
-	responsavel = st.multiselect("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
-	filtrado = filtrado[filtrado['responsável identificação'] in responsavel ]
+	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
+	if responsavel is not None and (str(responsavel) != 'nan'):
+		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
 	#st.text('Selecione o Gestor')
 	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()))
