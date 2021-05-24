@@ -221,12 +221,12 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	
 	st.text('Selecione o responsável pelo preenchimento do formulário')
-	responsavel = st.selectbox("Selecione o responsável", list(df['responsável identificação']))
+	responsavel = st.selectbox("Selecione o responsável", list(dados['responsável identificação']))
 		
 	st.text('Selecione o responsável pelo preenchimento do formulário')
-	gestor = st.selectbox("Selecione o responsável", list(df['gestor']))
+	gestor = st.selectbox("Selecione o responsável", list(dados['gestor']))
 	
-	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]
+	filtrado = dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro) & (dados['gestor'] = gestor) & (dados['responsável identificação'] = responsavel) ]
 	st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
 	detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
 	
