@@ -62,7 +62,7 @@ def func_validar(index, row, indice):
 		bt1, bt2, bt3 = st.beta_columns(3)
 		aprovar = bt1.button('Aprovar')
 		reprovar = bt2.button('Reprovar')
-		editar = bt3.button('Editar')
+		editar = bt3.checkbox('Editar')
 		
 		if aprovar:
 			caching.clear_cache()
@@ -117,6 +117,7 @@ def func_validar(index, row, indice):
 					if (value == '') or value == '[]':
 						new_d[key] = 'Não informado'
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
+				editar = False
 
 # email
 def send_email():
