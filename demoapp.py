@@ -110,6 +110,25 @@ def func_validar(index, row, indice):
 		
 		if not editar:
 			st.table(row)
+			bt1, bt2 = st.beta_columns(2)
+			aprovar = bt1.button('Aprovar')
+			reprovar = bt2.button('Reprovar')
+
+			if aprovar:
+				caching.clear_cache()
+				att_verificado = {}
+				att_verificado['status'] = 'Aprovado'
+				db.collection("5porques_2").document(row['document']).update(att_verificado)
+				send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 2)
+				caching.clear_cache()
+
+			if reprovar:
+				caching.clear_cache()
+				att_verificado = {}
+				att_verificado['status'] = 'Reprovado'
+				db.collection("5porques_2").document(row['document']).update(att_verificado)
+				send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 3)
+				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
 			doc = db.collection("5porques_2").document(documento).get().to_dict()
@@ -150,72 +169,7 @@ def func_validar(index, row, indice):
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
 				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1)
-			
-			
-		bt1, bt2= st.beta_columns(2)
-		aprovar = bt1.button('Aprovar')
-		reprovar = bt2.button('Reprovar')
-		
-		
-		if aprovar:
-			caching.clear_cache()
-			att_verificado = {}
-			att_verificado['status'] = 'Aprovado'
-			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 2)
-			caching.clear_cache()
-		
-		if reprovar:
-			caching.clear_cache()
-			att_verificado = {}
-			att_verificado['status'] = 'Reprovado'
-			db.collection("5porques_2").document(row['document']).update(att_verificado)
-			send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 3)
-			caching.clear_cache()
-			
-		if editar:
-			documento = str(row['document'])
-			#retorno = editar_registro(str(row['document']))	
-			doc = db.collection("5porques_2").document(documento).get().to_dict()
-			
-			with st.form('Form_edit'):
-				dic['data'] = st.date_input('Data da ocorrência')
-				dic['turno'] = st.selectbox('Selecione o turno', turnos, turnos.index(doc['turno']) )
-				dic['departamento'] = st.selectbox('Selecione o departamento', departamentos, departamentos.index(doc['departamento']))
-				dic['linha'] = st.selectbox('Selecione a linha', linhas, linhas.index(doc['linha']))
-				dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos, equipamentos.index(doc['equipamento']))
-				dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos, gatilhos.index(doc['gatilho']))
-				dic['descrição anomalia'] = st.text_input('Descreva a anomalia', value=doc['descrição anomalia'])
-				dic['ordem manutenção'] = st.text_input('Ordem de manutenção', value=doc['ordem manutenção'])
-				dic['correção'] = st.text_input('Descreva a correção', value=doc['correção'])
-				dic['pq1'] = st.text_input('1) Por que?', value=doc['pq1'])
-				dic['pq2'] = st.text_input('2) Por que?', value=doc['pq2'])
-				dic['pq3'] = st.text_input('3) Por que?', value=doc['pq3'])
-				dic['pq4'] = st.text_input('4) Por que?', value=doc['pq4'])
-				dic['pq5'] = st.text_input('5) Por que?', value=doc['pq5'])
-				dic['tipo de falha'] = st.multiselect('Selecione o tipo da falha', falhas)
-				dic['falha deterioização'] = st.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
-				dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
-				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
-				dic['ações'] = st.text_input('Ações tomadas', value=doc['ações'])
-				dic['notas de manutenção'] = st.text_input('Notas de manutenção', value=doc['notas de manutenção'])
-				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores, nao_gestores.index(doc['responsável identificação']))
-				dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia', nao_gestores, nao_gestores.index(doc['responsável reparo']))
-				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores, gestores.index(doc['gestor']))
-				dic['status'] = 'Retificado'
-				submitted_edit = st.form_submit_button('Editar 5 Porquês')
-
-			if submitted_edit:
-				keys_values = dic.items()
-				new_d = {str(key): str(value) for key, value in keys_values}
-				for key, value in new_d.items():
-					if (value == '') or value == '[]':
-						new_d[key] = 'Não informado'
-				db.collection("5porques_2").document(documento).set(new_d,merge=True)
-				editar = False
-				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1)
-				
-		
+					
 #função formulário 
 def formulario():
 	with st.form('Form_ins'):
