@@ -133,12 +133,12 @@ def formulario():
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
 
 	if submitted_ins:
-		for value in dic.values():
-			if value == '' or value is None:
-				value = 'Não preenchido'
 		caching.clear_cache()
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
+		for value in new_d.values():
+			if value == '' or value is None:
+				value = 'Não preenchido'
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 		
@@ -175,13 +175,11 @@ def editar_registro(documento):
 		submitted_edit = st.form_submit_button('Editar 5 Porquês')
 
 	if submitted_edit:
-		
-		for value in dic.values():
-			if value == '' or value is None:
-				value = 'Não preenchido'
-				
 		keys_values = dic.items()
 		new_d = {str(key): str(value) for key, value in keys_values}
+		for value in new_d.values():
+			if value == '' or value is None:
+				value = 'Não preenchido'
 		db.collection("5porques_2").document(documento).update(new_d, merge=True)
 		caching.clear_cache()
 
