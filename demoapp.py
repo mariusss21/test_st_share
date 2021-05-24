@@ -220,7 +220,7 @@ if analisar:
 	inicio_filtro = col1.date_input("Início")
 	fim_filtro = col2.date_input("Fim")
 	
-	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]['data', 'turno', 'gestor', 'responsável identificação', 'status','linha', 'equipamento'])
+	st.write(dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)][['data', 'turno', 'gestor', 'responsável identificação', 'status','linha', 'equipamento']])
 	#st.write(filtrado[['data', 'turno', 'linha', 'equipamento', 'responsável identificação', 'verificado', 'document']])
 	st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(dados['responsável identificação'].drop_duplicates()))
