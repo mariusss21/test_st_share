@@ -1,4 +1,15 @@
 ######################################################################################################
+                                           #Introdução
+######################################################################################################
+# O sistema desenvolvido coleta os dados dos 5 porques através de um formulário web e armazena num  
+# banco no-SQL. Esses dados são ligos e disponibilizados para visualização e edição
+
+# Tecnologias:
+# Streamlit para web, streamlit share para deploy, banco de dados Firebase (Google)
+
+# Link:
+# https://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py
+######################################################################################################
                                  # importar bibliotecas
 ######################################################################################################
 
@@ -36,11 +47,10 @@ analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
 ######################################################################################################
-                                           #Funções
+                                           #Função para enviar email
 ######################################################################################################
-
-
-# email
+# Recebe como parâmetros destinatário e um código de atividade para o envio
+# O email está configurado por parâmetros presentes no streamlit share (secrets)
 def send_email(to, atividade):
 	gmail_user = st.secrets["email"]
 	gmail_password = st.secrets["senha"]
@@ -76,23 +86,24 @@ def send_email(to, atividade):
 	except:
 		st.write('Whoops, something went wrong...')
 
-
-#função para carregar os dados do firebase (utiliza cache para agilizar a aplicação)
+######################################################################################################
+                                           #Função para leitura do banco (Firebase)
+######################################################################################################
+# Efetua a leitura de todos os documentos presentes no banco e passa para um dataframe pandas
+# Função para carregar os dados do firebase (utiliza cache para agilizar a aplicação)
 @st.cache
 def load_data():
 	data = pd.read_csv(DATA_URL)
 	posts_ref = db.collection("5porques_2")	
-	# For a reference to a collection, we use .stream() instead of .get()
 	for doc in posts_ref.stream():
 		dicionario = doc.to_dict()
 		dicionario['document'] = doc.id
 		data = data.append(dicionario, ignore_index=True)
 
 	data['data'] = pd.to_datetime(data['data']).dt.date
-	#data = data.sort_values(by=['data'])
-	#data.reset_index(inplace = True)
 	return data
 
+# Efetua a leitura dos dados dos usuários no banco
 @st.cache
 def load_usuarios():
 	data = pd.DataFrame(columns=['Nome', 'Email', 'Gestor', 'Codigo'])
@@ -102,6 +113,13 @@ def load_usuarios():
 		dicionario['document'] = doc.id
 		data = data.append(dicionario, ignore_index=True)
 	return data
+
+######################################################################################################
+                                           #Avaliação e edição das ocorrências
+######################################################################################################
+# Função para aprovar ou reprovar a ocorrência. Permite também a edição de ocorrências passadas,
+# possibilitando a retificação das mesmas. Edição através de formulário que aparece preenchido com
+# os valores passados anteriormente
 
 def func_validar(index, row, indice):
 
@@ -172,7 +190,10 @@ def func_validar(index, row, indice):
 				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1)
 				caching.clear_cache()
 					
-#função formulário 
+######################################################################################################
+                                           #Formulário para inclusão de ocorrência
+######################################################################################################
+
 def formulario():
 	with st.form('Form_ins'):
 		dic['data'] = st.date_input('Data da ocorrência')
@@ -224,8 +245,8 @@ nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nom
 colunas = dados.columns
 
 # Constantes
-equipamentos = ['Uncoiler', 'Cupper']
-gatilhos = [ 'Segurança', '10 minutos', '1 hora']
+equipamentos = ['Uncoiler', 'Cupper', 'Washer', 'Body Maker', 'IBO', 'ISM', 'Necker', 'Palletizer', 'FullPallet' ]
+gatilhos = [ 'Segurança', '10 minutos', '30 minutos', '1 hora']
 linhas = ['L571', 'L572', 'L581', 'Utilidades']
 turnos = ['Turno A', 'Turno B', 'Turno C']
 departamentos = ['Engenharia', 'Automação', 'Manutenção']
@@ -239,7 +260,6 @@ st.write('Selecione no menu lateral a opção desejada')
 
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
-#submitted1=False
 
 if inserir:
 	st.subheader('Formulário para incluir ocorrência')
@@ -253,32 +273,22 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 		
-	#st.text('Selecione o responsável pelo preenchimento do formulário')
 	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
 	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	#st.text('Selecione o Gestor')
 	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()))
 	if gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	#st.text('Selecione o status da ocorrência')
 	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()))
 	if status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
-	#detalhar_todas = st.checkbox("Detalhar todas as ocorrências")
-	
-	#if not detalhar_todas:
 	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
-
+	
 	for index, row in filtrado.iterrows():
-		#if detalhar_todas:
-		#	st.subheader('Ocorrência ' + str(index))
-		#	st.table(row)
-		#else:
 		if index in indice:
 			st.subheader('Ocorrência ' + str(index))
 			func_validar(index, row, indice)
