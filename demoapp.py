@@ -201,7 +201,7 @@ def func_validar(index, row, indice):
                                            #Formulário para inclusão de ocorrência
 ######################################################################################################
 
-def formulario():
+def formulario(linhas):
 	sap_nv2 = st.selectbox('Selecione a linha', linhas)	
 	equipamentos = sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento']
 
@@ -267,15 +267,15 @@ deterioização = ['Forçada', 'Natural', 'Nenhuma']
 
 # Imagem
 st.image('Ambev.jpeg')
-st.subheader('Aplicação 5 porques')
+st.subheader('Aplicação 5-porques')
 st.write('Selecione no menu lateral a opção desejada')
 
 # Lista vazia para input dos dados do formulário
 dic = {} #dicionario
 
 if inserir:
-	st.subheader('Formulário para incluir ocorrência')
-	formulario()
+	st.subheader('Formulário 5-porques')
+	formulario(linhas)
 
 if analisar:
 	st.subheader('Configure as opções de filtro')
