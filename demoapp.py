@@ -217,8 +217,8 @@ def formulario():
 		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 		dic['ações'] = st.text_input('Ações tomadas', "")
 		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
-		dic['responsável identificação'] = st.selectbox('Responsável pela identificação', nao_gestores)
-		dic['responsável reparo'] = st.selectbox('Responsável pela correção', nao_gestores)
+		dic['responsável identificação'] = st.text_input('Responsável pela identificação')
+		dic['responsável reparo'] = st.text_input('Responsável pela correção')
 		dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário')
 		dic['gestor'] = st.selectbox('Coordenador', gestores)
 		dic['status'] = 'Pendente'
