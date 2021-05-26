@@ -168,8 +168,7 @@ def func_validar(index, row, indice):
 				equipamento_ant = 0
 			else:
 				equipamento_ant = equipamentos.index(doc['equipamento'])
-			res = json.loads(doc['ordem manutenção'])
-			st.write(res)
+			
 			with st.form('Form_edit' + str(index)):
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
