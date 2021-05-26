@@ -157,7 +157,9 @@ def func_validar(index, row, indice):
 			documento = str(row['document'])	
 			#doc = db.collection("5porques_2").document(documento).get().to_dict()
 			doc = row.to_dict()
-			sap_nv2 = st.selectbox('Selecione a linha', list(linhas), linhas.index(doc['linha']))	
+			
+			list_linhas = list(linhas)
+			sap_nv2 = st.selectbox('Selecione a linha', list_linhas, list_linhas.index(doc['linha']))
 			equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
@@ -204,7 +206,8 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario(linhas):
-	sap_nv2 = st.selectbox('Selecione a linha', list(linhas))	
+	list_linhas = list(linhas)
+	sap_nv2 = st.selectbox('Selecione a linha', list_linhas)	
 	equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 
 	with st.form('Form_ins'):
