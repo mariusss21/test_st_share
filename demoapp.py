@@ -208,7 +208,7 @@ def func_validar(index, row, indice):
 					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
 					caching.clear_cache()
 				else:
-					st.error(‘Please enter a valid input’)
+					st.error('Please enter a valid input')
 					
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
