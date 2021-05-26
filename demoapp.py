@@ -159,7 +159,7 @@ def func_validar(index, row, indice):
 			doc = row.to_dict()
 			
 			list_linhas = list(linhas)
-			sap_nv2 = st.selectbox('Selecione a linha', list_linhas, list_linhas.index(doc['linha']))
+			sap_nv2 = st.selectbox('Selecione a linha' + ' (' + str(index) + '):', list_linhas, list_linhas.index(doc['linha']))
 			equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 			
 			if sap_nv2 != doc['linha']:
@@ -190,7 +190,7 @@ def func_validar(index, row, indice):
 				dic['notas de manutenção'] = st.text_input('Notas de manutenção' + ' (' + str(index) + '):', value=doc['notas de manutenção'])
 				dic['responsável identificação'] = st.text_input('Responsável pela identificação' + ' (' + str(index) + '):', value=doc['responsável identificação'])
 				dic['responsável reparo'] = st.text_input('Responsável pela correção' + ' (' + str(index) + '):',value=doc['responsável reparo'])
-				dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário', value=doc['email responsável'])
+				dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário' + ' (' + str(index) + '):', value=doc['email responsável'])
 				dic['gestor'] = st.selectbox('Coordenador' + ' (' + str(index) + '):', gestores, gestores.index(doc['gestor']))
 				dic['status'] = 'Retificado'
 				submitted_edit = st.form_submit_button('Editar 5 Porquês' + ' (' + str(index) + '):')
@@ -319,7 +319,7 @@ if analisar:
 	elif status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
-	st.write(filtrado[['data', 'document','responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
+	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
 	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	indice_doc = st.multiselect('Selecione a ocorrência', filtrado.document)
 	for index, row in filtrado.iterrows():
