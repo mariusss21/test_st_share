@@ -173,9 +173,10 @@ def func_validar(index, row, indice):
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)' + ' (' + str(index) + '):', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas' + ' (' + str(index) + '):', value=doc['ações'])
 				dic['notas de manutenção'] = st.text_input('Notas de manutenção' + ' (' + str(index) + '):', value=doc['notas de manutenção'])
-				dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia' + ' (' + str(index) + '):', nao_gestores, nao_gestores.index(doc['responsável identificação']))
-				dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia' + ' (' + str(index) + '):', nao_gestores, nao_gestores.index(doc['responsável reparo']))
-				dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência' + ' (' + str(index) + '):', gestores, gestores.index(doc['gestor']))
+				dic['responsável identificação'] = st.text_input('Responsável pela identificação' + ' (' + str(index) + '):', value=doc['responsável identificação'])
+				dic['responsável reparo'] = st.text_input('Responsável pela correção' + ' (' + str(index) + '):',value=doc['responsável reparo'])
+				dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário', value=doc['email responsável'])
+				dic['gestor'] = st.selectbox('Coordenador' + ' (' + str(index) + '):', gestores, gestores.index(doc['gestor']))
 				dic['status'] = 'Retificado'
 				submitted_edit = st.form_submit_button('Editar 5 Porquês' + ' (' + str(index) + '):')
 
@@ -216,9 +217,10 @@ def formulario():
 		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 		dic['ações'] = st.text_input('Ações tomadas', "")
 		dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
-		dic['responsável identificação'] = st.selectbox('Responsável pela identificação da anomalia', nao_gestores)
-		dic['responsável reparo'] = st.selectbox('Responsável pela correção da anomalia', nao_gestores)
-		dic['gestor'] = st.selectbox('Gestor responsável pela avaliação da ocorrência', gestores)
+		dic['responsável identificação'] = st.selectbox('Responsável pela identificação', nao_gestores)
+		dic['responsável reparo'] = st.selectbox('Responsável pela correção', nao_gestores)
+		dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário')
+		dic['gestor'] = st.selectbox('Coordenador', gestores)
 		dic['status'] = 'Pendente'
 		submitted_ins = st.form_submit_button('Enviar 5 Porquês')
 
