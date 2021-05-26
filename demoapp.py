@@ -208,7 +208,7 @@ def func_validar(index, row, indice):
 					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
 					caching.clear_cache()
 				else:
-					st.error('Please enter a valid input')
+					st.error('Por favor inserir e-mail')
 					
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
@@ -254,12 +254,15 @@ def formulario(linhas):
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
-
-		ts = time.time()
-		val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
-		doc_ref = db.collection("5porques_2").document(val_documento)
-		doc_ref.set(new_d)
-		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento)
+				
+		if '@ambev.com.br' in new_d['email responsável']:
+			ts = time.time()
+			val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
+			doc_ref = db.collection("5porques_2").document(val_documento)
+			doc_ref.set(new_d)
+			send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento)
+		else:
+			st.error('Por favor inserir e-mail')
 		
 ######################################################################################################
                                            #Main
