@@ -131,7 +131,7 @@ def load_sap_nv3():
 def func_validar(index, row, indice):
 
 	if row['document'] in indice:
-		editar = st.checkbox('Editar ocorrência ' + str(index))
+		editar = st.checkbox('Editar ocorrência ' + str(indice))
 		
 		if not editar:
 			st.table(row)
@@ -202,10 +202,13 @@ def func_validar(index, row, indice):
 				for key, value in new_d.items():
 					if (value == '') or value == '[]':
 						new_d[key] = 'Não informado'
-				db.collection("5porques_2").document(documento).set(new_d,merge=True)
-				editar = False
-				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
-				caching.clear_cache()
+				if '@ambev.com.br' in new_d['email responsável']:
+					db.collection("5porques_2").document(documento).set(new_d,merge=True)
+					editar = False
+					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
+					caching.clear_cache()
+				else:
+					st.error(‘Please enter a valid input’)
 					
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
