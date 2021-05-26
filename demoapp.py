@@ -304,8 +304,8 @@ if analisar:
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
 	list_gestor = list(filtrado['gestor'].drop_duplicates())
-	list_gestor.append('todos') 
-	gestor = st.selectbox("Selecione o gestor, list_gestor, list_gestor.index('todos'))
+	list_gestor.append('todos')  
+	gestor = st.selectbox("Selecione o gestor", list_gestor, list_gestor.index('todos'))
 	if gestor == 'todos':
 		pass
 	elif gestor is not None and (str(gestor) != 'nan'):
