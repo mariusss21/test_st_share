@@ -162,7 +162,7 @@ def func_validar(index, row, indice):
 			sap_nv2 = st.selectbox('Selecione a linha', list_linhas, list_linhas.index(doc['linha']))
 			equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 			
-			if sap_nv2 != doc'linha']:
+			if sap_nv2 != doc['linha']:
 				equipamento_ant = 0
 			else:
 				equipamento_ant = equipamentos.index(doc['equipamento'])
