@@ -117,7 +117,7 @@ def load_usuarios():
 # Efetua a leitura dos dados das linhas e dos equipamentos
 @st.cache
 def load_sap_nv3():
-	data = pd.read_csv('SAP_nivel3.csv')
+	data = pd.read_csv('SAP_nivel3.csv', sep=';')
 	return data
 			   
 ######################################################################################################
