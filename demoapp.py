@@ -83,9 +83,9 @@ def send_email(to, atividade, documento):
 		server.login(gmail_user, gmail_password)
 		server.sendmail(sent_from, to, email_text)
 		server.close()
-		st.write('Email sent!')
+		st.write('E-mail enviado!')
 	except:
-		st.write('Whoops, something went wrong...')
+		st.error('Falha ao enviar e-mail, tente novamente')
 
 ######################################################################################################
                                            #Função para leitura do banco (Firebase)
