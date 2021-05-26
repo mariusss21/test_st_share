@@ -327,7 +327,7 @@ if analisar:
 	elif gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	list_status = list(filtrado['gestor'].drop_duplicates())
+	list_status = list(filtrado['status'].drop_duplicates())
 	list_status.append('todos') 
 	status = st.selectbox("Selecione o status", list_status, list_status.index('todos'))
 	if status == 'todos':
