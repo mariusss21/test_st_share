@@ -157,12 +157,14 @@ def func_validar(index, row, indice):
 			documento = str(row['document'])	
 			#doc = db.collection("5porques_2").document(documento).get().to_dict()
 			doc = row.to_dict()
+			sap_nv2 = st.selectbox('Selecione a linha', list(linhas), linhas.index(doc['linha']))	
+			equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
-				dic['linha'] = st.selectbox('Selecione a linha' + ' (' + str(index) + '):', linhas, linhas.index(doc['linha']))
+				dic['linha'] = sap_nv2
 				dic['equipamento'] = st.selectbox('Selecione o equipamento' + ' (' + str(index) + '):', equipamentos, equipamentos.index(doc['equipamento']))
 				dic['gatilho'] = st.selectbox('Selecione o gatilho' + ' (' + str(index) + '):', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia' + ' (' + str(index) + '):', value=doc['descrição anomalia'])
@@ -202,7 +204,6 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario(linhas):
-	st.write(linhas)
 	sap_nv2 = st.selectbox('Selecione a linha', list(linhas))	
 	equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 
