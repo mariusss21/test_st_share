@@ -114,6 +114,12 @@ def load_usuarios():
 		data = data.append(dicionario, ignore_index=True)
 	return data
 
+# Efetua a leitura dos dados das linhas e dos equipamentos
+@st.cache
+def load_sap_nv3():
+	data = pd.read_csv('SAP_nivel3.csv')
+	return data
+			   
 ######################################################################################################
                                            #Avaliação e edição das ocorrências
 ######################################################################################################
@@ -196,11 +202,16 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario():
+	sap_nv2 = st.selectbox('Selecione a linha', linhas)
+	
+	equipamentos = sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamentos']
+	st.write(equipamentos)
+	
 	with st.form('Form_ins'):
 		dic['data'] = st.date_input('Data da ocorrência')
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
 		dic['departamento'] = st.selectbox('Selecione o departamento', departamentos)
-		dic['linha'] = st.selectbox('Selecione a linha', linhas)
+		dic['linha'] = sap_nv2
 		dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
 		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
 		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
@@ -242,14 +253,15 @@ def formulario():
 # Carrega dataframe e extrai suas colunas
 dados = load_data()
 usuarios_fb = load_usuarios()
+sap_nv3 = load_sap_nv3()
 gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
 nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
 
 # Constantes
-equipamentos = ['Uncoiler', 'Cupper', 'Washer', 'Body Maker', 'IBO', 'ISM', 'Necker', 'Palletizer', 'FullPallet' ]
+equipamentos = []
 gatilhos = [ 'Segurança', '10 minutos', '30 minutos', '1 hora']
-linhas = ['L571', 'L572', 'L581', 'Utilidades']
+linhas = sap_nv3['Linhas'].drop_duplicates()
 turnos = ['Turno A', 'Turno B', 'Turno C']
 departamentos = ['Engenharia', 'Automação', 'Manutenção']
 falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', 'Medição', 'Outra']
