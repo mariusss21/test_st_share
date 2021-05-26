@@ -229,7 +229,7 @@ def formulario(linhas):
 		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
 		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
 		#keywords = st_tags(‘Enter Keyword:’, ‘Press enter to add more’, [‘One’, ‘Two’, ‘Three’])
-		dic['ordem de manutenção'] = st_tags('Insira as ordens de manutenção', 'Pressione enter para adicionar')
+		dic['ordem de manutenção'] = st_tags(label='Insira as ordens de manutenção', text='Pressione enter para adicionar')
 		#dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
 		dic['correção'] = st.text_input('Descreva a correção', "")
 		dic['pq1'] = st.text_input('1) Por que?', "")
