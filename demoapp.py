@@ -295,19 +295,19 @@ if analisar:
 	fim_filtro = col2.date_input("Fim")
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 		
-	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()))	
+	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()), '')	
 	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()))
+	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()), '')
 	if gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()))
+	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()), '')
 	if status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
-	st.write(filtrado[['data', 'responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
+	st.write(filtrado[['data', 'document','responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
 	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	
 	for index, row in filtrado.iterrows():
