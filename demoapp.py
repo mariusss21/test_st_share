@@ -305,7 +305,7 @@ if analisar:
 		
 	list_gestor = list(filtrado['gestor'].drop_duplicates())
 	list_gestor.append('todos') 
-	gestor = st.selectbox("Selecione o responsável", list_gestor, list_gestor.index('todos'))
+	gestor = st.selectbox("Selecione o gestor, list_gestor, list_gestor.index('todos'))
 	if gestor == 'todos':
 		pass
 	elif gestor is not None and (str(gestor) != 'nan'):
@@ -313,14 +313,14 @@ if analisar:
 	
 	list_status = list(filtrado['gestor'].drop_duplicates())
 	list_status.append('todos') 
-	status = st.selectbox("Selecione o responsável", list_status, list_status.index('todos'))
+	status = st.selectbox("Selecione o status", list_status, list_status.index('todos'))
 	if status == 'todos':
 		pass
 	elif status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'document','responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
-	indice = st.multiselect('Selecione a ocorrência', filtrado.index)
+	indice = st.multiselect('Selecione a ocorrência', filtrado.document)
 	
 	for index, row in filtrado.iterrows():
 		if index in indice:
