@@ -62,17 +62,17 @@ def send_email(to, atividade, documento):
 	atividade = int(atividade)
 	
 	if atividade == 0:
-		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """5-porques %s gerado""" % (documento)
+		body = "Ola, foi gerada um novo 5-porques, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """Gerado 5-porques %s""" % (documento)
 	elif atividade == 1:
-		body = "Ola, o responsavel retificou a ocorrencia, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """5-porques %s retificado""" % (documento)
+		body = "Ola, o responsavel retificou 5-porques, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """Retificado 5-porques %s""" % (documento)
 	elif atividade == 2:
-		body = "Ola, o gestor aprovou a ocorrencia.\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """5-porques %s aprovado""" % (documento)	
+		body = "Ola, o gestor aprovou 5-porques.\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """Aprovado 5-porques %s""" % (documento)	
 	elif atividade == 3:
-		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """5-porques %s reprovado""" % (documento)		
+		body = "Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """Reprovado 5-porques %s""" % (documento)		
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (from_, to, subject, body)
