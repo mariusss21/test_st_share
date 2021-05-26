@@ -20,6 +20,7 @@ import pandas as pd
 import numpy as np
 import json
 import smtplib
+import time
 
 from google.cloud import firestore
 from google.oauth2 import service_account
@@ -250,6 +251,9 @@ def formulario(linhas):
 		for key, value in new_d.items():
 			if (value == '') or value == '[]':
 				new_d[key] = 'Não informado'
+
+		ts = time.time()
+		val_documento = new_d['linha'] + new_d['equipamento'] + str(ts)
 		doc_ref = db.collection("5porques_2").document()
 		doc_ref.set(new_d)
 		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0)
