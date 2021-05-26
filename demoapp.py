@@ -296,8 +296,8 @@ if analisar:
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
 	
 	list_resp = list(filtrado['responsável identificação'].drop_duplicates())
-	list_resp.append('todos')
-	responsavel = st.selectbox("Selecione o responsável", list_resp, 'todos')
+	list_resp.append('todos') 
+	responsavel = st.selectbox("Selecione o responsável", list_resp, list_resp.index('todos'))
 	if responsavel == 'todos':
 		pass
 	elif responsavel is not None and (str(responsavel) != 'nan'):
