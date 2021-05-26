@@ -202,11 +202,9 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario():
-	sap_nv2 = st.selectbox('Selecione a linha', linhas)
-	
+	sap_nv2 = st.selectbox('Selecione a linha', linhas)	
 	equipamentos = sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento']
-	st.write(equipamentos)
-	
+
 	with st.form('Form_ins'):
 		dic['data'] = st.date_input('Data da ocorrência')
 		dic['turno'] = st.selectbox('Selecione o turno', turnos )
