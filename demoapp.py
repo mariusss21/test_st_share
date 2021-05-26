@@ -261,7 +261,7 @@ colunas = dados.columns
 # Constantes
 equipamentos = []
 gatilhos = [ 'Segurança', '10 minutos', '30 minutos', '1 hora']
-linhas = sap_nv3['Linhas'].drop_duplicates()
+linhas = sap_nv3['Linha'].drop_duplicates()
 turnos = ['Turno A', 'Turno B', 'Turno C']
 departamentos = ['Engenharia', 'Automação', 'Manutenção']
 falhas = ['Máquina', 'Mão-de-obra', 'Método', 'Materiais', 'Meio ambiente', 'Medição', 'Outra']
