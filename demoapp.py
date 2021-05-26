@@ -298,7 +298,7 @@ if analisar:
 	list_resp = list(filtrado['responsável identificação'].drop_duplicates())
 	list_resp.append('todos')
 	responsavel = st.selectbox("Selecione o responsável", list_resp, 'todos')
-	if responsavel = 'todos':
+	if responsavel == 'todos':
 		pass
 	elif responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
