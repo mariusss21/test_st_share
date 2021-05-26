@@ -62,13 +62,13 @@ def send_email(to, atividade, documento):
 	atividade = int(atividade)
 	
 	if atividade == 0:
-		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n \nAtenciosamente, \nAmbev 5 Porques"
+		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
 		subject = """5-porques %s gerado""" % (documento)
 	elif atividade == 1:
 		body = "Ola, o responsavel retificou a ocorrencia, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
 		subject = """5-porques %s retificado""" % (documento)
 	elif atividade == 2:
-		body = "Ola, o gestor aprovou a ocorrencia.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		body = "Ola, o gestor aprovou a ocorrencia.\n\nAtenciosamente, \nAmbev 5 Porques"
 		subject = """5-porques %s aprovado""" % (documento)	
 	elif atividade == 3:
 		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
