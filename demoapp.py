@@ -303,12 +303,20 @@ if analisar:
 	elif responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()))
-	if gestor is not None and (str(gestor) != 'nan'):
+	list_gestor = list(filtrado['gestor'].drop_duplicates())
+	list_gestor.append('todos') 
+	gestor = st.selectbox("Selecione o responsável", list_gestor, list_gestor.index('todos'))
+	if gestor == 'todos':
+		pass
+	elif gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()))
-	if status is not None and (str(status) != 'nan'):
+	list_status = list(filtrado['gestor'].drop_duplicates())
+	list_status.append('todos') 
+	status = st.selectbox("Selecione o responsável", list_status, list_status.index('todos'))
+	if status == 'todos':
+		pass
+	elif status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'document','responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
