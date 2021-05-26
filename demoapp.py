@@ -132,7 +132,7 @@ def load_sap_nv3():
 def func_validar(index, row, indice):
 
 	if row['document'] in indice:
-		editar = st.checkbox('Editar ocorrência ' + str(indice))
+		editar = st.checkbox('Editar ocorrência ' + str(row['document']))
 		
 		if not editar:
 			st.table(row)
