@@ -177,7 +177,7 @@ def func_validar(index, row, indice):
 				dic['equipamento'] = st.selectbox('Selecione o equipamento' + ' (' + str(index) + '):', equipamentos, equipamento_ant)
 				dic['gatilho'] = st.selectbox('Selecione o gatilho' + ' (' + str(index) + '):', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia' + ' (' + str(index) + '):', value=doc['descrição anomalia'])
-				dic['ordem manutenção'] = st_tags(label=('Ordem de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['ordem manutenção'].replace(']', '').replace('[','').replace(',','').split())
+				dic['ordem manutenção'] = st_tags(label=('Ordem de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['ordem manutenção'].replace(']', '').replace('[','').replace(',','').replace("'",'').split())
 				#dic['ordem manutenção'] = st.text_input('Ordem de manutenção' + ' (' + str(index) + '):', value=doc['ordem manutenção'])
 				dic['correção'] = st.text_input('Descreva a correção' + ' (' + str(index) + '):', value=doc['correção'])
 				dic['pq1'] = st.text_input('1) Por que?' + ' (' + str(index) + '):', value=doc['pq1'])
