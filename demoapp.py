@@ -320,12 +320,12 @@ if analisar:
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'document','responsável identificação', 'gestor', 'status', 'turno', 'linha', 'equipamento']])
-	indice = st.multiselect('Selecione a ocorrência', filtrado.document)
-	
+	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
+	indice_doc = st.multiselect('Selecione a ocorrência', filtrado.document)
 	for index, row in filtrado.iterrows():
-		if index in indice:
-			st.subheader('Ocorrência ' + str(index))
-			func_validar(index, row, indice)
+		if row['document'] in indice_doc:
+			st.subheader('Ocorrência ' + str(row['document']))
+			func_validar(index, row, indice_doc)
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
