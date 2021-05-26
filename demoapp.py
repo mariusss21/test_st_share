@@ -137,7 +137,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Aprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 2)
+				send_email(row['email responsável'], 2)
 				caching.clear_cache()
 
 			if reprovar:
@@ -145,7 +145,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Reprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(usuarios_fb[usuarios_fb['Nome'] == row['responsável identificação']]['Email'], 3)
+				send_email(row['email responsável'], 3)
 				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
