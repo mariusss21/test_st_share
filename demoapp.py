@@ -208,7 +208,7 @@ def func_validar(index, row, indice):
 					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
 					caching.clear_cache()
 				else:
-					st.error('Por favor inserir e-mail')
+					st.error('Por favor inserir e-mail Ambev válido')
 					
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
@@ -262,7 +262,7 @@ def formulario(linhas):
 			doc_ref.set(new_d)
 			send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento)
 		else:
-			st.error('Por favor inserir e-mail')
+			st.error('Por favor inserir e-mail Ambev válido')
 		
 ######################################################################################################
                                            #Main
