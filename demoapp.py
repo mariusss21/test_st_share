@@ -52,7 +52,7 @@ estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 ######################################################################################################
 # Recebe como parâmetros destinatário e um código de atividade para o envio
 # O email está configurado por parâmetros presentes no streamlit share (secrets)
-def send_email(to, atividade):
+def send_email(to, atividade, documento):
 	gmail_user = st.secrets["email"]
 	gmail_password = st.secrets["senha"]
 	sent_from = gmail_user
@@ -62,17 +62,17 @@ def send_email(to, atividade):
 	atividade = int(atividade)
 	
 	if atividade == 0:
-		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar. \nAtenciosamente, \nAmbev 5 Porques"
-		subject = "Nova ocorrencia gerada"
+		body = "Ola, foi gerada uma nova ocorrencia, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n \nAtenciosamente, \nAmbev 5 Porques"
+		subject = """5-porques %s gerado""" % (documento)
 	elif atividade == 1:
-		body = "Ola, o responsavel retificou a ocorrencia, acesse a plataforma para reavaliar. \nAtenciosamente, \nAmbev 5 Porques"
-		subject = "Ocorrencia retificada"
+		body = "Ola, o responsavel retificou a ocorrencia, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """5-porques %s retificado""" % (documento)
 	elif atividade == 2:
-		body = "Ola, o gestor aprovou a ocorrencia. \nAtenciosamente, \nAmbev 5 Porques"
-		subject = "Ocorrencia aprovada"	
+		body = "Ola, o gestor aprovou a ocorrencia.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """5-porques %s aprovado""" % (documento)	
 	elif atividade == 3:
-		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar. \nAtenciosamente, \nAmbev 5 Porques"
-		subject = "Ocorrencia reprovada"		
+		body = "Ola, o gestor reprovou a ocorrencia, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		subject = """5-porques %s reprovado""" % (documento)		
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (from_, to, subject, body)
@@ -144,7 +144,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Aprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(row['email responsável'], 2)
+				send_email(row['email responsável'], 2, str(row['document']))
 				caching.clear_cache()
 
 			if reprovar:
@@ -152,7 +152,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Reprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(row['email responsável'], 3)
+				send_email(row['email responsável'], 3, str(row['document']))
 				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
@@ -204,7 +204,7 @@ def func_validar(index, row, indice):
 						new_d[key] = 'Não informado'
 				db.collection("5porques_2").document(documento).set(new_d,merge=True)
 				editar = False
-				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1)
+				send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, str(new_d['document']))
 				caching.clear_cache()
 					
 ######################################################################################################
@@ -256,7 +256,7 @@ def formulario(linhas):
 		val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
 		doc_ref = db.collection("5porques_2").document(val_documento)
 		doc_ref.set(new_d)
-		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0)
+		send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento)
 		
 ######################################################################################################
                                            #Main
