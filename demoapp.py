@@ -294,16 +294,16 @@ if analisar:
 	inicio_filtro = col1.date_input("Início")
 	fim_filtro = col2.date_input("Fim")
 	filtrado = (dados[(dados['data'] >= inicio_filtro) & (dados['data'] <= fim_filtro)]) 
-		
-	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()), '')	
+	input_slot = st.empty()
+	responsavel = st.selectbox("Selecione o responsável", list(filtrado['responsável identificação'].drop_duplicates()), input_slot)	
 	if responsavel is not None and (str(responsavel) != 'nan'):
 		filtrado = filtrado[filtrado['responsável identificação'] == responsavel]
 		
-	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()), '')
+	gestor = st.selectbox("Selecione o gestor", list(filtrado['gestor'].drop_duplicates()), input_slot)
 	if gestor is not None and (str(gestor) != 'nan'):
 		filtrado = filtrado[filtrado['gestor'] == gestor]	
 	
-	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()), '')
+	status = st.selectbox("Selecione o status", list(filtrado['status'].drop_duplicates()), input_slot)
 	if status is not None and (str(status) != 'nan'):
 		filtrado = filtrado[filtrado['status'] == status]	
 	
