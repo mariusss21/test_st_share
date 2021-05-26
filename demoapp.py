@@ -162,12 +162,17 @@ def func_validar(index, row, indice):
 			sap_nv2 = st.selectbox('Selecione a linha', list_linhas, list_linhas.index(doc['linha']))
 			equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 			
+			if sap_nv2 != doc'linha']:
+				equipamento_ant = 0
+			else:
+				equipamento_ant = equipamentos.index(doc['equipamento'])
+			
 			with st.form('Form_edit' + str(index)):
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
 				dic['linha'] = sap_nv2
-				dic['equipamento'] = st.selectbox('Selecione o equipamento' + ' (' + str(index) + '):', equipamentos, equipamentos.index(doc['equipamento']))
+				dic['equipamento'] = st.selectbox('Selecione o equipamento' + ' (' + str(index) + '):', equipamentos, equipamento_ant)
 				dic['gatilho'] = st.selectbox('Selecione o gatilho' + ' (' + str(index) + '):', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia' + ' (' + str(index) + '):', value=doc['descrição anomalia'])
 				dic['ordem manutenção'] = st.text_input('Ordem de manutenção' + ' (' + str(index) + '):', value=doc['ordem manutenção'])
