@@ -202,6 +202,7 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario(linhas):
+	st.write(linhas)
 	sap_nv2 = st.selectbox('Selecione a linha', linhas)	
 	equipamentos = sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento']
 
