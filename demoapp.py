@@ -18,7 +18,7 @@ from streamlit_tags import st_tags
 from streamlit import caching
 import plotly.express as px
 import pandas as pd
-import numpy as np
+#import numpy as np
 import json
 import smtplib
 import time
@@ -128,7 +128,7 @@ def load_sap_nv3():
 # Função para aprovar ou reprovar a ocorrência. Permite também a edição de ocorrências passadas,
 # possibilitando a retificação das mesmas. Edição através de formulário que aparece preenchido com
 # os valores passados anteriormente
-@st.cache
+
 def func_validar(index, row, indice):
 
 	if row['document'] in indice:
@@ -213,7 +213,7 @@ def func_validar(index, row, indice):
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
 ######################################################################################################
-@st.cache
+
 def formulario(linhas):
 	list_linhas = list(linhas)
 	sap_nv2 = st.selectbox('Selecione a linha', list_linhas)	
