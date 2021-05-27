@@ -339,7 +339,7 @@ if analisar:
 	
 	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
 	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
-	st.write(filtrdo['document'])
+	st.write(filtrado['document'])
 	indice_doc = st.multiselect('Selecione a ocorrência', filtrado['document'])
 	st.write(indice_doc)
 	for index, row in filtrado.iterrows():
