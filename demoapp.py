@@ -16,7 +16,8 @@
 import streamlit as st
 from streamlit_tags import st_tags
 from streamlit import caching
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
+import plotly.express as px
 import pandas as pd
 import numpy as np
 import json
@@ -344,9 +345,11 @@ if analisar:
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
-	fig = plt.figure()
+	#fig = px.figure()
 	variavel =  st.selectbox('Selecione o item para análise', colunas)
-	ax = fig.add_subplot(1,1,1)
-	plt.xticks(rotation=45)
-	ax.hist(dados[variavel])
+	#ax = fig.add_subplot(1,1,1)
+	#plt.xticks(rotation=45)
+	#ax.hist(dados[variavel])
+	fig = px.histogram(dados, x=variavel)
 	st.write(fig)
+	
