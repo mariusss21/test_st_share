@@ -14,7 +14,6 @@
 ######################################################################################################
 
 import streamlit as st
-from datetime import datetime
 from streamlit_tags import st_tags
 from streamlit import caching
 import matplotlib.pyplot as plt
@@ -158,7 +157,6 @@ def func_validar(index, row, indice):
 				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
-			#doc = db.collection("5porques_2").document(documento).get().to_dict()
 			doc = row.to_dict()
 			
 			list_linhas = list(linhas)
@@ -171,7 +169,6 @@ def func_validar(index, row, indice):
 				equipamento_ant = equipamentos.index(doc['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
-				#datetime_object = datetime.strptime(doc['data'], '%m/%d/%y')
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):', doc['data'])
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
