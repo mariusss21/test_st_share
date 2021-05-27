@@ -16,6 +16,7 @@
 import streamlit as st
 from streamlit_tags import st_tags
 from streamlit import caching
+from datetime import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -170,7 +171,8 @@ def func_validar(index, row, indice):
 				equipamento_ant = equipamentos.index(doc['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
-				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
+				datetime_object = datetime.strptime(doc['data'], '%m/%d/%y')
+				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):', datetime_object)
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
 				dic['linha'] = sap_nv2
