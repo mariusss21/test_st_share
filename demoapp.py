@@ -44,7 +44,7 @@ DATA_URL = "data.csv"
 
 
 st.sidebar.title("Escolha a ação desejada")
-inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês", value=True)
+inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
@@ -170,7 +170,8 @@ def func_validar(index, row, indice):
 				equipamento_ant = equipamentos.index(doc['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
-				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
+				datetime_object = datetime.strptime(doc['data'], '%m/%d/%y')
+				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):', datetime_object)
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
 				dic['linha'] = sap_nv2
