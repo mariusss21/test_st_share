@@ -44,7 +44,7 @@ DATA_URL = "data.csv"
 
 
 st.sidebar.title("Escolha a ação desejada")
-inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês", value=True)
+inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
