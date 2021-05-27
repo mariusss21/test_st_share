@@ -2,7 +2,7 @@
                                            #Introdução
 ######################################################################################################
 # O sistema desenvolvido coleta os dados dos 5 porques através de um formulário web e armazena num  
-# banco no-SQL. Esses dados são ligos e disponibilizados para visualização e edição
+# banco no-SQL. Esses dados são lidos e disponibilizados para visualização e edição
 
 # Tecnologias:
 # Streamlit para web, streamlit share para deploy, banco de dados Firebase (Google)
@@ -340,6 +340,7 @@ if analisar:
 	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
 	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	indice_doc = st.multiselect('Selecione a ocorrência', filtrado.document)
+	st.write(indice_doc)
 	for index, row in filtrado.iterrows():
 		if row['document'] in indice_doc:
 			st.subheader('Ocorrência ' + str(row['document']))
