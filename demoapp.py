@@ -2,7 +2,7 @@
                                            #Introdução
 ######################################################################################################
 # O sistema desenvolvido coleta os dados dos 5 porques através de um formulário web e armazena num  
-# banco no-SQL. Esses dados são lidos e disponibilizados para visualização e edição
+# banco no-SQL. Esses dados são ligos e disponibilizados para visualização e edição
 
 # Tecnologias:
 # Streamlit para web, streamlit share para deploy, banco de dados Firebase (Google)
@@ -16,7 +16,6 @@
 import streamlit as st
 from streamlit_tags import st_tags
 from streamlit import caching
-#from datetime import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -45,7 +44,7 @@ DATA_URL = "data.csv"
 
 
 st.sidebar.title("Escolha a ação desejada")
-inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês")
+inserir = st.sidebar.checkbox("Inserir ocorrência 5 Porquês", value=True)
 analisar = st.sidebar.checkbox("Avaliar ocorrência 5 Porquês")
 estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 
@@ -171,7 +170,6 @@ def func_validar(index, row, indice):
 				equipamento_ant = equipamentos.index(doc['equipamento'])
 			
 			with st.form('Form_edit' + str(index)):
-				#datetime_object = datetime.strptime(doc['data'], '%m/%d/%y')
 				dic['data'] = st.date_input('Data da ocorrência' + ' (' + str(index) + '):')
 				dic['turno'] = st.selectbox('Selecione o turno' + ' (' + str(index) + '):', turnos, turnos.index(doc['turno']) )
 				dic['departamento'] = st.selectbox('Selecione o departamento' + ' (' + str(index) + '):', departamentos, departamentos.index(doc['departamento']))
@@ -179,7 +177,7 @@ def func_validar(index, row, indice):
 				dic['equipamento'] = st.selectbox('Selecione o equipamento' + ' (' + str(index) + '):', equipamentos, equipamento_ant)
 				dic['gatilho'] = st.selectbox('Selecione o gatilho' + ' (' + str(index) + '):', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia' + ' (' + str(index) + '):', value=doc['descrição anomalia'])
-				dic['ordem manutenção'] = st_tags(label=('Ordem de manutenção' + ' (' + str(index) + '):'), text='Pressione enter', value=doc['ordem manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
+				dic['ordem manutenção'] = st_tags(label=('Ordem de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['ordem manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
 				#dic['ordem manutenção'] = st.text_input('Ordem de manutenção' + ' (' + str(index) + '):', value=doc['ordem manutenção'])
 				dic['correção'] = st.text_input('Descreva a correção' + ' (' + str(index) + '):', value=doc['correção'])
 				dic['pq1'] = st.text_input('1) Por que?' + ' (' + str(index) + '):', value=doc['pq1'])
@@ -192,7 +190,7 @@ def func_validar(index, row, indice):
 				dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção' + ' (' + str(index) + '):', falhas)
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)' + ' (' + str(index) + '):', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas' + ' (' + str(index) + '):', value=doc['ações'])
-				dic['notas de manutenção'] = st_tags(label=('Notas de manutenção' + ' (' + str(index) + '):'), text='Pressione enter', value=doc['notas de manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
+				dic['notas de manutenção'] = st_tags(label=('Notas de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['notas de manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
 				#dic['notas de manutenção'] = st.text_input('Notas de manutenção' + ' (' + str(index) + '):', value=doc['notas de manutenção'])
 				dic['responsável identificação'] = st.text_input('Responsável pela identificação' + ' (' + str(index) + '):', value=doc['responsável identificação'])
 				dic['responsável reparo'] = st.text_input('Responsável pela correção' + ' (' + str(index) + '):',value=doc['responsável reparo'])
@@ -233,7 +231,7 @@ def formulario(linhas):
 		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
 		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
 		#keywords = st_tags(‘Enter Keyword:’, ‘Press enter to add more’, [‘One’, ‘Two’, ‘Three’])
-		dic['ordem manutenção'] = st_tags(label='Ordens de manutenção', text='Pressione enter')
+		dic['ordem manutenção'] = st_tags(label='Ordens de manutenção', text='Pressione enter para adicionar')
 		#dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
 		dic['correção'] = st.text_input('Descreva a correção', "")
 		dic['pq1'] = st.text_input('1) Por que?', "")
@@ -246,7 +244,7 @@ def formulario(linhas):
 		dic['tipo de correção'] = st.multiselect('Selecione o tipo da correção', falhas)
 		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 		dic['ações'] = st.text_input('Ações tomadas', "")
-		dic['notas de manutenção'] = st_tags(label='Notas de manutenção', text='Pressione enter')
+		dic['notas de manutenção'] = st_tags(label='Notas de manutenção', text='Pressione enter para adicionar')
 		#dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
 		dic['responsável identificação'] = st.text_input('Responsável pela identificação')
 		dic['responsável reparo'] = st.text_input('Responsável pela correção')
@@ -339,9 +337,7 @@ if analisar:
 	
 	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
 	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
-	st.write(filtrado['document'])
-	indice_doc = st.multiselect('Selecione a ocorrência', filtrado['document'])
-	st.write(indice_doc)
+	indice_doc = st.multiselect('Selecione a ocorrência', filtrado.document)
 	for index, row in filtrado.iterrows():
 		if row['document'] in indice_doc:
 			st.subheader('Ocorrência ' + str(row['document']))
