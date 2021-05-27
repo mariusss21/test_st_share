@@ -215,19 +215,23 @@ def func_validar(index, row, indice):
 ######################################################################################################
 
 def formulario(linhas):
-	st8, st9, st10 = st.beta_columns(3)
+	sp2, sp3, st0 = st.beta_columns(3)
 	list_linhas = list(linhas)
-	sap_nv2 = st8.selectbox('Selecione a linha', list_linhas)	
+	sap_nv2 = sp2.selectbox('Selecione a linha', list_linhas)	
 	equipamentos = list(sap_nv3[sap_nv3['Linha'] == sap_nv2]['equipamento'])
 
 	with st.form('Form_ins'):
 		st1, st2, st3 = st.beta_columns(3)
+		st4, st5 = st.beta_columns(2)
+		st6, st7 = st.beta_columns(2)
+		st8, st9 = st.beta_columns(2)
+		
 		dic['data'] = st1.date_input('Data da ocorrência')
 		dic['turno'] = st2.selectbox('Selecione o turno', turnos )
 		dic['departamento'] = st3.selectbox('Selecione o departamento', departamentos)
 		dic['linha'] = sap_nv2
-		dic['equipamento'] = st9.selectbox('Selecione o equipamento', equipamentos)
-		dic['gatilho'] = st10.selectbox('Selecione o gatilho', gatilhos)		
+		dic['equipamento'] = sp3.selectbox('Selecione o equipamento', equipamentos)
+		dic['gatilho'] = st0.selectbox('Selecione o gatilho', gatilhos)		
 		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
 		dic['ordem manutenção'] = st_tags(label='Ordens de manutenção', text='Pressione enter')
 		dic['correção'] = st.text_input('Descreva a correção', "")
@@ -236,16 +240,14 @@ def formulario(linhas):
 		dic['pq3'] = st.text_input('3) Por que?', "")
 		dic['pq4'] = st.text_input('4) Por que?', "")
 		dic['pq5'] = st.text_input('5) Por que?', "")
-		st4, st5 = st.beta_columns(2)
-		st6, st7 = st.beta_columns(2)
 		dic['tipo de falha'] = st4.multiselect('Selecione o tipo da falha', falhas)
 		dic['falha deterioização'] = st5.multiselect('Selecione o tipo da deterioização (falha)', deterioização)
 		dic['tipo de correção'] = st6.multiselect('Selecione o tipo da correção', falhas)
 		dic['correção deterioização'] = st7.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 		dic['ações'] = st.text_input('Ações tomadas', "")
 		dic['notas de manutenção'] = st_tags(label='Notas de manutenção', text='Pressione enter')
-		dic['responsável identificação'] = st.text_input('Responsável pela identificação')
-		dic['responsável reparo'] = st.text_input('Responsável pela correção')
+		dic['responsável identificação'] = st8.text_input('Responsável pela identificação')
+		dic['responsável reparo'] = st9.text_input('Responsável pela correção')
 		dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário')
 		dic['gestor'] = st.selectbox('Coordenador', gestores)
 		dic['status'] = 'Pendente'
