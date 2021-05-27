@@ -16,7 +16,6 @@
 import streamlit as st
 from streamlit_tags import st_tags
 from streamlit import caching
-#import matplotlib.pyplot as plt
 import plotly.express as px
 import pandas as pd
 import numpy as np
@@ -129,7 +128,7 @@ def load_sap_nv3():
 # Função para aprovar ou reprovar a ocorrência. Permite também a edição de ocorrências passadas,
 # possibilitando a retificação das mesmas. Edição através de formulário que aparece preenchido com
 # os valores passados anteriormente
-
+@st.cache
 def func_validar(index, row, indice):
 
 	if row['document'] in indice:
@@ -178,7 +177,6 @@ def func_validar(index, row, indice):
 				dic['gatilho'] = st.selectbox('Selecione o gatilho' + ' (' + str(index) + '):', gatilhos, gatilhos.index(doc['gatilho']))
 				dic['descrição anomalia'] = st.text_input('Descreva a anomalia' + ' (' + str(index) + '):', value=doc['descrição anomalia'])
 				dic['ordem manutenção'] = st_tags(label=('Ordem de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['ordem manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
-				#dic['ordem manutenção'] = st.text_input('Ordem de manutenção' + ' (' + str(index) + '):', value=doc['ordem manutenção'])
 				dic['correção'] = st.text_input('Descreva a correção' + ' (' + str(index) + '):', value=doc['correção'])
 				dic['pq1'] = st.text_input('1) Por que?' + ' (' + str(index) + '):', value=doc['pq1'])
 				dic['pq2'] = st.text_input('2) Por que?' + ' (' + str(index) + '):', value=doc['pq2'])
@@ -191,7 +189,6 @@ def func_validar(index, row, indice):
 				dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)' + ' (' + str(index) + '):', deterioização)
 				dic['ações'] = st.text_input('Ações tomadas' + ' (' + str(index) + '):', value=doc['ações'])
 				dic['notas de manutenção'] = st_tags(label=('Notas de manutenção' + ' (' + str(index) + '):'), text='Pressione enter para adicionar', value=doc['notas de manutenção'].replace(']', '').replace('[','').replace("'",'').split(','))
-				#dic['notas de manutenção'] = st.text_input('Notas de manutenção' + ' (' + str(index) + '):', value=doc['notas de manutenção'])
 				dic['responsável identificação'] = st.text_input('Responsável pela identificação' + ' (' + str(index) + '):', value=doc['responsável identificação'])
 				dic['responsável reparo'] = st.text_input('Responsável pela correção' + ' (' + str(index) + '):',value=doc['responsável reparo'])
 				dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário' + ' (' + str(index) + '):', value=doc['email responsável'])
@@ -216,7 +213,7 @@ def func_validar(index, row, indice):
 ######################################################################################################
                                            #Formulário para inclusão de ocorrência
 ######################################################################################################
-
+@st.cache
 def formulario(linhas):
 	list_linhas = list(linhas)
 	sap_nv2 = st.selectbox('Selecione a linha', list_linhas)	
@@ -230,9 +227,7 @@ def formulario(linhas):
 		dic['equipamento'] = st.selectbox('Selecione o equipamento', equipamentos)
 		dic['gatilho'] = st.selectbox('Selecione o gatilho', gatilhos)
 		dic['descrição anomalia'] = st.text_input('Descreva a anomalia', "")
-		#keywords = st_tags(‘Enter Keyword:’, ‘Press enter to add more’, [‘One’, ‘Two’, ‘Three’])
 		dic['ordem manutenção'] = st_tags(label='Ordens de manutenção', text='Pressione enter para adicionar')
-		#dic['ordem manutenção'] = st.text_input('Ordem de manutenção', "")
 		dic['correção'] = st.text_input('Descreva a correção', "")
 		dic['pq1'] = st.text_input('1) Por que?', "")
 		dic['pq2'] = st.text_input('2) Por que?', "")
@@ -245,7 +240,6 @@ def formulario(linhas):
 		dic['correção deterioização'] = st.multiselect('Selecione o tipo da deterioização (correção)', deterioização)
 		dic['ações'] = st.text_input('Ações tomadas', "")
 		dic['notas de manutenção'] = st_tags(label='Notas de manutenção', text='Pressione enter para adicionar')
-		#dic['notas de manutenção'] = st.text_input('Notas de manutenção', "")
 		dic['responsável identificação'] = st.text_input('Responsável pela identificação')
 		dic['responsável reparo'] = st.text_input('Responsável pela correção')
 		dic['email responsável'] = st.text_input('E-mail do responsável pelo formulário')
@@ -336,7 +330,6 @@ if analisar:
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
-	#indice = st.multiselect('Selecione a ocorrência', filtrado.index)
 	indice_doc = st.multiselect('Selecione a ocorrência', filtrado['document'].tolist())
 	for index, row in filtrado.iterrows():
 		if row['document'] in indice_doc:
@@ -345,11 +338,7 @@ if analisar:
 			        
 if estatistica:
 	st.subheader("Estatísticas das ocorrências")
-	#fig = px.figure()
 	variavel =  st.selectbox('Selecione o item para análise', colunas)
-	#ax = fig.add_subplot(1,1,1)
-	#plt.xticks(rotation=45)
-	#ax.hist(dados[variavel])
 	fig = px.histogram(dados, x=variavel)
 	st.write(fig)
 	
