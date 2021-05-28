@@ -147,15 +147,18 @@ def func_validar(index, row, indice):
 				att_verificado['status'] = 'Aprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
 				send_email(row['email responsável'], 2, str(row['document']), comentario)
-				caching.clear_cache()
+				#caching.clear_cache()
 
 			if reprovar:
-				caching.clear_cache()
-				att_verificado = {}
-				att_verificado['status'] = 'Reprovado'
-				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(row['email responsável'], 3, str(row['document']), comentario)
-				caching.clear_cache()
+				if comentario == '':
+					st.error('Obrigatório o preenchimento do comentário!')
+				else:
+					caching.clear_cache()
+					att_verificado = {}
+					att_verificado['status'] = 'Reprovado'
+					db.collection("5porques_2").document(row['document']).update(att_verificado)
+					send_email(row['email responsável'], 3, str(row['document']), comentario)
+					#caching.clear_cache()
 		else:
 			documento = str(row['document'])	
 			doc = row.to_dict()
