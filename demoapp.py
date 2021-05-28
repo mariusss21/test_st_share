@@ -48,7 +48,7 @@ st.sidebar.title("Escolha a ação desejada")
 inserir = st.sidebar.checkbox("Inserir 5-Porques")
 analisar = st.sidebar.checkbox("Avaliar 5-Porques")
 estatistica = st.sidebar.checkbox("Estatísticas de 5-Porques")
-pendencia = st.sidebar.checkbox("Registrar pendencia")
+pendencia = st.sidebar.checkbox("Registrar pendência")
 
 ######################################################################################################
                                            #Função para enviar email
@@ -406,7 +406,7 @@ if pendencia:
 		val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
 		doc_ref = db.collection("pendencias").document(val_documento)
 		doc_ref.set(new_d)
-		st.write('Pendencia criada com sucesso')
+		st.write('Pendência criada com sucesso')
 
 
 
