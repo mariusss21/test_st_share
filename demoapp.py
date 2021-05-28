@@ -77,7 +77,7 @@ def send_email(to, atividade, documento, comentario):
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (from_, to, subject, body)
-
+	email_text.set_charset('utf8')
 	try:
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 		server.ehlo()
