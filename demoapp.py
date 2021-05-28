@@ -136,7 +136,7 @@ def func_validar(index, row, indice):
 		
 		if not editar:
 			st.table(row)
-			comentario = st.text_input('Envie um comentário sobre a ocorrência')			
+			comentario = st.text_input('Envie um comentário sobre a ocorrência',"")			
 			bt1, bt2 = st.beta_columns(2)
 			aprovar = bt1.button('Aprovar ocorrência ' + str(index))
 			reprovar = bt2.button('Reprovar ocorrência ' + str(index))
