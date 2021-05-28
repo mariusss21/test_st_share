@@ -23,6 +23,7 @@ import json
 import smtplib
 import time
 import base64
+import openpyxl
 
 from google.cloud import firestore
 from google.oauth2 import service_account
