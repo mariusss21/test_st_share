@@ -105,7 +105,7 @@ def download(df):
 	#return href
 
 	bin_str = base64.b64encode(df).decode()
-	href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {'teste.xlsx}</a>'
+	href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {"teste.xlsx"}</a>'
 	return href
 
 ######################################################################################################
