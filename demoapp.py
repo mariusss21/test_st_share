@@ -53,7 +53,7 @@ estatistica = st.sidebar.checkbox("Estatísticas de ocorrências")
 ######################################################################################################
 # Recebe como parâmetros destinatário e um código de atividade para o envio
 # O email está configurado por parâmetros presentes no streamlit share (secrets)
-def send_email(to, atividade, documento):
+def send_email(to, atividade, documento, comentario):
 	gmail_user = st.secrets["email"]
 	gmail_password = st.secrets["senha"]
 	sent_from = gmail_user
@@ -69,10 +69,10 @@ def send_email(to, atividade, documento):
 		body = "Ola, o responsavel retificou 5-porques, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
 		subject = """Retificado 5-porques %s""" % (documento)
 	elif atividade == 2:
-		body = "Ola, o gestor aprovou 5-porques.\n\nAtenciosamente, \nAmbev 5 Porques"
+		body = """Ola, o gestor aprovou 5-porques.\n\n%s \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
 		subject = """Aprovado 5-porques %s""" % (documento)	
 	elif atividade == 3:
-		body = "Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
+		body = """Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py \n\n comentario do gestor \n\n%s  \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
 		subject = """Reprovado 5-porques %s""" % (documento)		
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
@@ -136,6 +136,7 @@ def func_validar(index, row, indice):
 		
 		if not editar:
 			st.table(row)
+			comentario = st.text_input('Envie um comentário sobre a ocorrência')			
 			bt1, bt2 = st.beta_columns(2)
 			aprovar = bt1.button('Aprovar ocorrência ' + str(index))
 			reprovar = bt2.button('Reprovar ocorrência ' + str(index))
@@ -145,7 +146,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Aprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(row['email responsável'], 2, str(row['document']))
+				send_email(row['email responsável'], 2, str(row['document']), comentario)
 				caching.clear_cache()
 
 			if reprovar:
@@ -153,7 +154,7 @@ def func_validar(index, row, indice):
 				att_verificado = {}
 				att_verificado['status'] = 'Reprovado'
 				db.collection("5porques_2").document(row['document']).update(att_verificado)
-				send_email(row['email responsável'], 3, str(row['document']))
+				send_email(row['email responsável'], 3, str(row['document']), comentario)
 				caching.clear_cache()
 		else:
 			documento = str(row['document'])	
@@ -205,7 +206,7 @@ def func_validar(index, row, indice):
 				if '@ambev.com.br' in new_d['email responsável']:
 					db.collection("5porques_2").document(documento).set(new_d,merge=True)
 					editar = False
-					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento)
+					send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 1, documento, '')
 					caching.clear_cache()
 				else:
 					st.error('Por favor inserir e-mail Ambev válido')
@@ -265,7 +266,7 @@ def formulario(linhas):
 			val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
 			doc_ref = db.collection("5porques_2").document(val_documento)
 			doc_ref.set(new_d)
-			send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento)
+			send_email(usuarios_fb[usuarios_fb['Nome'] == new_d['gestor']]['Email'], 0, val_documento, '')
 		else:
 			st.error('Por favor inserir e-mail Ambev válido')
 		
