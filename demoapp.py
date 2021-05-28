@@ -368,11 +368,11 @@ if analisar:
 			func_validar(index, row, indice_doc)
 			        
 if estatistica:
-	st.subheader("Estatísticas das ocorrências")
+	st.subheader("Estatísticas 5-Porques")
 	variavel =  st.selectbox('Selecione o item para análise', colunas)
 	fig = px.histogram(dados, x=variavel)
 	st.write(fig)
-	
+		
 
 if pendencia:
 	st.subheader('Inserir pendências')
