@@ -89,6 +89,19 @@ def send_email(to, atividade, documento, comentario):
 		st.error('Falha ao enviar e-mail, tente novamente')
 
 ######################################################################################################
+                                           #Função para download
+######################################################################################################
+		
+def download(df):
+    """Generates a link allowing the data in a given panda dataframe to be downloaded
+    in:  dataframe
+    out: href string
+    """
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+    href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
+
+######################################################################################################
                                            #Função para leitura do banco (Firebase)
 ######################################################################################################
 # Efetua a leitura de todos os documentos presentes no banco e passa para um dataframe pandas
@@ -145,6 +158,9 @@ def func_validar(index, row, indice):
 			down1, down2 = st.beta_columns(2)
 			down_pdf = down1.button('Download 5-Porques em pdf' + ' (' + str(index) + ')')
 			down_excel = down2.button('Download 5-Porques em excel' + ' (' + str(index) + ')')
+			
+			if down_excel:
+				download(row)
 
 			if aprovar:
 				caching.clear_cache()
