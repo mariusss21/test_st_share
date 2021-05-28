@@ -406,6 +406,7 @@ if pendencia:
 		val_documento = new_d['linha'] + '-' + new_d['equipamento'].replace(" ", "") + '-' + str(int(ts))
 		doc_ref = db.collection("pendencias").document(val_documento)
 		doc_ref.set(new_d)
+		st.write('Pendencia criada com sucesso')
 
 
 
