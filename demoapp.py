@@ -22,6 +22,7 @@ import pandas as pd
 import json
 import smtplib
 import time
+import base64
 
 from google.cloud import firestore
 from google.oauth2 import service_account
@@ -155,12 +156,13 @@ def func_validar(index, row, indice):
 			aprovar = bt1.button('Aprovar 5-Porques ' + '(' + str(index) + ')')
 			reprovar = bt2.button('Reprovar 5-Porques ' + '(' + str(index) + ')')
 			st.subheader('Exportar 5-Porques')
-			down1, down2 = st.beta_columns(2)
-			down_pdf = down1.button('Download 5-Porques em pdf' + ' (' + str(index) + ')')
-			down_excel = down2.button('Download 5-Porques em excel' + ' (' + str(index) + ')')
+			#down1, down2 = st.beta_columns(2)
+			#down_pdf = down1.button('Download 5-Porques em pdf' + ' (' + str(index) + ')')
+			#down_excel = down2.button('Download 5-Porques em excel' + ' (' + str(index) + ')')
 			
-			if down_excel:
-				download(row)
+			st.markdown(download(row), unsafe_allow_html=True)
+			#if down_excel:
+			#	download(row)
 
 			if aprovar:
 				caching.clear_cache()
