@@ -82,7 +82,7 @@ def send_email(to, atividade, documento, comentario):
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 		server.ehlo()
 		server.login(gmail_user, gmail_password)
-		server.sendmail(sent_from, to, email_text.encode('utf-8'))
+		server.sendmail(sent_from, to, email_text.encode('latin-1'))
 		server.close()
 		st.write('E-mail enviado!')
 	except:
