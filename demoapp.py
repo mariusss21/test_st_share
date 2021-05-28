@@ -63,17 +63,17 @@ def send_email(to, atividade, documento, comentario):
 	atividade = int(atividade)
 	
 	if atividade == 0:
-		body = "Ola, foi gerada um novo 5-porques, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """Gerado 5-porques %s""" % (documento)
+		body = "Ola, foi gerada um novo 5-Porques, acesse a plataforma para avaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5-Porques"
+		subject = """Gerado 5-Porques %s""" % (documento)
 	elif atividade == 1:
-		body = "Ola, o responsavel retificou 5-porques, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5 Porques"
-		subject = """Retificado 5-porques %s""" % (documento)
+		body = "Ola, o responsavel retificou 5-Porques, acesse a plataforma para reavaliar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py\n\nAtenciosamente, \nAmbev 5-Porques"
+		subject = """Retificado 5-Porques %s""" % (documento)
 	elif atividade == 2:
-		body = """Ola, o gestor aprovou 5-porques.\n\n%s \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
-		subject = """Aprovado 5-porques %s""" % (documento)	
+		body = """Ola, o gestor aprovou 5-Porques.\n\n%s \n\nAtenciosamente, \nAmbev 5-Porques""" %(comentario)
+		subject = """Aprovado 5-Porques %s""" % (documento)	
 	elif atividade == 3:
-		body = """Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py \n\n Comentario do gestor: \n\n%s  \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
-		subject = """Reprovado 5-porques %s""" % (documento)		
+		body = """Ola, o gestor reprovou 5-Porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py \n\n Comentario do gestor: \n\n%s  \n\nAtenciosamente, \nAmbev 5-Porques""" %(comentario)
+		subject = """Reprovado 5-Porques %s""" % (documento)		
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (from_, to, subject, body)
@@ -136,7 +136,8 @@ def func_validar(index, row, indice):
 		
 		if not editar:
 			st.table(row)
-			comentario = st.text_input('Envie um comentário sobre a ocorrência',"")			
+			st.subheader('Avaliação do 5-Porques')
+			comentario = st.text_input('Envie um comentário sobre 5-Porques',"")			
 			bt1, bt2 = st.beta_columns(2)
 			aprovar = bt1.button('Aprovar ocorrência ' + str(index))
 			reprovar = bt2.button('Reprovar ocorrência ' + str(index))
