@@ -100,8 +100,12 @@ def download(df):
 	out: href string
 	"""
 	csv = df.to_excel("output.xlsx")
-	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-	href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
+	#b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+	#href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
+	#return href
+
+	bin_str = base64.b64encode(df).decode()
+	href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {'teste.xlsx}</a>'
 	return href
 
 ######################################################################################################
