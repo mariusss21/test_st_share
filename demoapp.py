@@ -139,12 +139,12 @@ def func_validar(index, row, indice):
 			st.subheader('Avaliação do 5-Porques')
 			comentario = st.text_input('Envie um comentário sobre 5-Porques' + ' (' + str(index) + '):',"")			
 			bt1, bt2 = st.beta_columns(2)
-			aprovar = bt1.button('Aprovar 5-Porques ' + str(index))
-			reprovar = bt2.button('Reprovar 5-Porques ' + str(index))
+			aprovar = bt1.button('Aprovar 5-Porques ' + '(' + str(index) + ')')
+			reprovar = bt2.button('Reprovar 5-Porques ' + '(' + str(index) + ')')
 			st.subheader('Exportar 5-Porques')
 			down1, down2 = st.beta_columns(2)
-			down_pdf = down1.button('Download 5-Porques em pdf')
-			down_excel = down2.button('Download 5-Porques em excel')
+			down_pdf = down1.button('Download 5-Porques em pdf' + ' (' + str(index) + ')')
+			down_excel = down2.button('Download 5-Porques em excel' + ' (' + str(index) + ')')
 
 			if aprovar:
 				caching.clear_cache()
