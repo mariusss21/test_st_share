@@ -18,7 +18,6 @@ from streamlit_tags import st_tags
 from streamlit import caching
 import plotly.express as px
 import pandas as pd
-#import numpy as np
 import json
 import smtplib
 import time
@@ -99,13 +98,9 @@ def download(df):
 	in:  dataframe
 	out: href string
 	"""
-	csv = df.to_excel("output.xlsx")
-	#b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-	#href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
-	#return href
-
-	bin_str = base64.b64encode(df).decode()
-	href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {"teste.xlsx"}</a>'
+	csv = df.to_csv(index=False)
+	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+	href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
 	return href
 
 ######################################################################################################
