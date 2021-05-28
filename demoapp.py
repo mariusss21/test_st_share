@@ -72,7 +72,7 @@ def send_email(to, atividade, documento, comentario):
 		body = """Ola, o gestor aprovou 5-porques.\n\n%s \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
 		subject = """Aprovado 5-porques %s""" % (documento)	
 	elif atividade == 3:
-		body = """Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py \n\n comentario do gestor \n\n%s  \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
+		body = """Ola, o gestor reprovou 5-porques, acesse a plataforma para retificar.\nhttps://share.streamlit.io/mariusss21/test_st_share/main/demoapp.py \n\n Comentario do gestor: \n\n%s  \n\nAtenciosamente, \nAmbev 5 Porques""" %(comentario)
 		subject = """Reprovado 5-porques %s""" % (documento)		
 	
 	email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
