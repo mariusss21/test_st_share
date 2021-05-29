@@ -101,7 +101,7 @@ def download(df):
 	"""
 	csv = df.to_csv(index=False)
 	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-	href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
+	href = f'<a href="data:file/csv;base64,{b64}">Download dos dados como csv</a>'
 	return href
 
 ######################################################################################################
@@ -157,7 +157,7 @@ def load_sap_nv3():
 # os valores passados anteriormente
 
 def func_validar(index, row, indice):
-
+	st.markdown(download(filtrado), unsafe_allow_html=True)
 	if row['document'] in indice:
 		editar = st.checkbox('Editar 5-Porques ' + str(row['document']))
 		
@@ -170,9 +170,8 @@ def func_validar(index, row, indice):
 			reprovar = bt2.button('Reprovar 5-Porques ' + '(' + str(index) + ')')
 			st.subheader('Exportar 5-Porques')
 			
-			export = filtrado[filtrado['document'] == row['document']]
-			st.markdown(download(export), unsafe_allow_html=True)
-
+			#export = filtrado[filtrado['document'] == row['document']]
+			#st.markdown(download(export), unsafe_allow_html=True)
 
 			if aprovar:
 				caching.clear_cache()
