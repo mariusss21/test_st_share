@@ -389,7 +389,7 @@ if estatistica:
 if pendencia:
 	st.subheader('Últimas pendências')
 	qtd_pendencias = st.slider('Selecione quantas pendencias deseja visualiar', 10)
-	st.write(df_pendencia.tail(qtd_pendencias))
+	st.write(df_pendencia.tail(qtd_pendencias)['data', 'turno', 'linha', 'equipamento', 'departamento', 'usuario', 'descrição'])
 		 
 	st.subheader('Inserir pendências')
 	st.write('Inserir possíveis 5-Porques para verificação')
