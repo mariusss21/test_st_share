@@ -314,7 +314,7 @@ def formulario(linhas):
 dados = load_data()
 usuarios_fb = load_usuarios()
 sap_nv3 = load_sap_nv3()
-df_pendencias = load_pendencias()
+df_pendencia = load_pendencias()
 gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
 nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
