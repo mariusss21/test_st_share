@@ -157,7 +157,7 @@ def load_sap_nv3():
 # os valores passados anteriormente
 
 def func_validar(index, row, indice):
-	st.markdown(download(filtrado), unsafe_allow_html=True)
+	
 	if row['document'] in indice:
 		editar = st.checkbox('Editar 5-Porques ' + str(row['document']))
 		
@@ -372,6 +372,7 @@ if analisar:
 		filtrado = filtrado[filtrado['status'] == status]	
 	
 	st.write(filtrado[['data', 'document', 'gestor', 'status','responsável identificação', 'turno', 'linha', 'equipamento']])
+	st.markdown(download(filtrado), unsafe_allow_html=True)
 	indice_doc = st.multiselect('Selecione a ocorrência', filtrado['document'].tolist())
 	for index, row in filtrado.iterrows():
 		if row['document'] in indice_doc:
