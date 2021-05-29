@@ -48,7 +48,7 @@ st.sidebar.title("Escolha a ação desejada")
 inserir = st.sidebar.checkbox("Inserir 5-Porques")
 analisar = st.sidebar.checkbox("Avaliar 5-Porques")
 estatistica = st.sidebar.checkbox("Estatísticas de 5-Porques")
-pendencia = st.sidebar.checkbox("Registrar pendência")
+pendencia = st.sidebar.checkbox("Registrar pendência", value=True)
 
 ######################################################################################################
                                            #Função para enviar email
@@ -126,6 +126,17 @@ def load_data():
 def load_usuarios():
 	data = pd.DataFrame(columns=['Nome', 'Email', 'Gestor', 'Codigo'])
 	posts_ref = db.collection("Usuarios")	
+	for doc in posts_ref.stream():
+		dicionario = doc.to_dict()
+		dicionario['document'] = doc.id
+		data = data.append(dicionario, ignore_index=True)
+	return data
+
+# Efetua a leitura das pendencias no banco
+@st.cache
+def load_pendencias():
+	data = pd.DataFrame(columns=['data', 'turno', 'linha', 'equipamento', 'departamento', 'usuario', 'descrição'])
+	posts_ref = db.collection("pendencias")	
 	for doc in posts_ref.stream():
 		dicionario = doc.to_dict()
 		dicionario['document'] = doc.id
@@ -303,6 +314,7 @@ def formulario(linhas):
 dados = load_data()
 usuarios_fb = load_usuarios()
 sap_nv3 = load_sap_nv3()
+df_pendencias = load_pendencias()
 gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() == 'sim']['Nome'])
 nao_gestores = list(usuarios_fb[usuarios_fb['Gestor'].str.lower() != 'sim']['Nome'])
 colunas = dados.columns
@@ -375,6 +387,10 @@ if estatistica:
 		
 
 if pendencia:
+	st.subheader('Últimas pendências')
+	qtd_pendencias = st.slider('Selecione quantas pendencias deseja visualiar', 10)
+	st.write(df_pendencia.tail(qtd_pendencias))
+		 
 	st.subheader('Inserir pendências')
 	st.write('Inserir possíveis 5-Porques para verificação')
 	sp2, sp3= st.beta_columns(2)
